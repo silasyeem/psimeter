@@ -38,10 +38,13 @@ struct BarographView: View {
                 DrumShade()
             }
             if palette.face != .open {
+                Pen(nib: chart.nib, palette: palette)
+                    .clipShape(Layout.windowPath)
                 DrumGlass(face: palette.face)
             }
             Housing(region: reading.region, palette: palette)
             Pen(nib: chart.nib, palette: palette)
+                .clipShape(palette.face == .open ? Layout.housingPath : Layout.housingFrame, style: FillStyle(eoFill: true))
             BaseEngraving(reading: reading, palette: palette)
             RollerCounter(value: reading.psi, centre: Layout.psiCounter, height: Layout.psiCounterHeight,
                           palette: palette, u: 1, rimScale: Layout.counterRimScale, grain: grain)
@@ -109,6 +112,13 @@ private enum Layout {
         width: (0.9095 - 0.0911) * housing.width,
         height: (0.8534 - 0.1406) * housing.height)
     static let engraving = CGPoint(x: housing.midX, y: housing.minY + 0.066 * housing.height)
+    static let windowPath = Path(window)
+    static let housingPath = Path(housing)
+    static let housingFrame: Path = {
+        var path = Path(housing)
+        path.addRect(window)
+        return path
+    }()
 
     static let plot = CGRect(x: window.minX + 26, y: window.minY + 7, width: window.width - 26 - 13, height: window.height - 26)
     static let hourLabelY: CGFloat = plot.maxY + 9

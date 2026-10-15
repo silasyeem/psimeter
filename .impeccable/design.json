@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-15T03:18:34Z",
+  "generatedAt": "2026-10-15T03:34:57Z",
   "title": "Design System: psimeter",
   "extensions": {
     "colorMeta": {
@@ -575,7 +575,7 @@
       {
         "name": "pen-cast",
         "value": "radius 0.6, offset (0.3pt, 0.8pt), black 40% day / 60% night",
-        "purpose": "The barograph pen arm standing off the housing."
+        "purpose": "The barograph pen arm standing off the paper and the end cap."
       },
       {
         "name": "drum-shade",
@@ -830,7 +830,7 @@
       },
       {
         "name": "The Glass Over Everything Rule",
-        "body": "On the aneroid, the crystal is the top layer, and the needle, hub and counters sit under its glare. On the barograph the glass covers the drum only: paper, zones, grid and trace sit under it, and the housing, pen arm, engraving and counters sit above it. The accented finish has no glass on either size.",
+        "body": "On the aneroid, the crystal is the top layer, and the needle, hub and counters sit under its glare. On the barograph the glass covers everything inside the drum window: the paper, zones, grid, labels, trace, wrap shading and the pen arm all sit under its glare. The glass is clipped to the window, so the housing, the pen arm's collar on the end cap, the engraving and the counters stay unglazed above it. The accented finish has no glass on either size.",
         "section": "elevation"
       },
       {
