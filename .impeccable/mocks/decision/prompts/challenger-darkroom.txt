@@ -1,0 +1,5 @@
+UI widget comp, not a poster or a scene. An iOS Home Screen small widget (square 2x2 tile, continuous-curvature rounded corners) shown straight-on and filling most of a square frame, on a softly blurred iPhone wallpaper, with neighbouring app icons cropped at the edges.
+
+The widget is a backlit lightbox. Along its left edge, a vertical eleven-step greyscale zone wedge from pure black at the bottom to glowing white at the top, each step labelled with a tiny Roman numeral 0 to X. Over the right two-thirds, a sheet of translucent tracing film taped at its corners with matte tape, light glowing through it. On the film, in tracked condensed caps and ruled boxes: box one "PSI 24H · NEA" with a large tabular monospaced figure "183" and the word "UNHEALTHY"; box two "AQI · WAQI" with "168" and "UNHEALTHY". Thin pencil leader lines run from each box to the wedge step it matches (zones VI and VII), and that step is outlined by a glowing dichroic magenta frame. Fine diagonal hatching over the darkest zones. Tiny "20:30" in the top-right corner.
+
+Photorealistic film translucency, backlight bloom, slight film creases. All text sharp, legible, and spelled exactly as given.

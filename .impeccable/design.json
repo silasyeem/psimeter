@@ -1,0 +1,672 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T17:18:38Z",
+  "title": "Design System: psimeter",
+  "extensions": {
+    "colorMeta": {
+      "brass": {
+        "role": "primary",
+        "displayName": "Counter Brass",
+        "canonical": "oklch(73.7% 0.110 82.6)",
+        "tonalRamp": [
+          "#110a00",
+          "#322200",
+          "#563d01",
+          "#7d5b05",
+          "#a37b26",
+          "#c79e4d",
+          "#edc372",
+          "#ffecca"
+        ]
+      },
+      "brass-highlight": {
+        "role": "primary",
+        "displayName": "Brass Highlight",
+        "canonical": "oklch(91.0% 0.087 91.1)",
+        "tonalRamp": [
+          "#100a00",
+          "#2f2401",
+          "#514004",
+          "#745f1c",
+          "#968041",
+          "#b9a363",
+          "#dec886",
+          "#feeebe"
+        ]
+      },
+      "brass-shadow": {
+        "role": "primary",
+        "displayName": "Brass Shadow",
+        "canonical": "oklch(53.7% 0.091 76.2)",
+        "tonalRamp": [
+          "#130900",
+          "#342101",
+          "#593b02",
+          "#7f591a",
+          "#a27b3f",
+          "#c69d61",
+          "#ebc285",
+          "#feecd1"
+        ]
+      },
+      "blued-steel-root": {
+        "role": "secondary",
+        "displayName": "Blued Steel Root",
+        "canonical": "oklch(24.8% 0.077 261.1)",
+        "tonalRamp": [
+          "#000826",
+          "#0e234a",
+          "#2a416a",
+          "#48618d",
+          "#6883b1",
+          "#8aa6d6",
+          "#adcafc",
+          "#e6efff"
+        ]
+      },
+      "blued-steel-tip": {
+        "role": "secondary",
+        "displayName": "Blued Steel Tip",
+        "canonical": "oklch(58.6% 0.164 257.2)",
+        "tonalRamp": [
+          "#000a22",
+          "#012351",
+          "#023e87",
+          "#125dbc",
+          "#3a81e2",
+          "#6aa6fc",
+          "#a8cbfe",
+          "#e5efff"
+        ]
+      },
+      "enamel-green": {
+        "role": "tertiary",
+        "displayName": "Good Enamel Green",
+        "canonical": "oklch(56.9% 0.136 147.4)",
+        "tonalRamp": [
+          "#001002",
+          "#002e0c",
+          "#01511b",
+          "#14752f",
+          "#409850",
+          "#65bc72",
+          "#89e195",
+          "#c9ffce"
+        ]
+      },
+      "enamel-blue": {
+        "role": "tertiary",
+        "displayName": "Moderate Enamel Blue",
+        "canonical": "oklch(53.2% 0.143 257.4)",
+        "tonalRamp": [
+          "#000a21",
+          "#002352",
+          "#013e88",
+          "#245fb0",
+          "#4782d6",
+          "#69a6fd",
+          "#a8cbfe",
+          "#e5efff"
+        ]
+      },
+      "enamel-vermilion": {
+        "role": "tertiary",
+        "displayName": "Unhealthy Vermilion",
+        "canonical": "oklch(63.3% 0.204 34.7)",
+        "tonalRamp": [
+          "#1d0200",
+          "#470d02",
+          "#771d05",
+          "#ab2e0c",
+          "#e24115",
+          "#ff7554",
+          "#feb4a2",
+          "#ffe9e3"
+        ]
+      },
+      "enamel-oxblood": {
+        "role": "tertiary",
+        "displayName": "Very Unhealthy Oxblood",
+        "canonical": "oklch(43.7% 0.132 25.5)",
+        "tonalRamp": [
+          "#1f0001",
+          "#4d0005",
+          "#791719",
+          "#9f3c38",
+          "#c55f58",
+          "#ec827a",
+          "#fdb3ac",
+          "#ffe9e6"
+        ]
+      },
+      "enamel-maroon": {
+        "role": "tertiary",
+        "displayName": "Hazardous Maroon",
+        "canonical": "oklch(36.5% 0.115 14.5)",
+        "tonalRamp": [
+          "#1e0004",
+          "#4b0115",
+          "#72202e",
+          "#97424c",
+          "#bd636d",
+          "#e3868e",
+          "#fdb2b7",
+          "#ffe8e9"
+        ]
+      },
+      "engraving-ink": {
+        "role": "neutral",
+        "displayName": "Engraver's Black",
+        "canonical": "oklch(21.9% 0.004 286.1)",
+        "tonalRamp": [
+          "#0b0b0d",
+          "#252527",
+          "#424244",
+          "#616163",
+          "#828285",
+          "#a5a5a7",
+          "#c9c9cb",
+          "#eeeef1"
+        ]
+      },
+      "bezel-ink": {
+        "role": "neutral",
+        "displayName": "Bezel Umber",
+        "canonical": "oklch(26.5% 0.045 70.2)",
+        "tonalRamp": [
+          "#140800",
+          "#33210a",
+          "#513e27",
+          "#725d45",
+          "#947e65",
+          "#b8a187",
+          "#ddc5aa",
+          "#ffebd5"
+        ]
+      },
+      "bezel-relief": {
+        "role": "neutral",
+        "displayName": "Relief Glint",
+        "canonical": "oklch(95.5% 0.067 93.6 / 0.55)",
+        "tonalRamp": [
+          "#100b00",
+          "#2e2402",
+          "#4e4110",
+          "#6e6032",
+          "#908253",
+          "#b3a574",
+          "#d8c997",
+          "#fdeebb"
+        ]
+      },
+      "figure-white": {
+        "role": "neutral",
+        "displayName": "Wheel White",
+        "canonical": "oklch(97.5% 0.007 106.5)",
+        "tonalRamp": [
+          "#0b0b08",
+          "#252522",
+          "#42423e",
+          "#61615d",
+          "#83837e",
+          "#a5a5a1",
+          "#c9c9c5",
+          "#efefea"
+        ]
+      },
+      "drum-crest": {
+        "role": "neutral",
+        "displayName": "Drum Crest",
+        "canonical": "oklch(39.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "drum-shadow": {
+        "role": "neutral",
+        "displayName": "Drum Shadow",
+        "canonical": "oklch(11.5% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "counter-window": {
+        "role": "neutral",
+        "displayName": "Counter Well",
+        "canonical": "oklch(16.0% 0.011 89.3)",
+        "tonalRamp": [
+          "#0d0b06",
+          "#27251f",
+          "#44423c",
+          "#64615a",
+          "#85827b",
+          "#a8a59e",
+          "#ccc9c1",
+          "#f1eee6"
+        ]
+      },
+      "radium-lume": {
+        "role": "neutral",
+        "displayName": "Radium Lume",
+        "canonical": "oklch(91.1% 0.067 138.4)",
+        "tonalRamp": [
+          "#020f00",
+          "#122c09",
+          "#2f4a26",
+          "#4e6a45",
+          "#6e8c65",
+          "#90b087",
+          "#b4d4aa",
+          "#d9facf"
+        ]
+      },
+      "lacquer-centre": {
+        "role": "neutral",
+        "displayName": "Lacquer Sheen",
+        "canonical": "oklch(22.6% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "lacquer-edge": {
+        "role": "neutral",
+        "displayName": "Black Lacquer",
+        "canonical": "oklch(10.7% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "gunmetal-needle-root": {
+        "role": "neutral",
+        "displayName": "Gunmetal Needle Root",
+        "canonical": "oklch(25.7% 0.004 196.9)",
+        "tonalRamp": [
+          "#090c0c",
+          "#232626",
+          "#3f4343",
+          "#5e6262",
+          "#7f8383",
+          "#a2a6a6",
+          "#c6caca",
+          "#ebefef"
+        ]
+      },
+      "gunmetal-needle-tip": {
+        "role": "neutral",
+        "displayName": "Gunmetal Needle Tip",
+        "canonical": "oklch(39.3% 0.007 170.1)",
+        "tonalRamp": [
+          "#080c0b",
+          "#222624",
+          "#3e4341",
+          "#5d6360",
+          "#7e8482",
+          "#a1a7a4",
+          "#c5cbc8",
+          "#eaf0ee"
+        ]
+      },
+      "night-enamel-warmth": {
+        "role": "tertiary",
+        "displayName": "Lamp Warmth",
+        "canonical": "oklch(77.4% 0.161 59.4)",
+        "tonalRamp": [
+          "#160700",
+          "#3a1c01",
+          "#633503",
+          "#8f4f09",
+          "#bd6b11",
+          "#ed8820",
+          "#fdb881",
+          "#feeadb"
+        ]
+      },
+      "stale-rust": {
+        "role": "neutral",
+        "displayName": "Stale Rust",
+        "canonical": "oklch(36.0% 0.124 31.8)",
+        "tonalRamp": [
+          "#1e0100",
+          "#4b0600",
+          "#761e10",
+          "#9b4131",
+          "#c16352",
+          "#e88673",
+          "#ffb4a4",
+          "#fee9e5"
+        ]
+      },
+      "stale-ember": {
+        "role": "neutral",
+        "displayName": "Stale Ember",
+        "canonical": "oklch(70.6% 0.189 36.2)",
+        "tonalRamp": [
+          "#1c0200",
+          "#460f01",
+          "#761f03",
+          "#a93109",
+          "#dc4a1e",
+          "#fd7853",
+          "#ffb49f",
+          "#fee9e3"
+        ]
+      },
+      "accent-amber": {
+        "role": "neutral",
+        "displayName": "Accent Stand-in Amber",
+        "canonical": "oklch(86.1% 0.135 80.3)",
+        "tonalRamp": [
+          "#120900",
+          "#322201",
+          "#573d03",
+          "#7e5a08",
+          "#a87910",
+          "#d19a2e",
+          "#f7bf58",
+          "#ffeccd"
+        ]
+      },
+      "accented-plate": {
+        "role": "neutral",
+        "displayName": "Accented Slate",
+        "canonical": "oklch(28.1% 0.014 267.1)",
+        "tonalRamp": [
+          "#090b11",
+          "#22252c",
+          "#3f4249",
+          "#5e6169",
+          "#7f828b",
+          "#a1a5ae",
+          "#c5c9d2",
+          "#eaeef8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "counter-psi": {
+        "displayName": "PSI wheels",
+        "purpose": "The 24-hour PSI on the large roller counter. Size is 0.993 x drum height. SF Pro is a stand-in the build carries, not the house display face."
+      },
+      "counter-aqi": {
+        "displayName": "AQI wheels",
+        "purpose": "The WAQI AQI on the small roller counter, floored at 9pt."
+      },
+      "engraving": {
+        "displayName": "Engraving",
+        "purpose": "Legends, scale numerals, the time and the stale mark. max(9, 9u)."
+      },
+      "bezel-inscription": {
+        "displayName": "Bezel inscription",
+        "purpose": "Regional PSIs at N, E, S, W on the bezel ring; relief copy by day, lume by night."
+      },
+      "accessory-headline": {
+        "displayName": "Lock Screen headline",
+        "purpose": "PSI and AQI on the rectangular and inline accessories; system .headline, Dynamic Type."
+      },
+      "accessory-detail": {
+        "displayName": "Lock Screen detail",
+        "purpose": "Region, band and time under the headline; system .caption at a 0.8 minimum scale."
+      }
+    },
+    "shadows": [
+      {
+        "name": "bezel-lip",
+        "value": "stroke 6u, blur 2.4u, black 55% day / 90% night, ring offset (-0.6u, -1.1u)",
+        "purpose": "Shades the dial's upper-left inner edge under the bezel."
+      },
+      {
+        "name": "needle-cast",
+        "value": "radius 0.9u, offset (0.9u, 1.4u), black 38% day / 60% night / none accented",
+        "purpose": "The needle standing off the dial."
+      },
+      {
+        "name": "hub-drop",
+        "value": "disc offset (0.7u, 1.2u), blur 1u, black 50%",
+        "purpose": "The hub cap standing off the dial."
+      },
+      {
+        "name": "counter-frame",
+        "value": "radius 1.2u, offset (0.3u, 1.0u), black 50% day / 80% night",
+        "purpose": "Raised brass counter frames."
+      },
+      {
+        "name": "counter-well",
+        "value": "inner stroke 1.6u blurred 1u, black 80%; glint white 14% to 3% at 46%, hard cut at 48%",
+        "purpose": "The recessed slot and its split glass."
+      },
+      {
+        "name": "drum-wrap",
+        "value": "black 75% to clear over the top 20%, clear to black 80% over the bottom 20%",
+        "purpose": "Figures rolling over the curve of each wheel."
+      },
+      {
+        "name": "lume-glow",
+        "value": "radius 1.6u text / 1.2u ticks / 2u needle, #ccedc2 at 60% (85% needle)",
+        "purpose": "Night only. Never on the stale mark."
+      },
+      {
+        "name": "engraving-relief",
+        "value": "copy of the letters 0.55u lower, #fff0bd at 55%, no blur",
+        "purpose": "Day bezel inscriptions only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "counter-roll",
+        "value": "SwiftUI .contentTransition(.numericText(value: digit)) inside .animation(.smooth(duration: 0.9), value: digit)",
+        "purpose": "Each wheel rolls its own figure up or down, clipped by the drum."
+      },
+      {
+        "name": "needle-sweep",
+        "value": "SwiftUI .animation(.smooth(duration: 1.2), value: psi) on rotation and length scale",
+        "purpose": "The needle swings to the new value and settles 0.3s after the wheels. Reduce Motion is not consulted."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "widget-170",
+        "value": "430pt screen width and up: 170pt side"
+      },
+      {
+        "name": "widget-169",
+        "value": "414pt: 169pt side"
+      },
+      {
+        "name": "widget-164",
+        "value": "402pt: 164pt side (reference, iPhone 17 Pro)"
+      },
+      {
+        "name": "widget-158",
+        "value": "390pt: 158pt side"
+      },
+      {
+        "name": "widget-155",
+        "value": "375pt: 155pt side"
+      },
+      {
+        "name": "widget-141",
+        "value": "below 375pt: 141pt side"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "PSI roller counter, day",
+      "kind": "custom",
+      "refersTo": "counter-psi",
+      "description": "The hero: three black wheels in a brass frame carrying the exact 24-hour PSI. Sized at the 164pt reference widget.",
+      "html": "<div class=\"ds-counter\"><div class=\"ds-counter-well\"><span class=\"ds-counter-drum\">1</span><span class=\"ds-counter-drum\">8</span><span class=\"ds-counter-drum\">3</span></div></div>",
+      "css": ".ds-counter { display: inline-block; padding: 2.96px; border-radius: 5.55px; background: linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 1.00px 1.18px rgba(0,0,0,0.5), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-well { position: relative; display: flex; gap: 1.67px; padding: 0 1.67px; background: #0f0d08; border-radius: 2.22px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-drum { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #f7f7f2; font: 700 30.9px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums;  } .ds-counter-dim { color: rgba(247,247,242,.3); }"
+    },
+    {
+      "name": "PSI roller counter, night",
+      "kind": "custom",
+      "refersTo": "counter-psi-night",
+      "description": "Night finish: radium-lume figures with glow, the brass frame under a 22% black wash.",
+      "html": "<div class=\"ds-night-plate\"><div class=\"ds-counter-night\"><div class=\"ds-counter-night-well\"><span class=\"ds-counter-night-drum\">1</span><span class=\"ds-counter-night-drum\">8</span><span class=\"ds-counter-night-drum\">3</span></div></div></div>",
+      "css": ".ds-night-plate { display: inline-block; padding: 10px; background: radial-gradient(circle at 40% 30%, #1c1c1c, #0d0d0d 55%, #040404); } .ds-counter-night { display: inline-block; padding: 2.96px; border-radius: 5.55px; background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.22)), linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 1.00px 1.18px rgba(0,0,0,0.8), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-night-well { position: relative; display: flex; gap: 1.67px; padding: 0 1.67px; background: #0f0d08; border-radius: 2.22px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-night-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-night-drum { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #ccedc2; font: 700 30.9px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums; text-shadow: 0 0 1.5px rgba(204,237,194,.6); } .ds-counter-night-dim { color: rgba(204,237,194,.3); }"
+    },
+    {
+      "name": "PSI roller counter, accented",
+      "kind": "custom",
+      "refersTo": "counter-psi-accented",
+      "description": "Tinted or clear Home Screen: outlines only, figures in the accent group. Amber stands in for the system tint.",
+      "html": "<div class=\"ds-counter-acc\"><span>1</span><span>8</span><span>3</span></div>",
+      "css": ".ds-counter-acc { display: inline-flex; gap: 1.67px; padding: 2.96px 4.6px; border: .7px solid rgba(255,255,255,.5); border-radius: 5.55px; background: #262930; } .ds-counter-acc span { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; border: .5px solid rgba(255,255,255,.28); border-radius: 1px; color: #ffc761; font: 700 30.9px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "AQI roller counter with legend",
+      "kind": "custom",
+      "refersTo": "counter-aqi",
+      "description": "The secondary reading under its engraved legend. A leading zero draws at 30% opacity.",
+      "html": "<div class=\"ds-aqi\"><div class=\"ds-aqi-legend\">AQI · WAQI</div><div class=\"ds-counter-aqi\"><div class=\"ds-counter-aqi-well\"><span class=\"ds-counter-aqi-drum ds-counter-aqi-dim\">0</span><span class=\"ds-counter-aqi-drum\">6</span><span class=\"ds-counter-aqi-drum\">8</span></div></div></div>",
+      "css": ".ds-aqi { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 14px; background: radial-gradient(circle at 35% 30%, #e4e5e3, #b4b6b5); } .ds-aqi-legend { font: 500 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; color: #1a1a1c; } .ds-counter-aqi { display: inline-block; padding: 1.07px; border-radius: 2.01px; background: linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 0.36px 0.43px rgba(0,0,0,0.5), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-aqi-well { position: relative; display: flex; gap: 0.80px; padding: 0 0.80px; background: #0f0d08; border-radius: 0.80px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-aqi-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-aqi-drum { width: 9.68px; height: 11.26px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #f7f7f2; font: 700 11.2px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums;  } .ds-counter-aqi-dim { color: rgba(247,247,242,.3); }"
+    },
+    {
+      "name": "Engraved legend",
+      "kind": "custom",
+      "refersTo": "legend",
+      "description": "Scale, averaging window and region, engraved in the system serif at the 9pt floor. Night swaps to lume with glow.",
+      "html": "<div class=\"ds-legend-pair\"><span class=\"ds-legend\">PSI · 24H · CENTRAL</span><span class=\"ds-legend-night\">PSI · 24H · CENTRAL</span></div>",
+      "css": ".ds-legend-pair { display: inline-flex; } .ds-legend, .ds-legend-night { padding: 8px 12px; font: 500 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; } .ds-legend { background: radial-gradient(circle at 35% 30%, #e4e5e3, #b4b6b5); color: #1a1a1c; } .ds-legend-night { background: radial-gradient(circle at 40% 30%, #1c1c1c, #0d0d0d 55%, #040404); color: #ccedc2; text-shadow: 0 0 1.5px rgba(204,237,194,.6); }"
+    },
+    {
+      "name": "Stale time mark",
+      "kind": "custom",
+      "refersTo": "time-stale",
+      "description": "The observation time once the reading is older than 2 hours or held from cache. Rust by day, ember by night, never glowing. On the instrument it follows the lower arc of the dial.",
+      "html": "<div class=\"ds-stale-pair\"><span class=\"ds-stale\">STALE 20:30</span><span class=\"ds-stale-night\">STALE 20:30</span></div>",
+      "css": ".ds-stale-pair { display: inline-flex; } .ds-stale, .ds-stale-night { padding: 8px 12px; font: 500 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; } .ds-stale { background: radial-gradient(circle at 35% 30%, #e4e5e3, #b4b6b5); color: #70180a; } .ds-stale-night { background: radial-gradient(circle at 40% 30%, #1c1c1c, #0d0d0d 55%, #040404); color: #ff6b42; }"
+    },
+    {
+      "name": "Bezel inscription",
+      "kind": "custom",
+      "refersTo": "bezel-inscription",
+      "description": "A regional PSI cut into the bezel: umber letters over a warm relief copy 0.55u lower, the lit lip of an engraving.",
+      "html": "<div class=\"ds-bezel\"><span>N 126</span></div>",
+      "css": ".ds-bezel { display: inline-block; padding: 5px 14px; background: linear-gradient(#e2c27a, #b38a3e 55%, #d4b169); border-radius: 3px; } .ds-bezel span { font: 600 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; color: #33210a; text-shadow: 0 .55px 0 rgba(255,240,189,.55); }"
+    },
+    {
+      "name": "Enamel band arc, needle and hub",
+      "kind": "custom",
+      "refersTo": "needle-day",
+      "description": "The 126-degree PSI scale at the 170 grid: five enamel bands with the current one lit, ticks every 25, radial numerals, the blued-steel needle at 183 and the turned brass hub. The silver ground is an approximation of the raster dial.",
+      "html": "<svg class=\"ds-dial-arc\" viewBox=\"20 10 130 54\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"PSI band arc with needle at 183\"><defs><radialGradient id=\"silver\" cx=\"45%\" cy=\"30%\" r=\"80%\"><stop offset=\"0\" stop-color=\"#e4e5e3\"/><stop offset=\"1\" stop-color=\"#b4b6b5\"/></radialGradient><radialGradient id=\"gc\" gradientUnits=\"userSpaceOnUse\" cx=\"84.66\" cy=\"78.6\" r=\"48.199999999999996\"><stop offset=\"0.8838\" stop-color=\"#000\" stop-opacity=\".18\"/><stop offset=\"0.9361\" stop-color=\"#000\" stop-opacity=\"0\"/><stop offset=\"0.9907\" stop-color=\"#fff\" stop-opacity=\".38\"/><stop offset=\"1\" stop-color=\"#fff\" stop-opacity=\".05\"/></radialGradient><radialGradient id=\"gm\" gradientUnits=\"userSpaceOnUse\" cx=\"84.66\" cy=\"78.6\" r=\"48.199999999999996\"><stop offset=\"0.8838\" stop-color=\"#000\" stop-opacity=\".18\"/><stop offset=\"0.9361\" stop-color=\"#000\" stop-opacity=\"0\"/><stop offset=\"0.9907\" stop-color=\"#fff\" stop-opacity=\".22\"/><stop offset=\"1\" stop-color=\"#fff\" stop-opacity=\".05\"/></radialGradient><linearGradient id=\"steel\" gradientUnits=\"userSpaceOnUse\" x1=\"84.66\" y1=\"55.0\" x2=\"79.84\" y2=\"27.23\"><stop offset=\"0\" stop-color=\"#0a1f45\"/><stop offset=\"1\" stop-color=\"#337adb\"/></linearGradient><linearGradient id=\"hubg\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#edcc80\"/><stop offset=\".5\" stop-color=\"#c79e4f\"/><stop offset=\"1\" stop-color=\"#8c692e\"/></linearGradient><filter id=\"cast\" x=\"-50%\" y=\"-50%\" width=\"200%\" height=\"200%\"><feDropShadow dx=\".9\" dy=\"1.4\" stdDeviation=\".45\" flood-color=\"#000\" flood-opacity=\".38\"/></filter></defs><rect x=\"20\" y=\"10\" width=\"130\" height=\"54\" fill=\"url(#silver)\"/><path d=\"M41.71 56.72 A48.199999999999996 48.199999999999996 0 0 1 48.73 46.47 L52.90 50.20 A42.6 42.6 0 0 0 46.70 59.26 Z\" fill=\"#448952\"/><path d=\"M41.71 56.72 A48.199999999999996 48.199999999999996 0 0 1 48.73 46.47 L52.90 50.20 A42.6 42.6 0 0 0 46.70 59.26 Z\" fill=\"url(#gm)\" stroke=\"rgba(0,0,0,.22)\" stroke-width=\".3\"/><path d=\"M49.81 45.30 A48.199999999999996 48.199999999999996 0 0 1 58.80 37.92 L61.80 42.65 A42.6 42.6 0 0 0 53.86 49.17 Z\" fill=\"#4270af\"/><path d=\"M49.81 45.30 A48.199999999999996 48.199999999999996 0 0 1 58.80 37.92 L61.80 42.65 A42.6 42.6 0 0 0 53.86 49.17 Z\" fill=\"url(#gm)\" stroke=\"rgba(0,0,0,.22)\" stroke-width=\".3\"/><path d=\"M60.16 37.09 A48.199999999999996 48.199999999999996 0 0 1 83.86 30.41 L83.96 36.01 A42.6 42.6 0 0 0 63.00 41.91 Z\" fill=\"#eb4a21\"/><path d=\"M60.16 37.09 A48.199999999999996 48.199999999999996 0 0 1 83.86 30.41 L83.96 36.01 A42.6 42.6 0 0 0 63.00 41.91 Z\" fill=\"url(#gc)\" stroke=\"rgba(0,0,0,.22)\" stroke-width=\".3\"/><path d=\"M85.46 30.41 A48.199999999999996 48.199999999999996 0 0 1 109.16 37.09 L106.32 41.91 A42.6 42.6 0 0 0 85.36 36.01 Z\" fill=\"#893e3c\"/><path d=\"M85.46 30.41 A48.199999999999996 48.199999999999996 0 0 1 109.16 37.09 L106.32 41.91 A42.6 42.6 0 0 0 85.36 36.01 Z\" fill=\"url(#gm)\" stroke=\"rgba(0,0,0,.22)\" stroke-width=\".3\"/><path d=\"M110.52 37.92 A48.199999999999996 48.199999999999996 0 0 1 127.61 56.72 L122.62 59.26 A42.6 42.6 0 0 0 107.52 42.65 Z\" fill=\"#72323e\"/><path d=\"M110.52 37.92 A48.199999999999996 48.199999999999996 0 0 1 127.61 56.72 L122.62 59.26 A42.6 42.6 0 0 0 107.52 42.65 Z\" fill=\"url(#gm)\" stroke=\"rgba(0,0,0,.22)\" stroke-width=\".3\"/><line x1=\"41.09\" y1=\"56.40\" x2=\"37.97\" y2=\"54.81\" stroke=\"#1a1a1c\" stroke-width=\"1.1\"/><line x1=\"44.54\" y1=\"50.64\" x2=\"42.63\" y2=\"49.31\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"48.75\" y1=\"45.41\" x2=\"46.18\" y2=\"43.03\" stroke=\"#1a1a1c\" stroke-width=\"1.1\"/><line x1=\"53.64\" y1=\"40.80\" x2=\"52.16\" y2=\"39.00\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"59.11\" y1=\"36.91\" x2=\"57.28\" y2=\"33.92\" stroke=\"#1a1a1c\" stroke-width=\"1.1\"/><line x1=\"65.06\" y1=\"33.80\" x2=\"64.13\" y2=\"31.66\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"71.39\" y1=\"31.54\" x2=\"70.75\" y2=\"29.29\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"77.96\" y1=\"30.16\" x2=\"77.64\" y2=\"27.85\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"84.66\" y1=\"29.70\" x2=\"84.66\" y2=\"26.20\" stroke=\"#1a1a1c\" stroke-width=\"1.1\"/><line x1=\"91.36\" y1=\"30.16\" x2=\"91.68\" y2=\"27.85\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"97.93\" y1=\"31.54\" x2=\"98.57\" y2=\"29.29\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"104.26\" y1=\"33.80\" x2=\"105.19\" y2=\"31.66\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"110.21\" y1=\"36.91\" x2=\"112.04\" y2=\"33.92\" stroke=\"#1a1a1c\" stroke-width=\"1.1\"/><line x1=\"115.68\" y1=\"40.80\" x2=\"117.16\" y2=\"39.00\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"120.57\" y1=\"45.41\" x2=\"122.28\" y2=\"43.82\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"124.78\" y1=\"50.64\" x2=\"126.69\" y2=\"49.31\" stroke=\"#1a1a1c\" stroke-width=\"0.8\"/><line x1=\"128.23\" y1=\"56.40\" x2=\"131.35\" y2=\"54.81\" stroke=\"#1a1a1c\" stroke-width=\"1.1\"/><g font-family=\"'New York', ui-serif, Georgia, serif\" font-weight=\"500\" font-size=\"9\" fill=\"#1a1a1c\" text-anchor=\"middle\" dominant-baseline=\"central\"><text transform=\"translate(34.02 52.80) rotate(-63.0)\">0</text><text transform=\"translate(54.96 30.14) rotate(-31.5)\">100</text><text transform=\"translate(84.66 21.76) rotate(0.0)\">200</text><text transform=\"translate(114.36 30.14) rotate(31.5)\">300</text><text transform=\"translate(135.30 52.80) rotate(63.0)\">400</text></g><g filter=\"url(#cast)\"><polygon points=\"86.16,57.79 86.53,54.68 80.20,27.16 79.49,27.29 82.79,55.32 84.19,58.13\" fill=\"url(#steel)\"/><polygon points=\"86.53,54.68 80.20,27.16 79.84,27.23 84.66,55.00\" fill=\"#fff\" fill-opacity=\".22\"/></g><circle cx=\"85.36\" cy=\"56.2\" r=\"4.8\" fill=\"#000\" fill-opacity=\".5\" style=\"filter:blur(.5px)\"/><circle cx=\"84.66\" cy=\"55.0\" r=\"4.8\" fill=\"url(#hubg)\" stroke=\"rgba(0,0,0,.45)\" stroke-width=\".35\"/><circle cx=\"84.66\" cy=\"55.0\" r=\".55\" fill=\"#735424\"/></svg>",
+      "css": ".ds-dial-arc { display: block; width: 390px; height: auto; }"
+    },
+    {
+      "name": "Lock Screen rectangular accessory",
+      "kind": "custom",
+      "refersTo": "accessory-rectangular",
+      "description": "Plain system type for the Lock Screen: headline with tabular digits over a caption naming region, band and time.",
+      "html": "<div class=\"ds-acc-rect\"><div class=\"ds-acc-head\">PSI 183 · AQI 168</div><div class=\"ds-acc-detail\">Central · Unhealthy · 20:30</div></div>",
+      "css": ".ds-acc-rect { display: inline-flex; flex-direction: column; gap: 1px; width: 172px; padding: 12px 14px; border-radius: 16px; background: #1f1f1f; color: #fff; font-family: -apple-system, 'SF Pro Display', system-ui, sans-serif; } .ds-acc-head { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-acc-detail { font-size: 12px; white-space: nowrap; opacity: .9; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Brass Aneroid",
+    "overview": "psimeter is one instrument. On the Home Screen it is a 164 pt square on the reference iPhone 17 Pro. A gunmetal plate with four slotted screws holds a knurled brass bezel and a round dial. The dial carries a shallow five-band enamel arc with one needle, a wide three-wheel roller counter for the 24-hour PSI, a small counter for the WAQI AQI, and engraved legends. Every mark on the face is metal, enamel, glass, a tick or engraved text. There are no buttons, icons, chips or cards. On the Lock Screen, where the materials cannot survive vibrant rendering, the accessories drop to plain system type and make no attempt to imitate brass.\n\nThe world changes material with the appearance. It never inverts. Day is grained silver, black engraving and a blued-steel needle. Night is black lacquer with radium lume: legends, ticks and wheel figures glow, the needle turns gunmetal with a lume strip, and the bezel tile becomes a tone-mapped, darker copy of the day brass. A tinted or clear Home Screen gets a third finish, an open line drawing that keeps the engraved structure and puts the needle and figures in the accent group.\n\nThe reading is the product, so the figures carry it and the band supports it. Figures never take the band colour. The band shows only as the needle's position over the enamel, where the current band is the brightest segment. The face is dense, about a dozen engraved strings on 164 pt, and it holds together with two type voices, one light source and a 9 pt floor.",
+    "keyCharacteristics": [
+      "One square instrument, drawn in code over three raster textures, scaled from a 170 pt authoring unit.",
+      "Exact figures on roller wheels; the band arc is supporting cast.",
+      "A material switch for night (lacquer, lume, dimmed brass), never an inverted palette.",
+      "Engraved serif for every legend and heavy tabular figures for the two readings. Nothing else is set on the face.",
+      "Light from the upper left everywhere: dial sheen, crystal glare, needle and hub shadows, counter frames.",
+      "Honest states drawn in the material: blank wheels for missing data, a rust or ember stale mark, a pegged needle."
+    ],
+    "rules": [
+      {
+        "name": "The One Lit Band Rule",
+        "body": "The segment holding the current PSI draws at full enamel under a 38% white glaze. The other four are muted (22% toward mid-grey by day, 15% toward black by night) under a 22% glaze. With no PSI reading, no segment is lit.",
+        "section": "colors"
+      },
+      {
+        "name": "The Figures Never Take the Band Rule",
+        "body": "Wheel figures stay Wheel White by day and Radium Lume by night at every value. The band shows only as the needle over the enamel.",
+        "section": "colors"
+      },
+      {
+        "name": "The Lume Is Night Rule",
+        "body": "Only the night finish glows. The day finish has no glow anywhere, and the stale mark never glows in any finish. Stale is painted, not luminous.",
+        "section": "colors"
+      },
+      {
+        "name": "The Engraver's Floor Rule",
+        "body": "Engraved text never drops below 9 pt. When space runs out, drop scale numerals first (the 50 already went), then shorten the legend. Never shrink. The floor sits two points under the iOS 11 pt guidance and holds only for tertiary engraving on the fixed-art face. App UI stays at 11 pt or above.",
+        "section": "typography"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "The face has two type voices. The engraved serif sets every legend, numeral, time and inscription; the wheel figures set the two readings. A third voice, or the serif on a wheel, breaks the instrument.",
+        "section": "typography"
+      },
+      {
+        "name": "The 170 Grid Rule",
+        "body": "Author every measure in u = side / 170 and let the view scale. Only type has a floor.",
+        "section": "layout"
+      },
+      {
+        "name": "The Raster Opening Rule",
+        "body": "The dial is a circle of radius 0.389 of the side at (0.498, 0.480). That matches the black opening in the `BezelTile` artwork, so the code dial covers it exactly. Move the dial and the plate's black shows.",
+        "section": "layout"
+      },
+      {
+        "name": "The One Lamp Rule",
+        "body": "Light comes from the upper left. Highlights sit up and left (dial sheen, crystal glare and crescent, hub cap gradient); shadows fall down and right (needle, hub, counters). A new part lit from anywhere else is wrong.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Glass Over Everything Rule",
+        "body": "The crystal is the top layer, and the needle, hub and counters sit under its glare. The accented finish has no crystal.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do measure everything in u = side / 170 and keep the dial at (0.498, 0.480) with radius 0.389 of the side.",
+      "Do keep the exact figures on the wheels and let the arc only place the band.",
+      "Do switch materials for night: lacquer face, lume ink with glow, `BezelTileNight`, a gunmetal needle with a lume strip, the counter frame dimmed 22%, the current enamel warmed 22% toward Lamp Warmth.",
+      "Do label each reading with its scale and source in the engraving (`PSI · 24H · CENTRAL`, `AQI · WAQI`).",
+      "Do show missing data as blank wheels and a named failure in the legend, with the needle parked at 0 when PSI is missing.",
+      "Do peg the needle at 400 and let the counter show the true figure, up to 999.",
+      "Do light every new part from the upper left and cast its shadow down and right.",
+      "Do put the needle and the wheel figures in the accent group, and drop the raster plate and the crystal in the accented finish."
+    ],
+    "donts": [
+      "Don't colour the figures, the counters or the plate by band. The thesis refuses the band-coloured number tile; the band lives in the enamel arc only.",
+      "Don't draw AQI on the arc or give it a needle. The arc is NEA's PSI scale; AQI has its own counter.",
+      "Don't shrink engraved text below 9 pt. Drop numerals or shorten the legend instead.",
+      "Don't let anything glow by day, and don't let the stale mark glow at all.",
+      "Don't invent a figure to fill a wheel. A blank wheel is the honest state.",
+      "Don't treat the wheels' SF Pro Bold as the house display face. It is a stand-in the build carries.",
+      "Don't put icons, chips, cards or buttons on the face. Every mark is engraving, enamel, metal or glass."
+    ]
+  }
+}

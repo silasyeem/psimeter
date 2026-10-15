@@ -1,0 +1,638 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		008258E8735142C4EB8C1A41 /* DayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F252F57809F3DE18A2990 /* DayStore.swift */; };
+		00B6E1454357CFFCF4F460FD /* ArchivoBlack-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A205881829D904308A5785A0 /* ArchivoBlack-OFL.txt */; };
+		01F2D5D6D108FB2B8ABA38F1 /* NEA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927364042F3F37C0C379303 /* NEA.swift */; };
+		08D2669355469CD59E38EB24 /* InstrumentPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10107C0A83AA813466F33A3A /* InstrumentPlate.swift */; };
+		094E6C84CBBA7B80FC1DE8CA /* ArchivoBlack-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A205881829D904308A5785A0 /* ArchivoBlack-OFL.txt */; };
+		1304F8D05394DEEB4675EDBC /* Barograph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C879A46D7709FD243A9B2AF9 /* Barograph.swift */; };
+		17EFD679CADC668F226C9960 /* WAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58296AF46C8C64E13F962479 /* WAQI.swift */; };
+		1887B9DFE19EFD0B34B11E5F /* WAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58296AF46C8C64E13F962479 /* WAQI.swift */; };
+		2060102D33FFE36622512CD7 /* FeedJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D139987B336903A83AA19F4 /* FeedJSON.swift */; };
+		248E5D416E4FAF757C639356 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB827F827AC69F6BB9411A /* HomeView.swift */; };
+		2A6DAF324B6890293F749266 /* ArchivoBlack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */; };
+		2C0650D543918CE3EC9C37CD /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BCA00DB3C8DCC2B6A0AFDA /* Fixtures.swift */; };
+		3A34CCD3302D271D9ACF68C9 /* InstrumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61CB60A30325E82526751AB /* InstrumentView.swift */; };
+		410E5330E572A9852A683C0A /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EB5DA52445ABBD3E04962 /* Reading.swift */; };
+		42C82D060CF4291F56455350 /* Finish.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D90782400EF2A93BE828A4 /* Finish.swift */; };
+		42D0D0D9FD9B1FE23996E0B4 /* RollerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DD3CF8E932256AC3D2A12C /* RollerCounter.swift */; };
+		44ABB66FE1461E9FDAA16C3B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7CD7459EF70DE8B837CB65 /* Palette.swift */; };
+		4D7AA025218E443155084DD8 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738676E912E5B0B1A6080E5 /* GalleryView.swift */; };
+		4E336E1B099EC62BBE74F150 /* AirFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D0DF232767D793726598 /* AirFeed.swift */; };
+		601726426EC474CE996D61BE /* ArchivoBlack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */; };
+		61237DE1DF0E218337DA8787 /* WAQIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78B7D80FE299133B605A295 /* WAQIToken.swift */; };
+		6279D5FE98E3CE2B7305D57B /* Accessories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F90D1C04B936954E0A3232 /* Accessories.swift */; };
+		685ECA9FBA5BD9EEDD5EAEA3 /* Air.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479C07D9E16D74BB01DDD02 /* Air.swift */; };
+		6AD38087E51FF8F167124260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA09E8F1268B28E95D680AA6 /* Assets.xcassets */; };
+		6EAF6CFF49CADA86EDA39422 /* RollerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DD3CF8E932256AC3D2A12C /* RollerCounter.swift */; };
+		7A9BAA0459C25B8B7B5018D5 /* InstrumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61CB60A30325E82526751AB /* InstrumentView.swift */; };
+		84EAAA33493FD29CED75B5D2 /* Bands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730869BF4AF1F13529A43B6A /* Bands.swift */; };
+		8954D516FF54C19A57D3A7A1 /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E04F7AADC7AC813EE6CD26B /* SnapshotStore.swift */; };
+		8BF1DA3925FA7842AEF0B1BF /* SnapshotStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E04F7AADC7AC813EE6CD26B /* SnapshotStore.swift */; };
+		8C1EB15A29ABCDECCD0BFF2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B16426687995ECA7DA56CFD /* Assets.xcassets */; };
+		8E19BA8B09103F1F9E7DE5A6 /* Finish.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D90782400EF2A93BE828A4 /* Finish.swift */; };
+		9D55C51BC7C703F6DD3C3996 /* WAQIToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78B7D80FE299133B605A295 /* WAQIToken.swift */; };
+		9D71389E6A7100F1036A810E /* FeedJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D139987B336903A83AA19F4 /* FeedJSON.swift */; };
+		A7A3ABE119FF3040920E9DD4 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7CD7459EF70DE8B837CB65 /* Palette.swift */; };
+		A7E82BBBD656BE9E6225E40B /* InstrumentPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10107C0A83AA813466F33A3A /* InstrumentPlate.swift */; };
+		B4ACAD6AE257CF258F645AB6 /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EB5DA52445ABBD3E04962 /* Reading.swift */; };
+		BFAC0CC6B953F9A256078596 /* DayStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F252F57809F3DE18A2990 /* DayStore.swift */; };
+		C029099D741B9D079B546EFC /* PsimeterWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA6E0828A74286B5C91ADC8 /* PsimeterWidget.swift */; };
+		C4246FDFE37584BFD1B8C5AE /* PsimeterWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 648F4E0CE3913833F0803CF5 /* PsimeterWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CD423D32E094253CBB4E4C65 /* Accessories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F90D1C04B936954E0A3232 /* Accessories.swift */; };
+		CE05C51F2A9B5D4205AA2EC7 /* RegionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E00F57CAAE431072E676A /* RegionIntent.swift */; };
+		CE5E378F0AC375386BCF40DE /* Air.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479C07D9E16D74BB01DDD02 /* Air.swift */; };
+		D94FC470962E24B8A9112E90 /* NEA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927364042F3F37C0C379303 /* NEA.swift */; };
+		DC30B6909D7E443F64BDA662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B16426687995ECA7DA56CFD /* Assets.xcassets */; };
+		F3AB7BCD0AD88A0B28841863 /* Bands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730869BF4AF1F13529A43B6A /* Bands.swift */; };
+		F654EB6C741020102E1D5E31 /* PsimeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A746CBBCDA8D545222EBC273 /* PsimeterApp.swift */; };
+		F8D88F3120E5DE11DBB827F3 /* Barograph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C879A46D7709FD243A9B2AF9 /* Barograph.swift */; };
+		FBF9771F31E714B1762CDFA8 /* AirFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D0DF232767D793726598 /* AirFeed.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9E5208BB0703B59529096AA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84DEA1759AD11E3E4CF46F17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C6DFBB846672F4B26ABD6BA;
+			remoteInfo = PsimeterWidget;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		46B92547CB36BF3C63F8234A /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C4246FDFE37584BFD1B8C5AE /* PsimeterWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0FAFA1EA988DBD9BC2A7B1F2 /* Psimeter.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Psimeter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		10107C0A83AA813466F33A3A /* InstrumentPlate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPlate.swift; sourceTree = "<group>"; };
+		1479C07D9E16D74BB01DDD02 /* Air.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Air.swift; sourceTree = "<group>"; };
+		15A4D0DF232767D793726598 /* AirFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirFeed.swift; sourceTree = "<group>"; };
+		1CD0B2DD9DCA809CFF45CE88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		3927364042F3F37C0C379303 /* NEA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEA.swift; sourceTree = "<group>"; };
+		3F7CD7459EF70DE8B837CB65 /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		44DD3CF8E932256AC3D2A12C /* RollerCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerCounter.swift; sourceTree = "<group>"; };
+		58296AF46C8C64E13F962479 /* WAQI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAQI.swift; sourceTree = "<group>"; };
+		648F4E0CE3913833F0803CF5 /* PsimeterWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PsimeterWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ArchivoBlack-Regular.ttf"; sourceTree = "<group>"; };
+		722F252F57809F3DE18A2990 /* DayStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStore.swift; sourceTree = "<group>"; };
+		730869BF4AF1F13529A43B6A /* Bands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bands.swift; sourceTree = "<group>"; };
+		7912A8BBC8197960757036D0 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		7B16426687995ECA7DA56CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E04F7AADC7AC813EE6CD26B /* SnapshotStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotStore.swift; sourceTree = "<group>"; };
+		9D139987B336903A83AA19F4 /* FeedJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedJSON.swift; sourceTree = "<group>"; };
+		A205881829D904308A5785A0 /* ArchivoBlack-OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ArchivoBlack-OFL.txt"; sourceTree = "<group>"; };
+		A70B5766D5A5C15B7F108D87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A746CBBCDA8D545222EBC273 /* PsimeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsimeterApp.swift; sourceTree = "<group>"; };
+		A78B7D80FE299133B605A295 /* WAQIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAQIToken.swift; sourceTree = "<group>"; };
+		BA09E8F1268B28E95D680AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BBA6E0828A74286B5C91ADC8 /* PsimeterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsimeterWidget.swift; sourceTree = "<group>"; };
+		C4D90782400EF2A93BE828A4 /* Finish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finish.swift; sourceTree = "<group>"; };
+		C738676E912E5B0B1A6080E5 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		C879A46D7709FD243A9B2AF9 /* Barograph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Barograph.swift; sourceTree = "<group>"; };
+		CD4EB5DA52445ABBD3E04962 /* Reading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
+		D2F90D1C04B936954E0A3232 /* Accessories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessories.swift; sourceTree = "<group>"; };
+		D5BCA00DB3C8DCC2B6A0AFDA /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
+		D61CB60A30325E82526751AB /* InstrumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentView.swift; sourceTree = "<group>"; };
+		E43E00F57CAAE431072E676A /* RegionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionIntent.swift; sourceTree = "<group>"; };
+		ECEB827F827AC69F6BB9411A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		166323FD9A925E980E05D598 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				15A4D0DF232767D793726598 /* AirFeed.swift */,
+				722F252F57809F3DE18A2990 /* DayStore.swift */,
+				9D139987B336903A83AA19F4 /* FeedJSON.swift */,
+				3927364042F3F37C0C379303 /* NEA.swift */,
+				8E04F7AADC7AC813EE6CD26B /* SnapshotStore.swift */,
+				58296AF46C8C64E13F962479 /* WAQI.swift */,
+				A78B7D80FE299133B605A295 /* WAQIToken.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		3F79F11FBE0B205668AB5C1D /* Instrument */ = {
+			isa = PBXGroup;
+			children = (
+				D2F90D1C04B936954E0A3232 /* Accessories.swift */,
+				730869BF4AF1F13529A43B6A /* Bands.swift */,
+				C879A46D7709FD243A9B2AF9 /* Barograph.swift */,
+				C4D90782400EF2A93BE828A4 /* Finish.swift */,
+				10107C0A83AA813466F33A3A /* InstrumentPlate.swift */,
+				D61CB60A30325E82526751AB /* InstrumentView.swift */,
+				3F7CD7459EF70DE8B837CB65 /* Palette.swift */,
+				CD4EB5DA52445ABBD3E04962 /* Reading.swift */,
+				44DD3CF8E932256AC3D2A12C /* RollerCounter.swift */,
+			);
+			path = Instrument;
+			sourceTree = "<group>";
+		};
+		523D1607E357BED005BC9B65 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7B16426687995ECA7DA56CFD /* Assets.xcassets */,
+				166323FD9A925E980E05D598 /* Feed */,
+				D4FC4474178DDE6EBA0436F0 /* Fonts */,
+				3F79F11FBE0B205668AB5C1D /* Instrument */,
+				5517414AE049F6C09963021F /* Model */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		5517414AE049F6C09963021F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1479C07D9E16D74BB01DDD02 /* Air.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9A7FEF0BDD31290BB9180D74 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				A70B5766D5A5C15B7F108D87 /* Info.plist */,
+				BBA6E0828A74286B5C91ADC8 /* PsimeterWidget.swift */,
+				E43E00F57CAAE431072E676A /* RegionIntent.swift */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
+		A91FF11CACFA7C8F7116BAAF /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				7912A8BBC8197960757036D0 /* Base.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		C79E0C93D9FB28E66F1917D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0FAFA1EA988DBD9BC2A7B1F2 /* Psimeter.app */,
+				648F4E0CE3913833F0803CF5 /* PsimeterWidget.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0B2CDB8A397F2F36C40881F /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BA09E8F1268B28E95D680AA6 /* Assets.xcassets */,
+				ECEB827F827AC69F6BB9411A /* HomeView.swift */,
+				1CD0B2DD9DCA809CFF45CE88 /* Info.plist */,
+				A746CBBCDA8D545222EBC273 /* PsimeterApp.swift */,
+				D0C6E87B0617098643C04E99 /* Gallery */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D0C6E87B0617098643C04E99 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				D5BCA00DB3C8DCC2B6A0AFDA /* Fixtures.swift */,
+				C738676E912E5B0B1A6080E5 /* GalleryView.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
+		D4FC4474178DDE6EBA0436F0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A205881829D904308A5785A0 /* ArchivoBlack-OFL.txt */,
+				6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		ED70F908182F6AE979AD914F = {
+			isa = PBXGroup;
+			children = (
+				D0B2CDB8A397F2F36C40881F /* App */,
+				A91FF11CACFA7C8F7116BAAF /* Config */,
+				523D1607E357BED005BC9B65 /* Shared */,
+				9A7FEF0BDD31290BB9180D74 /* Widget */,
+				C79E0C93D9FB28E66F1917D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C6DFBB846672F4B26ABD6BA /* PsimeterWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F957A3E9B97DB0019EF1CAF0 /* Build configuration list for PBXNativeTarget "PsimeterWidget" */;
+			buildPhases = (
+				A76C591E04BFE87166F232A3 /* Sources */,
+				36F559C828D1C90B9CDD82AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PsimeterWidget;
+			packageProductDependencies = (
+			);
+			productName = PsimeterWidget;
+			productReference = 648F4E0CE3913833F0803CF5 /* PsimeterWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		CDEE72820528DA337EC57ABD /* Psimeter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5D18C02F886F2A436DCA3F16 /* Build configuration list for PBXNativeTarget "Psimeter" */;
+			buildPhases = (
+				17E636305FD3CDB2CFD7B1AF /* Sources */,
+				97B4413AFE730A9100DE4AC0 /* Resources */,
+				46B92547CB36BF3C63F8234A /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EDB554B4C64EF8693BA0147D /* PBXTargetDependency */,
+			);
+			name = Psimeter;
+			packageProductDependencies = (
+			);
+			productName = Psimeter;
+			productReference = 0FAFA1EA988DBD9BC2A7B1F2 /* Psimeter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84DEA1759AD11E3E4CF46F17 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					9C6DFBB846672F4B26ABD6BA = {
+						DevelopmentTeam = 6U98Y8G55P;
+						ProvisioningStyle = Automatic;
+					};
+					CDEE72820528DA337EC57ABD = {
+						DevelopmentTeam = 6U98Y8G55P;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 8592C64C1C37152A39BBEB30 /* Build configuration list for PBXProject "Psimeter" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = ED70F908182F6AE979AD914F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C79E0C93D9FB28E66F1917D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDEE72820528DA337EC57ABD /* Psimeter */,
+				9C6DFBB846672F4B26ABD6BA /* PsimeterWidget */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		36F559C828D1C90B9CDD82AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				094E6C84CBBA7B80FC1DE8CA /* ArchivoBlack-OFL.txt in Resources */,
+				601726426EC474CE996D61BE /* ArchivoBlack-Regular.ttf in Resources */,
+				8C1EB15A29ABCDECCD0BFF2F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B4413AFE730A9100DE4AC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00B6E1454357CFFCF4F460FD /* ArchivoBlack-OFL.txt in Resources */,
+				2A6DAF324B6890293F749266 /* ArchivoBlack-Regular.ttf in Resources */,
+				6AD38087E51FF8F167124260 /* Assets.xcassets in Resources */,
+				DC30B6909D7E443F64BDA662 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17E636305FD3CDB2CFD7B1AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6279D5FE98E3CE2B7305D57B /* Accessories.swift in Sources */,
+				CE5E378F0AC375386BCF40DE /* Air.swift in Sources */,
+				FBF9771F31E714B1762CDFA8 /* AirFeed.swift in Sources */,
+				F3AB7BCD0AD88A0B28841863 /* Bands.swift in Sources */,
+				1304F8D05394DEEB4675EDBC /* Barograph.swift in Sources */,
+				008258E8735142C4EB8C1A41 /* DayStore.swift in Sources */,
+				9D71389E6A7100F1036A810E /* FeedJSON.swift in Sources */,
+				8E19BA8B09103F1F9E7DE5A6 /* Finish.swift in Sources */,
+				2C0650D543918CE3EC9C37CD /* Fixtures.swift in Sources */,
+				4D7AA025218E443155084DD8 /* GalleryView.swift in Sources */,
+				248E5D416E4FAF757C639356 /* HomeView.swift in Sources */,
+				A7E82BBBD656BE9E6225E40B /* InstrumentPlate.swift in Sources */,
+				3A34CCD3302D271D9ACF68C9 /* InstrumentView.swift in Sources */,
+				01F2D5D6D108FB2B8ABA38F1 /* NEA.swift in Sources */,
+				A7A3ABE119FF3040920E9DD4 /* Palette.swift in Sources */,
+				F654EB6C741020102E1D5E31 /* PsimeterApp.swift in Sources */,
+				B4ACAD6AE257CF258F645AB6 /* Reading.swift in Sources */,
+				6EAF6CFF49CADA86EDA39422 /* RollerCounter.swift in Sources */,
+				8BF1DA3925FA7842AEF0B1BF /* SnapshotStore.swift in Sources */,
+				1887B9DFE19EFD0B34B11E5F /* WAQI.swift in Sources */,
+				61237DE1DF0E218337DA8787 /* WAQIToken.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A76C591E04BFE87166F232A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD423D32E094253CBB4E4C65 /* Accessories.swift in Sources */,
+				685ECA9FBA5BD9EEDD5EAEA3 /* Air.swift in Sources */,
+				4E336E1B099EC62BBE74F150 /* AirFeed.swift in Sources */,
+				84EAAA33493FD29CED75B5D2 /* Bands.swift in Sources */,
+				F8D88F3120E5DE11DBB827F3 /* Barograph.swift in Sources */,
+				BFAC0CC6B953F9A256078596 /* DayStore.swift in Sources */,
+				2060102D33FFE36622512CD7 /* FeedJSON.swift in Sources */,
+				42C82D060CF4291F56455350 /* Finish.swift in Sources */,
+				08D2669355469CD59E38EB24 /* InstrumentPlate.swift in Sources */,
+				7A9BAA0459C25B8B7B5018D5 /* InstrumentView.swift in Sources */,
+				D94FC470962E24B8A9112E90 /* NEA.swift in Sources */,
+				44ABB66FE1461E9FDAA16C3B /* Palette.swift in Sources */,
+				C029099D741B9D079B546EFC /* PsimeterWidget.swift in Sources */,
+				410E5330E572A9852A683C0A /* Reading.swift in Sources */,
+				CE05C51F2A9B5D4205AA2EC7 /* RegionIntent.swift in Sources */,
+				42D0D0D9FD9B1FE23996E0B4 /* RollerCounter.swift in Sources */,
+				8954D516FF54C19A57D3A7A1 /* SnapshotStore.swift in Sources */,
+				17EFD679CADC668F226C9960 /* WAQI.swift in Sources */,
+				9D55C51BC7C703F6DD3C3996 /* WAQIToken.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EDB554B4C64EF8693BA0147D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C6DFBB846672F4B26ABD6BA /* PsimeterWidget */;
+			targetProxy = 9E5208BB0703B59529096AA7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2076914704182AC565699BB8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.silasyeem.psimeter;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2C587926FB40D0821DD5BF49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.silasyeem.psimeter;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		479A1E1D2A3A1B5076E249F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.silasyeem.psimeter.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6D0937D692563D591901716C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7912A8BBC8197960757036D0 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 6U98Y8G55P;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 0.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		B4C8324377009987CAC23943 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7912A8BBC8197960757036D0 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6U98Y8G55P;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 0.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		EE8D00505D67A05DF2925C1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = Widget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.silasyeem.psimeter.widget;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5D18C02F886F2A436DCA3F16 /* Build configuration list for PBXNativeTarget "Psimeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2076914704182AC565699BB8 /* Debug */,
+				2C587926FB40D0821DD5BF49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8592C64C1C37152A39BBEB30 /* Build configuration list for PBXProject "Psimeter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B4C8324377009987CAC23943 /* Debug */,
+				6D0937D692563D591901716C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F957A3E9B97DB0019EF1CAF0 /* Build configuration list for PBXNativeTarget "PsimeterWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				479A1E1D2A3A1B5076E249F6 /* Debug */,
+				EE8D00505D67A05DF2925C1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84DEA1759AD11E3E4CF46F17 /* Project object */;
+}

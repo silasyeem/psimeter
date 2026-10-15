@@ -1,0 +1,5 @@
+UI widget comp, not a poster or a scene. An iOS Home Screen small widget (square 2x2 tile, continuous-curvature rounded corners) shown straight-on and filling most of a square frame, on a softly blurred iPhone wallpaper, with neighbouring app icons cropped at the edges.
+
+The widget is a physical boarding-pass stub of bright white thermal-printed card stock, with a perforated tear line down the right edge, set into the tile over a near-black backing. Layout: a black header band with white caps "SIN · AIR READING" and small "SEQ 2030". Two labelled segments stacked below. Segment one: tiny grey labels "SOURCE NEA", "WINDOW 24HR", "REGION CENTRAL", and a large black tabular monospaced figure "PSI 183". Segment two: tiny labels "SOURCE WAQI", "SCALE US AQI", and a large "AQI 168". Each segment carries a small yellow (#FFD400) status chip reading "UNHEALTHY". A thin scan-block barcode strip runs along the bottom.
+
+Realistic thermal print texture, faint paper grain, slight curl at the torn edge, crisp black ink. All text sharp, legible, and spelled exactly as given.

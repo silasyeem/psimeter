@@ -1,0 +1,38 @@
+{
+  "title": "Approve the Brass Aneroid layout",
+  "question": "Three layouts in the same brass world. Pick the one to build, and use the steer box to say what to carry over from the others or what feels false.",
+  "options": [
+    {
+      "id": "comp-a",
+      "label": "A · PSI Leads",
+      "kicker": "YOUR PICK",
+      "thesis": "PSI owns the dial with a full sweep and needle; AQI is a sub-dial at six o'clock; regional PSIs are engraved on the bezel.",
+      "palette": ["#C9A35B", "#D6D9D8", "#16181C", "#2A4A8A", "#B5382A"],
+      "materials": ["silver dial", "single needle", "AQI sub-dial", "engraved bezel regions"],
+      "viewport": "PSI needle and counter are the hero; AQI reads second; regions ring the bezel.",
+      "risk": "AQI is clearly secondary, and the main counter is small for an exact-numbers-first product. The needle sits at about 190, not 183 (a comp defect, fixed in code).",
+      "sketch": ".impeccable/mocks/decision/assigned.png"
+    },
+    {
+      "id": "comp-b",
+      "label": "B · Twin Scales",
+      "thesis": "Both sources get equal weight: concentric PSI and AQI arcs, two needles on one hub, two counters side by side.",
+      "palette": ["#C9A35B", "#D6D9D8", "#16181C", "#2A4A8A", "#B5382A"],
+      "materials": ["silver dial", "two needles", "twin counters", "plain bezel"],
+      "viewport": "Two arcs up top, PSI 183 and AQI 168 in matching counters below.",
+      "risk": "Two scales on a 170pt face is the densest option, and the regional readings are gone.",
+      "sketch": ".impeccable/mocks/comps/comp-b-twin.png"
+    },
+    {
+      "id": "comp-c",
+      "label": "C · Counter First (night)",
+      "thesis": "The exact number is the hero in a wide roller counter; the needle arc shrinks to a band indicator. Shown in dark mode with radium lume.",
+      "palette": ["#C9A35B", "#0E0F10", "#CFE8C8", "#B5382A"],
+      "materials": ["black lacquer dial", "radium lume", "large roller counter", "engraved bezel regions"],
+      "viewport": "A big 183 across the middle, AQI 168 counter beneath, shallow band arc above.",
+      "risk": "Least like a classic barometer; the needle becomes supporting cast. Day mode would use the silver dial.",
+      "sketch": ".impeccable/mocks/comps/comp-c-counter-night.png"
+    }
+  ],
+  "steer": true
+}

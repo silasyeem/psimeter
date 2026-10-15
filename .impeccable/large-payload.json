@@ -1,0 +1,38 @@
+{
+  "title": "Approve the 4×4 barograph",
+  "question": "Same brass world, plus a 24-hour PSI trace from real NEA data (Central, 09:00 yesterday to 08:00 today). Pick the layout to build. Use the steer box for anything to carry over, e.g. 'A, but with a small capsule stack'.",
+  "options": [
+    {
+      "id": "large-a",
+      "label": "A · Drum + plate",
+      "kicker": "THE ROLL",
+      "thesis": "A full-width barograph drum carries the 24-hour trace; the PSI and AQI roller counters sit in the gunmetal base plate with the regions engraved along the edge.",
+      "palette": ["#C9A35B", "#3A3C40", "#F2F1EC", "#4B2E6B", "#B5382A"],
+      "materials": ["chart paper drum", "violet ink trace", "brass pen arm", "gunmetal base plate"],
+      "viewport": "Drum across the top 60%, big PSI counter and smaller AQI counter below, N/S/E/W and time engraved along the bottom.",
+      "risk": "The least surprising of the three; the drum's band zones need to stay faint so only the current band reads.",
+      "sketch": ".impeccable/mocks/large/large-a-day.png"
+    },
+    {
+      "id": "large-b",
+      "label": "B · Visible mechanism",
+      "thesis": "The barograph's working parts on show: a silver aneroid capsule stack and brass lever drive the pen across the drum.",
+      "palette": ["#C9A35B", "#3A3C40", "#C8CCCF", "#F2F1EC", "#4B2E6B"],
+      "materials": ["capsule stack", "lever linkage", "chart paper drum", "brass counter plaque"],
+      "viewport": "Drum upper-left, capsule stack and lever upper-right, counters on a full-width brass plaque below.",
+      "risk": "The mechanism takes about a third of the width, compressing the 24-hour chart; regional readings are dropped; the base becomes brass rather than the small widget's gunmetal.",
+      "sketch": ".impeccable/mocks/large/large-b-mechanism.png"
+    },
+    {
+      "id": "large-c",
+      "label": "C · A at night",
+      "thesis": "Layout A in its night finish: black chart paper, lume grid and trace, dimmed brass. Shown so you can judge A in both appearances.",
+      "palette": ["#8A7448", "#16181C", "#CFE8C8", "#B5382A"],
+      "materials": ["black chart", "lume trace", "dimmed brass"],
+      "viewport": "Identical to A, night appearance.",
+      "risk": "The band zones here are painted too strong; the build keeps only the current band lit.",
+      "sketch": ".impeccable/mocks/large/large-c-night.png"
+    }
+  ],
+  "steer": true
+}

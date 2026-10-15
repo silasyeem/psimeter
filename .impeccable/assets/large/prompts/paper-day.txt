@@ -1,0 +1,1 @@
+Square 1:1 image, 1024x1024. A production texture: smooth white chart-recorder paper with a very fine paper-fibre texture, perfectly even lighting, neutral warm white around #F4F2EC. Seamless and featureless: no grid, no lines, no text, no shadows, no vignette.

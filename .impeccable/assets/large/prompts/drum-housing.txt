@@ -1,0 +1,8 @@
+Landscape 3:2 image, 1536x1024. A production asset for an app widget: straight-on orthographic view, no perspective, soft top-left lighting. Match the brass material of the attached references exactly: warm polished brass with fine brushed grain and beaded rope trim.
+
+The object: the brass housing of a barograph drum seen front-on. It spans the full width of the canvas and the middle 84 percent of its height. It consists of:
+- a horizontal brass top bar across the full width, about 12 percent of the object's height, with a fine beaded rope trim along its lower edge and a small slotted brass screw near each end;
+- an identical brass bottom bar across the full width at the bottom, with beaded rope trim along its upper edge and a small slotted screw near each end;
+- at the left and right ends, between the bars, vertical turned brass end-cap rings, each about 7 percent of the object's width, with concentric turned grooves and a beaded outer edge, as if holding the ends of a cylinder.
+
+The rectangular window enclosed by the bars and end caps is perfectly flat pure chroma green #00FF00 with no texture or shading. Everything outside the object, above and below it, is also perfectly flat pure chroma green #00FF00. Absolutely no text, letters or numbers, no chart, no paper, no glass.

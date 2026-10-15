@@ -1,0 +1,11 @@
+.env
+.impeccable/review/
+build/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+Config/Secrets.xcconfig
+.DS_Store
+.claude/settings.local.json
+.impeccable/questions/
+.impeccable/mocks/decision/refs/

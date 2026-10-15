@@ -1,0 +1,5 @@
+UI widget comp, not a poster or a scene. An iOS Home Screen small widget (square 2x2 tile, continuous-curvature rounded corners) shown straight-on and filling most of a square frame, on a softly blurred iPhone wallpaper, with neighbouring app icons cropped at the edges.
+
+The category-standard air quality widget, executed with Apple-level polish: a flat orange (#F08A3C) band-coloured tile with a very subtle top-light gradient. Top-left, small white SF Pro text "Singapore" with a small location arrow glyph. A small face-mask glyph at top-right. Huge white rounded numerals "183" with a small "PSI" beside them. Beneath, "Unhealthy" in semibold white. Footer row: "AQI 168" at left and "20:30" at right in white at 70 percent opacity.
+
+Clean, flat, modern iOS. All text sharp, legible, and spelled exactly as given.

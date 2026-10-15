@@ -1,0 +1,25 @@
+{
+  "title": "How should the Brass Aneroid be built?",
+  "question": "Decide what the build answers to: an approved comp, or a written contract.",
+  "options": [
+    {
+      "id": "comp-led",
+      "label": "Comp-led",
+      "kicker": "LEADS FOR THIS WORLD",
+      "thesis": "The comp you just chose, plus two variations, goes in front of you; the approved one becomes law and the finished widget is audited against it side by side.",
+      "palette": ["#C9A35B", "#D6D9D8", "#16181C", "#2A4A8A", "#B5382A"],
+      "materials": ["approved comp as spec", "raster brass and crystal", "vector scale and figures"],
+      "viewport": "Two more comps varying the dial layout (sub-dial placement, counter position, bezel density), then you approve one before any Swift is written.",
+      "risk": "Boldest result, but expect fix rounds to match the comp's brass and glass, and one more approval stop before code."
+    },
+    {
+      "id": "code-led",
+      "label": "Code-led",
+      "thesis": "No further comps. The ambition moves into a written contract (first viewport, signature detail, night mode) and the finished widget is audited against that in behaviour.",
+      "palette": ["#C9A35B", "#D6D9D8", "#16181C", "#2A4A8A", "#B5382A"],
+      "materials": ["written direction contract", "chosen comp as critique reference only"],
+      "viewport": "Straight to building in SwiftUI. The comp you picked returns at the end as the reference for what the build dared or missed.",
+      "risk": "Faster to a working widget, but materials drawn in code drift toward flat unless the contract is held hard."
+    }
+  ]
+}
