@@ -469,8 +469,8 @@ A brass-framed window of three black wheels, one figure per wheel. Both sizes sh
 ### Engraved legends and time
 - **Legends:** `PSI · 24H · <REGION>` above the PSI counter and `AQI · WAQI` above the AQI counter. On failure the legend names the cause: `UNAVAILABLE` (no WAQI token), `OFFLINE`, or `NO DATA` (an unreadable reply, or the region missing from the report).
 - **Time:** the SGT observation time as `HH:MM`, set glyph by glyph along the lower arc in the ink colour, glowing at night.
-- **Stale:** after 2 hours, or when the reading was held from cache after a failed fetch, the time reads `STALE HH:MM`, or `STALE 14 OCT` after 20 hours, in Stale Rust or Stale Ember with no glow. The timeline adds an entry one minute past the 2-hour mark, so the face goes stale without a fetch.
-- **Refresh:** every timeline, on both sizes, asks WidgetKit to reload 15 minutes after the fetch.
+- **Stale:** once the reading is more than 2 hours old, the time reads `STALE HH:MM`, or `STALE 14 OCT` after 20 hours, in Stale Rust or Stale Ember with no glow. Age alone decides. A reading held from cache after a failed fetch is the last good reading and keeps its plain time until it reaches 2 hours. The timeline adds an entry one minute past the 2-hour mark, so the face goes stale without a fetch.
+- **Refresh:** every family reads the same NEA day feed, and one refresh wave sends each source one request. Concurrent fetches in the extension share a single flight, and a body fetched in the last 4 minutes is reused from the extension's UserDefaults. After a clean fetch the timeline reloads in 15 minutes, or one minute past the 2-hour mark if that comes sooner. After any failed fetch (PSI held or missing, AQI offline or unreadable, no trend), or while the reading is already stale, it retries in 5 minutes. A missing WAQI token is not a failure.
 - With PSI unavailable, no time is engraved.
 
 ### Bezel inscriptions
@@ -502,7 +502,7 @@ The systemLarge instrument, in `Shared/Instrument/Barograph.swift`. It shares th
 | State | Chart | Pen | Plate engraving |
 | --- | --- | --- | --- |
 | Live | zones, labelled grid, trace | nib at the current PSI, meeting the trace | legends, foot, `HH:MM` |
-| Stale | unchanged | at the held PSI | `STALE HH:MM`, Light Ember by day, Stale Ember at night, no glow |
+| Stale | unchanged | at the last PSI | `STALE HH:MM`, Light Ember by day, Stale Ember at night, no glow |
 | Trend unavailable | zones, value labels and an unlabelled grid; `TREND · OFFLINE` or `TREND · NO DATA` engraved at the centre in 11 pt; no trace | at the current PSI | unchanged |
 | PSI unavailable | no zone lit; any cached trend still drawn | parked at 0 | `PSI · OFFLINE` and siblings, bare region letters, no time |
 | Accented | white zones (14% current, 3% others), white grid, accent trace, no paper or glass | accent rule | white 85%, stale in white |

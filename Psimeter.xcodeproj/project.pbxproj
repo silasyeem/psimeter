@@ -12,18 +12,22 @@
 		01F2D5D6D108FB2B8ABA38F1 /* NEA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927364042F3F37C0C379303 /* NEA.swift */; };
 		08D2669355469CD59E38EB24 /* InstrumentPlate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10107C0A83AA813466F33A3A /* InstrumentPlate.swift */; };
 		094E6C84CBBA7B80FC1DE8CA /* ArchivoBlack-OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A205881829D904308A5785A0 /* ArchivoBlack-OFL.txt */; };
+		12F1AE8A97666ADDB065C281 /* RecentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA57456A67B142EAF90BE8 /* RecentStore.swift */; };
 		1304F8D05394DEEB4675EDBC /* Barograph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C879A46D7709FD243A9B2AF9 /* Barograph.swift */; };
+		1398ABD1D6D8145F88D64AEA /* Flights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661EC2098C50B3C79C1F1DD1 /* Flights.swift */; };
 		17EFD679CADC668F226C9960 /* WAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58296AF46C8C64E13F962479 /* WAQI.swift */; };
 		1887B9DFE19EFD0B34B11E5F /* WAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58296AF46C8C64E13F962479 /* WAQI.swift */; };
 		2060102D33FFE36622512CD7 /* FeedJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D139987B336903A83AA19F4 /* FeedJSON.swift */; };
 		248E5D416E4FAF757C639356 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECEB827F827AC69F6BB9411A /* HomeView.swift */; };
 		2A6DAF324B6890293F749266 /* ArchivoBlack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */; };
 		2C0650D543918CE3EC9C37CD /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BCA00DB3C8DCC2B6A0AFDA /* Fixtures.swift */; };
+		2DC01C0C6158176497F27F64 /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66274277AF688D3F736C364 /* Refresh.swift */; };
 		3A34CCD3302D271D9ACF68C9 /* InstrumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61CB60A30325E82526751AB /* InstrumentView.swift */; };
 		410E5330E572A9852A683C0A /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4EB5DA52445ABBD3E04962 /* Reading.swift */; };
 		42C82D060CF4291F56455350 /* Finish.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D90782400EF2A93BE828A4 /* Finish.swift */; };
 		42D0D0D9FD9B1FE23996E0B4 /* RollerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44DD3CF8E932256AC3D2A12C /* RollerCounter.swift */; };
 		44ABB66FE1461E9FDAA16C3B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7CD7459EF70DE8B837CB65 /* Palette.swift */; };
+		4979E8B7C0A0A53EDC1887DF /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66274277AF688D3F736C364 /* Refresh.swift */; };
 		4D7AA025218E443155084DD8 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738676E912E5B0B1A6080E5 /* GalleryView.swift */; };
 		4E336E1B099EC62BBE74F150 /* AirFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D0DF232767D793726598 /* AirFeed.swift */; };
 		601726426EC474CE996D61BE /* ArchivoBlack-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */; };
@@ -49,8 +53,10 @@
 		CD423D32E094253CBB4E4C65 /* Accessories.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F90D1C04B936954E0A3232 /* Accessories.swift */; };
 		CE05C51F2A9B5D4205AA2EC7 /* RegionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E00F57CAAE431072E676A /* RegionIntent.swift */; };
 		CE5E378F0AC375386BCF40DE /* Air.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1479C07D9E16D74BB01DDD02 /* Air.swift */; };
+		D051E806A13C76B51A13940E /* Flights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661EC2098C50B3C79C1F1DD1 /* Flights.swift */; };
 		D94FC470962E24B8A9112E90 /* NEA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3927364042F3F37C0C379303 /* NEA.swift */; };
 		DC30B6909D7E443F64BDA662 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B16426687995ECA7DA56CFD /* Assets.xcassets */; };
+		E5E82B0FC548BC4A33F6B7F9 /* RecentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA57456A67B142EAF90BE8 /* RecentStore.swift */; };
 		F3AB7BCD0AD88A0B28841863 /* Bands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730869BF4AF1F13529A43B6A /* Bands.swift */; };
 		F654EB6C741020102E1D5E31 /* PsimeterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A746CBBCDA8D545222EBC273 /* PsimeterApp.swift */; };
 		F8D88F3120E5DE11DBB827F3 /* Barograph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C879A46D7709FD243A9B2AF9 /* Barograph.swift */; };
@@ -92,6 +98,7 @@
 		44DD3CF8E932256AC3D2A12C /* RollerCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollerCounter.swift; sourceTree = "<group>"; };
 		58296AF46C8C64E13F962479 /* WAQI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAQI.swift; sourceTree = "<group>"; };
 		648F4E0CE3913833F0803CF5 /* PsimeterWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PsimeterWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		661EC2098C50B3C79C1F1DD1 /* Flights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flights.swift; sourceTree = "<group>"; };
 		6E7BA14A4DD14DA52BBA4081 /* ArchivoBlack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ArchivoBlack-Regular.ttf"; sourceTree = "<group>"; };
 		722F252F57809F3DE18A2990 /* DayStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStore.swift; sourceTree = "<group>"; };
 		730869BF4AF1F13529A43B6A /* Bands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bands.swift; sourceTree = "<group>"; };
@@ -103,6 +110,7 @@
 		A70B5766D5A5C15B7F108D87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A746CBBCDA8D545222EBC273 /* PsimeterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsimeterApp.swift; sourceTree = "<group>"; };
 		A78B7D80FE299133B605A295 /* WAQIToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAQIToken.swift; sourceTree = "<group>"; };
+		B66274277AF688D3F736C364 /* Refresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresh.swift; sourceTree = "<group>"; };
 		BA09E8F1268B28E95D680AA6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBA6E0828A74286B5C91ADC8 /* PsimeterWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsimeterWidget.swift; sourceTree = "<group>"; };
 		C4D90782400EF2A93BE828A4 /* Finish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finish.swift; sourceTree = "<group>"; };
@@ -112,6 +120,7 @@
 		D2F90D1C04B936954E0A3232 /* Accessories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessories.swift; sourceTree = "<group>"; };
 		D5BCA00DB3C8DCC2B6A0AFDA /* Fixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
 		D61CB60A30325E82526751AB /* InstrumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentView.swift; sourceTree = "<group>"; };
+		E1DA57456A67B142EAF90BE8 /* RecentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentStore.swift; sourceTree = "<group>"; };
 		E43E00F57CAAE431072E676A /* RegionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegionIntent.swift; sourceTree = "<group>"; };
 		ECEB827F827AC69F6BB9411A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,7 +132,10 @@
 				15A4D0DF232767D793726598 /* AirFeed.swift */,
 				722F252F57809F3DE18A2990 /* DayStore.swift */,
 				9D139987B336903A83AA19F4 /* FeedJSON.swift */,
+				661EC2098C50B3C79C1F1DD1 /* Flights.swift */,
 				3927364042F3F37C0C379303 /* NEA.swift */,
+				E1DA57456A67B142EAF90BE8 /* RecentStore.swift */,
+				B66274277AF688D3F736C364 /* Refresh.swift */,
 				8E04F7AADC7AC813EE6CD26B /* SnapshotStore.swift */,
 				58296AF46C8C64E13F962479 /* WAQI.swift */,
 				A78B7D80FE299133B605A295 /* WAQIToken.swift */,
@@ -353,6 +365,7 @@
 				9D71389E6A7100F1036A810E /* FeedJSON.swift in Sources */,
 				8E19BA8B09103F1F9E7DE5A6 /* Finish.swift in Sources */,
 				2C0650D543918CE3EC9C37CD /* Fixtures.swift in Sources */,
+				1398ABD1D6D8145F88D64AEA /* Flights.swift in Sources */,
 				4D7AA025218E443155084DD8 /* GalleryView.swift in Sources */,
 				248E5D416E4FAF757C639356 /* HomeView.swift in Sources */,
 				A7E82BBBD656BE9E6225E40B /* InstrumentPlate.swift in Sources */,
@@ -361,6 +374,8 @@
 				A7A3ABE119FF3040920E9DD4 /* Palette.swift in Sources */,
 				F654EB6C741020102E1D5E31 /* PsimeterApp.swift in Sources */,
 				B4ACAD6AE257CF258F645AB6 /* Reading.swift in Sources */,
+				12F1AE8A97666ADDB065C281 /* RecentStore.swift in Sources */,
+				2DC01C0C6158176497F27F64 /* Refresh.swift in Sources */,
 				6EAF6CFF49CADA86EDA39422 /* RollerCounter.swift in Sources */,
 				8BF1DA3925FA7842AEF0B1BF /* SnapshotStore.swift in Sources */,
 				1887B9DFE19EFD0B34B11E5F /* WAQI.swift in Sources */,
@@ -380,12 +395,15 @@
 				BFAC0CC6B953F9A256078596 /* DayStore.swift in Sources */,
 				2060102D33FFE36622512CD7 /* FeedJSON.swift in Sources */,
 				42C82D060CF4291F56455350 /* Finish.swift in Sources */,
+				D051E806A13C76B51A13940E /* Flights.swift in Sources */,
 				08D2669355469CD59E38EB24 /* InstrumentPlate.swift in Sources */,
 				7A9BAA0459C25B8B7B5018D5 /* InstrumentView.swift in Sources */,
 				D94FC470962E24B8A9112E90 /* NEA.swift in Sources */,
 				44ABB66FE1461E9FDAA16C3B /* Palette.swift in Sources */,
 				C029099D741B9D079B546EFC /* PsimeterWidget.swift in Sources */,
 				410E5330E572A9852A683C0A /* Reading.swift in Sources */,
+				E5E82B0FC548BC4A33F6B7F9 /* RecentStore.swift in Sources */,
+				4979E8B7C0A0A53EDC1887DF /* Refresh.swift in Sources */,
 				CE05C51F2A9B5D4205AA2EC7 /* RegionIntent.swift in Sources */,
 				42D0D0D9FD9B1FE23996E0B4 /* RollerCounter.swift in Sources */,
 				8954D516FF54C19A57D3A7A1 /* SnapshotStore.swift in Sources */,

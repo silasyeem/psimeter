@@ -25,8 +25,8 @@ struct Reading: Sendable {
             psi = report.psi[snapshot.region]
             psiLabel = psi == nil ? "PSI · \(FeedFailure.unreadable.engraving)" : "PSI · 24H · \(regionMark)"
             bezel = report.psi
-            let age = now.timeIntervalSince(report.observedAt)
-            if observation.freshness == .held || age > PSIReport.staleAfter {
+            if report.isStale(at: now) {
+                let age = now.timeIntervalSince(report.observedAt)
                 time = .stale("STALE " + (age > 20 * 60 * 60 ? SGT.day(report.observedAt) : SGT.clock(report.observedAt)))
             } else {
                 time = .fresh(SGT.clock(report.observedAt))

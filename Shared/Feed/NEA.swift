@@ -7,12 +7,6 @@ enum NEA {
         endpoint.appending(queryItems: [URLQueryItem(name: "date", value: day.iso)])
     }
 
-    static func decode(_ data: Data) throws(FeedFailure) -> PSIReport {
-        let response = try JSONDecoder.decodeFeed(Response.self, from: data)
-        guard let item = response.data.items.first else { throw .unreadable }
-        return PSIReport(psi: item.readings.psi.byRegion, observedAt: item.updatedTimestamp)
-    }
-
     static func decodeDay(_ data: Data, day: SGTDay) throws(FeedFailure) -> PSIDay {
         let items = try JSONDecoder.decodeFeed(Response.self, from: data).data.items
         var byHour: [Date: PSIHour] = [:]
