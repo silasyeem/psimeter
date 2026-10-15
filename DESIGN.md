@@ -72,7 +72,7 @@ typography:
     letterSpacing: "0.6pt"
   chart-label:
     fontFamily: "New York, ui-serif, serif"
-    fontSize: "9.5pt"
+    fontSize: "9.5pt" # on the 350 x 364pt canvas, set at max(9.5, 9 / scale) so it never renders under 9pt
     fontWeight: 500
   accessory-headline:
     fontFamily: "SF Pro" # system text style .headline, Dynamic Type
@@ -305,7 +305,7 @@ The AQI band table in `Shared/Instrument/Bands.swift` also defines an ochre (#d9
 - **Label, engraving** (500, 9 pt, 0.1u tracking, capitals): the aneroid's legends `PSI · 24H · CENTRAL` and `AQI · WAQI`, the scale numerals, the time and the stale mark. The size is max(9, 9u), so it grows only when the instrument is drawn larger than 170 pt, as in the app.
 - **Label strong, bezel inscription** (600, 9 pt, 0.1u tracking): `N 126`, `E 173`, `S 159`, `W 197`, with W and E turned to run along the ring.
 - **Barograph plate engraving** (600, 11.5 pt, 0.5 pt tracking): `PSI · NEA 24H`, `AQI · WAQI`, the regional foot `N 126   S 159   E 173   W 197` and the time or stale mark. The housing inscription `PSI · 24H · CENTRAL` uses the same size and weight at 0.6 pt tracking.
-- **Barograph chart labels** (500, 9.5 pt): the value scale and the hour labels. The trend failure note sets the same face at 11 pt.
+- **Barograph chart labels** (500, 9.5 pt on the canvas, never under 9 pt on screen): the value scale and the hour labels. The trend failure note sets the same face at 11 pt. See The Counter-Scaled Label Rule.
 - **Lock Screen** (`.headline` with tabular digits for `PSI 183 · AQI 168`, `.caption` at a 0.8 minimum scale for `Central · Unhealthy · 20:30`). Dynamic Type applies here and nowhere on either instrument face.
 
 Leading zeros on the wheels draw at 30% opacity, so 42 reads as a dim 0 followed by a full 4 and 2.
@@ -315,7 +315,7 @@ Leading zeros on the wheels draw at 30% opacity, so 42 reads as a dim 0 followed
 
 **The Two Voices Rule.** Each face has two type voices. The engraved serif sets every legend, numeral, time and inscription; Archivo Black sets the two readings on the wheels. A third voice, or the serif on a wheel, breaks the instrument.
 
-The barograph does not yet hold the floor on every phone. Its type scales with the whole face (see Layout), so the 9.5 pt chart labels still clear it at 9.2 pt on 390 pt-wide phones but fall to 8.9 pt on 375 pt-wide phones and 7.9 pt on the smallest. This is an open defect, not an exception to the rule.
+**The Counter-Scaled Label Rule.** The barograph face scales as one piece (see Layout), so text set at s pt on the canvas renders at s × scale. Each chart label is set at max(s, 9 / scale) on the canvas, so it renders at s × scale or at 9 pt, whichever is larger. The 9.5 pt labels render at 9.9 pt at 364 × 382, 9.5 pt at the 350 × 364 reference and 9.2 pt at 338 × 354, and hold at exactly 9 pt at 329 × 345 and 292 × 311. Only the size counter-scales. The labels stay anchored where the canvas puts them, so at 292 × 311 they stand 1.14 times their authored proportion. They still fit: the 3-hour labels clear one another and the 3-digit value labels clear the paper's edge, so nothing is dropped. The 11 pt trend note goes through the same floor but never needs it at a table size (9.2 pt at 292 × 311). The 11.5 pt plate and housing engraving have no floor in code; they render at 9.6 pt at 292 × 311.
 
 ## Layout
 
@@ -347,7 +347,7 @@ In the app and the gallery, the tile clips to a continuous corner of 0.13 of the
 
 ### Barograph (systemLarge)
 
-The barograph is laid out in points on a 350 × 364 pt canvas, the systemLarge size on the 402 pt-wide reference phone. The whole face scales uniformly by the smaller of width / 350 and height / 364 and sits centred in the widget, so type scales with it. The plate behind it fills the widget on its own. All positions are in points from the canvas's top left.
+The barograph is laid out in points on a 350 × 364 pt canvas, the systemLarge size on the 402 pt-wide reference phone. The whole face scales uniformly by the smaller of width / 350 and height / 364 and sits centred in the widget, so type scales with it, except that the chart labels never drop below 9 pt (see The Counter-Scaled Label Rule). The plate behind it fills the widget on its own. All positions are in points from the canvas's top left.
 
 | Element | Position | Size |
 | --- | --- | --- |
@@ -356,8 +356,8 @@ The barograph is laid out in points on a 350 × 364 pt canvas, the systemLarge s
 | Housing inscription | centre (175, 46) | 11.5 pt |
 | Chart window | origin (37.6, 59.6), set by the housing art at 9.11% to 90.95% across and 14.06% to 85.34% down | 275.0 × 129.7 |
 | Plot | the window inset 26 left, 7 top, 13 right, 26 bottom: origin (63.6, 66.6) | 236.0 × 103.7 |
-| Value labels | trailing edge at x 59.6, on their rules | 9.5 pt |
-| Hour labels | centred at y 179.3, on their rules | 9.5 pt |
+| Value labels | trailing edge at x 59.6, on their rules | 9.5 pt, never under 9 pt on screen |
+| Hour labels | centred at y 179.3, on their rules | 9.5 pt, never under 9 pt on screen |
 | Pen arm | nib at (299.6, the current PSI's height), arm running right over the end cap | 31 × 7.5, nib at 49.2% of its height |
 | PSI legend | centre (121, 233) | 11.5 pt |
 | PSI counter | centre (121, 285.5) | 84 tall, about 195 wide |
@@ -370,12 +370,12 @@ The chart's value scale fits the data. Its top is the first of 300, 400, 500, 60
 
 The hour axis is built from the live data window, not from the clock. The window is the 24 hours ending at the newest hourly reading, which sits on the right edge of the plot under the pen nib. Each reading sits at its own hour. Hourly rules step across the window from its start, which is the value axis itself; rules on Singapore hours divisible by 3 are major and carry a two-digit label (`21`, `00`, `03`). The labels therefore move with the data: a window ending at 10:00 reads `12` to `09`, one ending at 20:00 reads `21` to `18`. With no trend, the same 24 divisions are spaced evenly and carry no labels.
 
-The size table in the gallery (Apple's figures) gives 364 × 382 at 430 pt and wider, 360 × 379 at 414, 350 × 364 at 402, 338 × 354 at 390, 329 × 345 at 375 and 292 × 311 below that. Only 350 × 364 has been captured. In the gallery the tile clips to a continuous corner of 0.064 of its width; on the Home Screen the system shape clips it.
+The size table in the gallery (Apple's figures) gives 364 × 382 at 430 pt and wider, 360 × 379 at 414, 350 × 364 at 402, 338 × 354 at 390, 329 × 345 at 375 and 292 × 311 below that. 350 × 364 has been measured on a real iPhone 17 Pro Home Screen. Real Home Screens don't all match the table: the 17e, 390 pt wide, measures about 342 × 357, and the 17 Pro Max, 440 pt wide, about 377 × 393, against the table's 338 × 354 and 364 × 382. The chart labels render at 9.3 and 10.2 pt there. The table's sizes have been captured as gallery tiles: 364 × 382 on the 17 Pro Max, 338 × 354 on the 17e, 329 × 345 on the 13 mini and the SE (3rd generation), and 292 × 311 with `scripts/capture-large.sh <udid> <tag> 320`, because no iOS 27 simulator is narrower than 375 pt. The label floor is computed from the widget's actual size, so it also holds at sizes the table doesn't list. In the gallery the tile clips to a continuous corner of 0.064 of its width; on the Home Screen the system shape clips it.
 
 ### Named Rules
 **The 170 Grid Rule.** Author every aneroid measure in u = side / 170 and let the view scale. Only type has a floor.
 
-**The 350 Canvas Rule.** Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.
+**The 350 Canvas Rule.** Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The one exception is the chart labels' type size, which counter-scales under The Counter-Scaled Label Rule; their positions still scale with the face. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.
 
 **The Raster Opening Rule.** The dial is a circle of radius 0.389 of the side at (0.498, 0.480). That matches the black opening in the `BezelTile` artwork, so the code dial covers it exactly. Move the dial and the plate's black shows.
 
@@ -383,7 +383,7 @@ The size table in the gallery (Apple's figures) gives 364 × 382 at 430 pt and w
 
 There is no UI elevation. Depth is physical. On the aneroid: a raster plate, a dial sunk under the bezel, raised counters, a needle and hub standing off the dial, and a crystal over all of it. The draw order from the back is plate, dial print (face, enamel, ticks, numerals, legends, bezel inscriptions), PSI counter, AQI counter, needle, hub, crystal.
 
-On the barograph: a bevelled raster plate, screws seated in counterbores, a paper drum behind glass inside a brass housing, a pen arm lying over the housing's end cap, and raised counters on the plate. The draw order from the back is plate and bevel, screws, chart paper (paper, zones, grid, labels), trace, drum shade, drum glass, housing and its inscription, pen arm, plate engraving, PSI counter, AQI counter.
+On the barograph: a bevelled raster plate, screws seated in counterbores, a paper drum and the pen that writes on it behind glass inside a brass housing, the pen arm's collar resting on the housing's end cap, and raised counters on the plate. The draw order from the back is plate and bevel, screws, chart paper (paper, zones, grid, labels), trace, drum shade, pen arm inside the window, drum glass, housing and its inscription, pen arm outside the window (the collar on the end cap), plate engraving, PSI counter, AQI counter. The accented finish has no glass, so its pen rule draws whole over the housing outline.
 
 ### Shadow Vocabulary
 - **Bezel lip** (6u stroke blurred 2.4u, black 55% by day and 90% at night, on a ring offset 0.6u left and 1.1u up): shades the dial's upper-left inner edge, as the bezel would under an upper-left lamp.
@@ -435,7 +435,7 @@ The night housing, pen arm and grain share the day art's alpha and are tone-mapp
 ### Named Rules
 **The One Lamp Rule.** Light comes from the upper left. Highlights sit up and left (dial sheen, crystal glare and crescent, hub cap gradient, plate bevel); shadows fall down and right (needle, hub, counters, screw heads, pen arm). Recesses invert: a counterbore lights its lower-right wall and a letter cut into the plate shades its upper-left wall. A new part lit from anywhere else is wrong.
 
-**The Glass Over Everything Rule.** On the aneroid, the crystal is the top layer, and the needle, hub and counters sit under its glare. On the barograph the glass covers the drum only: paper, zones, grid and trace sit under it, and the housing, pen arm, engraving and counters sit above it. The accented finish has no glass on either size.
+**The Glass Over Everything Rule.** On the aneroid, the crystal is the top layer, and the needle, hub and counters sit under its glare. On the barograph the glass covers everything inside the drum window: the paper, zones, grid, labels, trace, wrap shading and the pen arm all sit under its glare. The glass is clipped to the window, so the housing, the pen arm's collar on the end cap, the engraving and the counters stay unglazed above it. The accented finish has no glass on either size.
 
 **The Raster Material, Code Data Rule.** A raster may carry a material and never a value. Brass, gunmetal, paper, glass, screws and the pen arm can be generated art; every zone, rule, label, trace point, figure and engraved string is drawn in code from the reading. A raster that moves with the data, like the pen arm, is placed by code and carries nothing that would need to change with it.
 
@@ -492,9 +492,9 @@ The finish follows the environment. Accented rendering mode selects the accented
 The systemLarge instrument, in `Shared/Instrument/Barograph.swift`. It shares the palette, the finish switch and the roller counter with the aneroid; the rest is its own.
 - **Plate:** `PlateDay` or `PlateNight` behind the face, with the plate bevel, and four screws in counterbores near the corners. Accented: flat Accented Slate with no bevel and no screws.
 - **Housing:** `DrumHousing` (`DrumHousingNight` at night) framing the drum, with `PSI · 24H · <REGION>` cut into the top bar: Bezel Umber over Relief Glint by day, lume with a 1.6 pt glow at night, white 85% in the accented finish, where the housing becomes an outline.
-- **Chart:** the paper raster clipped to the window; the band zones under The One Lit Band Rule; the grid; the value and hour labels in the ground's ink, with a 1.2 pt glow at night. Then the trace, the drum shade (day only) and the drum glass.
+- **Chart:** the paper raster clipped to the window; the band zones under The One Lit Band Rule; the grid; the value and hour labels in the ground's ink, with a 1.2 pt glow at night. Then the trace, the drum shade (day only), the pen arm and the drum glass over all of them.
 - **Trace:** the configured region's 24-hour PSI, one point per hourly NEA reading in the window, drawn under The Pen Ink Rule. The accented trace is a 1.4 pt line in the accent group.
-- **Pen arm:** the `PenArm` raster (`PenArmNight` at night), 31 × 7.5 pt. Its nib sits on the right edge of the plot at the current PSI's height, where the trace ends, and the arm runs right across the end cap. It moves with a 1.2 s smooth animation keyed to the nib's height and snaps to place with Reduce Motion on. With no PSI it parks at 0. Accented: a 1.2 pt rule in the accent group.
+- **Pen arm:** the `PenArm` raster (`PenArmNight` at night), 31 × 7.5 pt. Its nib sits on the right edge of the plot at the current PSI's height, where the trace ends, and the arm runs right across the end cap. Inside the window the arm lies under the drum glass; the collar on the end cap is outside it and draws over the housing, unglazed. It moves with a 1.2 s smooth animation keyed to the nib's height and snaps to place with Reduce Motion on. With no PSI it parks at 0. Accented: a 1.2 pt rule in the accent group.
 - **Plate engraving:** `PSI · NEA 24H` over the PSI counter (the failure legend, such as `PSI · OFFLINE`, when PSI is missing), `AQI · WAQI` or its failure over the AQI counter, the regional foot on the left (bare letters when PSI is missing), and the time or stale mark on the right. Plate Cream with the plate cut by day, lume with a 1.6 pt glow at night, white 85% in the accented finish.
 - **Counters:** PSI 84 pt and AQI 44 pt tall, rim scale 1.9, brass grain, drawn at u = 1.
 - **Trend data:** NEA's hourly PSI for the current and previous Singapore day, merged and cut to the 24 hours ending at the newest reading. A complete past day is cached and never fetched again.
