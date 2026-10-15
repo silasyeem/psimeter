@@ -375,7 +375,7 @@ The size table in the gallery (Apple's figures) gives 364 × 382 at 430 pt and w
 ### Named Rules
 **The 170 Grid Rule.** Author every aneroid measure in u = side / 170 and let the view scale. Only type has a floor.
 
-**The 350 Canvas Rule.** Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The chart window is fixed by the housing art, and the plot, pen and labels are fixed by the window, so nothing on the barograph is placed independently of the raster it sits in.
+**The 350 Canvas Rule.** Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.
 
 **The Raster Opening Rule.** The dial is a circle of radius 0.389 of the side at (0.498, 0.480). That matches the black opening in the `BezelTile` artwork, so the code dial covers it exactly. Move the dial and the plate's black shows.
 

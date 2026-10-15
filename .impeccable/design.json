@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-14T17:18:38Z",
+  "generatedAt": "2026-10-15T02:29:44Z",
   "title": "Design System: psimeter",
   "extensions": {
     "colorMeta": {
@@ -408,16 +408,76 @@
           "#c5c9d2",
           "#eaeef8"
         ]
+      },
+      "plate-cream": {
+        "role": "neutral",
+        "displayName": "Plate Cream",
+        "canonical": "oklch(90.8% 0.028 88.8)",
+        "tonalRamp": [
+          "#100a01",
+          "#2b2415",
+          "#484131",
+          "#68614f",
+          "#898270",
+          "#aca492",
+          "#d0c9b5",
+          "#f6eeda"
+        ]
+      },
+      "chart-grid": {
+        "role": "neutral",
+        "displayName": "Chart Blue-Grey",
+        "canonical": "oklch(51.2% 0.060 266.8)",
+        "tonalRamp": [
+          "#030824",
+          "#182342",
+          "#334162",
+          "#526084",
+          "#7282a7",
+          "#94a5cc",
+          "#b7c9f2",
+          "#e7eeff"
+        ]
+      },
+      "trace-ink": {
+        "role": "neutral",
+        "displayName": "Violet Ink",
+        "canonical": "oklch(25.8% 0.078 293.0)",
+        "tonalRamp": [
+          "#0e0128",
+          "#271b47",
+          "#443967",
+          "#635989",
+          "#847aad",
+          "#a69cd2",
+          "#cac0f8",
+          "#efecff"
+        ]
+      },
+      "stale-ember-light": {
+        "role": "neutral",
+        "displayName": "Light Ember",
+        "canonical": "oklch(79.0% 0.126 41.0)",
+        "tonalRamp": [
+          "#1b0300",
+          "#441200",
+          "#722500",
+          "#9a4320",
+          "#c06543",
+          "#e78865",
+          "#ffb599",
+          "#ffe9e1"
+        ]
       }
     },
     "typographyMeta": {
       "counter-psi": {
         "displayName": "PSI wheels",
-        "purpose": "The 24-hour PSI on the large roller counter. Size is 0.993 x drum height. SF Pro is a stand-in the build carries, not the house display face."
+        "purpose": "The 24-hour PSI on the aneroid's large roller counter, in Archivo Black. Size is drum height x 0.703 / 0.712, so a digit fills 70.3% of its drum."
       },
       "counter-aqi": {
         "displayName": "AQI wheels",
-        "purpose": "The WAQI AQI on the small roller counter, floored at 9pt."
+        "purpose": "The WAQI AQI on the aneroid's small roller counter, in Archivo Black, same formula, floored at 9pt."
       },
       "engraving": {
         "displayName": "Engraving",
@@ -434,6 +494,26 @@
       "accessory-detail": {
         "displayName": "Lock Screen detail",
         "purpose": "Region, band and time under the headline; system .caption at a 0.8 minimum scale."
+      },
+      "counter-psi-large": {
+        "displayName": "PSI wheels, barograph",
+        "purpose": "The 24-hour PSI on the barograph's 84pt counter, same formula."
+      },
+      "counter-aqi-large": {
+        "displayName": "AQI wheels, barograph",
+        "purpose": "The WAQI AQI on the barograph's 44pt counter, same formula."
+      },
+      "plate-engraving": {
+        "displayName": "Plate engraving",
+        "purpose": "Barograph legends, regional foot and time cut into the gunmetal plate: Plate Cream by day, lume at night, Light Ember or Stale Ember when stale."
+      },
+      "housing-inscription": {
+        "displayName": "Housing inscription",
+        "purpose": "PSI · 24H · <REGION> on the barograph's brass top bar; relief copy by day, lume by night."
+      },
+      "chart-label": {
+        "displayName": "Chart labels",
+        "purpose": "Value scale and hour labels on the barograph chart; Engraver's Black by day, lume with glow at night."
       }
     },
     "shadows": [
@@ -476,18 +556,63 @@
         "name": "engraving-relief",
         "value": "copy of the letters 0.55u lower, #fff0bd at 55%, no blur",
         "purpose": "Day bezel inscriptions only."
+      },
+      {
+        "name": "plate-bevel",
+        "value": "ContainerRelativeShape inset 0.75pt, 1.5pt stroke: white 42% day / 24% night on the upper-left half, black 60% on the lower-right half, split along the diagonal at 47% to 53%",
+        "purpose": "Barograph plate edge; follows the system's widget corner. None in the accented finish."
+      },
+      {
+        "name": "counterbore",
+        "value": "20pt bore, radial black 85% (at 0.4, 0.38) to 55% at the rim; 0.6pt lit lip on the lower-right wall, white 26% day / 14% night; head shadow black 60%, radius 0.7, offset (0.8, 0.8)",
+        "purpose": "Barograph plate screws seated in the plate."
+      },
+      {
+        "name": "plate-cut",
+        "value": "copy of the string in black 60%, offset (-0.4pt, -0.6pt), no blur",
+        "purpose": "Day plate engraving only: the shaded upper wall of a cut letter."
+      },
+      {
+        "name": "pen-cast",
+        "value": "radius 0.6, offset (0.3pt, 0.8pt), black 40% day / 60% night",
+        "purpose": "The barograph pen arm standing off the housing."
+      },
+      {
+        "name": "drum-shade",
+        "value": "multiply over the chart window: cosine falloff to 55% at top and bottom, to 85% at the ends",
+        "purpose": "Day only. Turns the flat paper into a drum."
+      },
+      {
+        "name": "drum-glass",
+        "value": "DrumGlass raster, screen blend, 60% day / 45% night, lifted 12pt, lower 14% faded out",
+        "purpose": "Glass over the paper and trace; under the housing and pen."
+      },
+      {
+        "name": "trace-bleed",
+        "value": "same path at 2.3pt, #261a45 at 28%, blur 0.5pt, under the 1.05pt line",
+        "purpose": "Day pen ink bleeding into paper. Not a glow."
+      },
+      {
+        "name": "trace-glow",
+        "value": "1.4pt #ccedc2 line, shadow #ccedc2 at 80%, radius 2pt",
+        "purpose": "Night trace."
       }
     ],
     "motion": [
       {
         "name": "counter-roll",
-        "value": "SwiftUI .contentTransition(.numericText(value: digit)) inside .animation(.smooth(duration: 0.9), value: digit)",
-        "purpose": "Each wheel rolls its own figure up or down, clipped by the drum."
+        "value": "SwiftUI .contentTransition(.numericText(value: digit)) inside .animation(.smooth(duration: 0.9), value: digit); with Reduce Motion, .contentTransition(.opacity) inside .easeInOut(duration: 0.3)",
+        "purpose": "Each wheel rolls its own figure up or down, clipped by the drum; with Reduce Motion it crossfades."
       },
       {
         "name": "needle-sweep",
-        "value": "SwiftUI .animation(.smooth(duration: 1.2), value: psi) on rotation and length scale",
-        "purpose": "The needle swings to the new value and settles 0.3s after the wheels. Reduce Motion is not consulted."
+        "value": "SwiftUI .animation(.smooth(duration: 1.2), value: psi) on rotation and length scale; nil with Reduce Motion",
+        "purpose": "The needle swings to the new value and settles 0.3s after the wheels. With Reduce Motion it snaps."
+      },
+      {
+        "name": "pen-sweep",
+        "value": "SwiftUI .animation(.smooth(duration: 1.2), value: nib.y); nil with Reduce Motion",
+        "purpose": "The barograph pen rides to the current reading; with Reduce Motion it snaps."
       }
     ],
     "breakpoints": [
@@ -514,6 +639,30 @@
       {
         "name": "widget-141",
         "value": "below 375pt: 141pt side"
+      },
+      {
+        "name": "widget-large-364",
+        "value": "430pt screen width and up: 364 x 382pt"
+      },
+      {
+        "name": "widget-large-360",
+        "value": "414pt: 360 x 379pt"
+      },
+      {
+        "name": "widget-large-350",
+        "value": "402pt: 350 x 364pt (reference, iPhone 17 Pro; the barograph's design canvas)"
+      },
+      {
+        "name": "widget-large-338",
+        "value": "390pt: 338 x 354pt"
+      },
+      {
+        "name": "widget-large-329",
+        "value": "375pt: 329 x 345pt (chart labels fall to 8.9pt)"
+      },
+      {
+        "name": "widget-large-292",
+        "value": "below 375pt: 292 x 311pt (chart labels fall to 7.9pt)"
       }
     ]
   },
@@ -524,7 +673,7 @@
       "refersTo": "counter-psi",
       "description": "The hero: three black wheels in a brass frame carrying the exact 24-hour PSI. Sized at the 164pt reference widget.",
       "html": "<div class=\"ds-counter\"><div class=\"ds-counter-well\"><span class=\"ds-counter-drum\">1</span><span class=\"ds-counter-drum\">8</span><span class=\"ds-counter-drum\">3</span></div></div>",
-      "css": ".ds-counter { display: inline-block; padding: 2.96px; border-radius: 5.55px; background: linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 1.00px 1.18px rgba(0,0,0,0.5), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-well { position: relative; display: flex; gap: 1.67px; padding: 0 1.67px; background: #0f0d08; border-radius: 2.22px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-drum { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #f7f7f2; font: 700 30.9px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums;  } .ds-counter-dim { color: rgba(247,247,242,.3); }"
+      "css": ".ds-counter { display: inline-block; padding: 2.96px; border-radius: 5.55px; background: linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 1.00px 1.18px rgba(0,0,0,0.5), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-well { position: relative; display: flex; gap: 1.67px; padding: 0 1.67px; background: #0f0d08; border-radius: 2.22px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-drum { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #f7f7f2; font: 400 30.7px/1 'Archivo Black', 'Arial Black', sans-serif; font-variant-numeric: tabular-nums;  } .ds-counter-dim { color: rgba(247,247,242,.3); }"
     },
     {
       "name": "PSI roller counter, night",
@@ -532,7 +681,7 @@
       "refersTo": "counter-psi-night",
       "description": "Night finish: radium-lume figures with glow, the brass frame under a 22% black wash.",
       "html": "<div class=\"ds-night-plate\"><div class=\"ds-counter-night\"><div class=\"ds-counter-night-well\"><span class=\"ds-counter-night-drum\">1</span><span class=\"ds-counter-night-drum\">8</span><span class=\"ds-counter-night-drum\">3</span></div></div></div>",
-      "css": ".ds-night-plate { display: inline-block; padding: 10px; background: radial-gradient(circle at 40% 30%, #1c1c1c, #0d0d0d 55%, #040404); } .ds-counter-night { display: inline-block; padding: 2.96px; border-radius: 5.55px; background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.22)), linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 1.00px 1.18px rgba(0,0,0,0.8), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-night-well { position: relative; display: flex; gap: 1.67px; padding: 0 1.67px; background: #0f0d08; border-radius: 2.22px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-night-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-night-drum { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #ccedc2; font: 700 30.9px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums; text-shadow: 0 0 1.5px rgba(204,237,194,.6); } .ds-counter-night-dim { color: rgba(204,237,194,.3); }"
+      "css": ".ds-night-plate { display: inline-block; padding: 10px; background: radial-gradient(circle at 40% 30%, #1c1c1c, #0d0d0d 55%, #040404); } .ds-counter-night { display: inline-block; padding: 2.96px; border-radius: 5.55px; background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.22)), linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 1.00px 1.18px rgba(0,0,0,0.8), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-night-well { position: relative; display: flex; gap: 1.67px; padding: 0 1.67px; background: #0f0d08; border-radius: 2.22px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-night-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-night-drum { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #ccedc2; font: 400 30.7px/1 'Archivo Black', 'Arial Black', sans-serif; font-variant-numeric: tabular-nums; text-shadow: 0 0 1.5px rgba(204,237,194,.6); } .ds-counter-night-dim { color: rgba(204,237,194,.3); }"
     },
     {
       "name": "PSI roller counter, accented",
@@ -540,7 +689,7 @@
       "refersTo": "counter-psi-accented",
       "description": "Tinted or clear Home Screen: outlines only, figures in the accent group. Amber stands in for the system tint.",
       "html": "<div class=\"ds-counter-acc\"><span>1</span><span>8</span><span>3</span></div>",
-      "css": ".ds-counter-acc { display: inline-flex; gap: 1.67px; padding: 2.96px 4.6px; border: .7px solid rgba(255,255,255,.5); border-radius: 5.55px; background: #262930; } .ds-counter-acc span { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; border: .5px solid rgba(255,255,255,.28); border-radius: 1px; color: #ffc761; font: 700 30.9px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums; }"
+      "css": ".ds-counter-acc { display: inline-flex; gap: 1.67px; padding: 2.96px 4.6px; border: .7px solid rgba(255,255,255,.5); border-radius: 5.55px; background: #262930; } .ds-counter-acc span { width: 26.73px; height: 31.08px; display: flex; align-items: center; justify-content: center; border: .5px solid rgba(255,255,255,.28); border-radius: 1px; color: #ffc761; font: 400 30.7px/1 'Archivo Black', 'Arial Black', sans-serif; font-variant-numeric: tabular-nums; }"
     },
     {
       "name": "AQI roller counter with legend",
@@ -548,7 +697,7 @@
       "refersTo": "counter-aqi",
       "description": "The secondary reading under its engraved legend. A leading zero draws at 30% opacity.",
       "html": "<div class=\"ds-aqi\"><div class=\"ds-aqi-legend\">AQI · WAQI</div><div class=\"ds-counter-aqi\"><div class=\"ds-counter-aqi-well\"><span class=\"ds-counter-aqi-drum ds-counter-aqi-dim\">0</span><span class=\"ds-counter-aqi-drum\">6</span><span class=\"ds-counter-aqi-drum\">8</span></div></div></div>",
-      "css": ".ds-aqi { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 14px; background: radial-gradient(circle at 35% 30%, #e4e5e3, #b4b6b5); } .ds-aqi-legend { font: 500 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; color: #1a1a1c; } .ds-counter-aqi { display: inline-block; padding: 1.07px; border-radius: 2.01px; background: linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 0.36px 0.43px rgba(0,0,0,0.5), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-aqi-well { position: relative; display: flex; gap: 0.80px; padding: 0 0.80px; background: #0f0d08; border-radius: 0.80px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-aqi-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-aqi-drum { width: 9.68px; height: 11.26px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #f7f7f2; font: 700 11.2px/1 -apple-system, 'SF Pro Display', system-ui, sans-serif; font-variant-numeric: tabular-nums;  } .ds-counter-aqi-dim { color: rgba(247,247,242,.3); }"
+      "css": ".ds-aqi { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 14px; background: radial-gradient(circle at 35% 30%, #e4e5e3, #b4b6b5); } .ds-aqi-legend { font: 500 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; color: #1a1a1c; } .ds-counter-aqi { display: inline-block; padding: 1.07px; border-radius: 2.01px; background: linear-gradient(#f7e09e 0%, #cca352 30%, #8c6629 72%, #c79e4f 100%); box-shadow: 0 0.36px 0.43px rgba(0,0,0,0.5), inset 0 0 0 .5px rgba(255,255,255,.35); } .ds-counter-aqi-well { position: relative; display: flex; gap: 0.80px; padding: 0 0.80px; background: #0f0d08; border-radius: 0.80px; overflow: hidden; box-shadow: inset 0 0 1.5px rgba(0,0,0,.8); } .ds-counter-aqi-well::after { content: ''; position: absolute; inset: 0; background: linear-gradient(rgba(255,255,255,.14) 0%, rgba(255,255,255,.03) 46%, transparent 48%); pointer-events: none; } .ds-counter-aqi-drum { width: 9.68px; height: 11.26px; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,.8)), linear-gradient(#050505 0%, #212121 16%, #454545 38%, #3b3b3b 58%, #1a1a1a 85%, #050505 100%); color: #f7f7f2; font: 400 11.1px/1 'Archivo Black', 'Arial Black', sans-serif; font-variant-numeric: tabular-nums;  } .ds-counter-aqi-dim { color: rgba(247,247,242,.3); }"
     },
     {
       "name": "Engraved legend",
@@ -589,33 +738,59 @@
       "description": "Plain system type for the Lock Screen: headline with tabular digits over a caption naming region, band and time.",
       "html": "<div class=\"ds-acc-rect\"><div class=\"ds-acc-head\">PSI 183 · AQI 168</div><div class=\"ds-acc-detail\">Central · Unhealthy · 20:30</div></div>",
       "css": ".ds-acc-rect { display: inline-flex; flex-direction: column; gap: 1px; width: 172px; padding: 12px 14px; border-radius: 16px; background: #1f1f1f; color: #fff; font-family: -apple-system, 'SF Pro Display', system-ui, sans-serif; } .ds-acc-head { font-size: 17px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-acc-detail { font-size: 12px; white-space: nowrap; opacity: .9; }"
+    },
+    {
+      "name": "Barograph chart and pen, day",
+      "kind": "custom",
+      "refersTo": "trace-day",
+      "description": "The barograph's chart window at the 350 x 364 canvas: paper, band zones with only the current one lit, blue-grey grid, an hour axis built from a window ending at 20:00, the jittered violet-ink trace from 148 to 183, and the pen nib at the current reading. The pen arm is simplified; on the widget it is a raster.",
+      "html": "<svg class=\"ds-chart\" viewBox=\"0 0 296.98 129.73\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"24-hour PSI trace rising from 148 to 183 with the pen at 183\"><defs><linearGradient id=\"ds-shade-v\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#8c8c8c\"/><stop offset=\".125\" stop-color=\"#b8b8b8\"/><stop offset=\".25\" stop-color=\"#dddddd\"/><stop offset=\".375\" stop-color=\"#f6f6f6\"/><stop offset=\".5\" stop-color=\"#fff\"/><stop offset=\".625\" stop-color=\"#f6f6f6\"/><stop offset=\".75\" stop-color=\"#dddddd\"/><stop offset=\".875\" stop-color=\"#b8b8b8\"/><stop offset=\"1\" stop-color=\"#8c8c8c\"/></linearGradient><linearGradient id=\"ds-shade-h\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#d9d9d9\"/><stop offset=\".125\" stop-color=\"#e7e7e7\"/><stop offset=\".25\" stop-color=\"#f4f4f4\"/><stop offset=\".375\" stop-color=\"#fcfcfc\"/><stop offset=\".5\" stop-color=\"#fff\"/><stop offset=\".625\" stop-color=\"#fcfcfc\"/><stop offset=\".75\" stop-color=\"#f4f4f4\"/><stop offset=\".875\" stop-color=\"#e7e7e7\"/><stop offset=\"1\" stop-color=\"#d9d9d9\"/></linearGradient><linearGradient id=\"ds-cap\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\"><stop offset=\"0\" stop-color=\"#5c4017\"/><stop offset=\".35\" stop-color=\"#e2c27a\"/><stop offset=\".7\" stop-color=\"#b38a3e\"/><stop offset=\"1\" stop-color=\"#6e5020\"/></linearGradient><linearGradient id=\"ds-brass\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#f7e09e\"/><stop offset=\".45\" stop-color=\"#cca352\"/><stop offset=\"1\" stop-color=\"#8c6629\"/></linearGradient><filter id=\"ds-bleed\"><feGaussianBlur stdDeviation=\".5\"/></filter><filter id=\"ds-pen\" x=\"-20%\" y=\"-50%\" width=\"140%\" height=\"200%\"><feDropShadow dx=\".3\" dy=\".8\" stdDeviation=\".3\" flood-color=\"#000\" flood-opacity=\".4\"/></filter></defs><rect width=\"274.98\" height=\"129.73\" fill=\"#f4f2ec\"/><rect x=\"26.00\" y=\"93.44\" width=\"235.98\" height=\"17.29\" fill=\"#338c45\" fill-opacity=\"0.12\"/><rect x=\"26.00\" y=\"76.15\" width=\"235.98\" height=\"17.29\" fill=\"#306bbd\" fill-opacity=\"0.12\"/><rect x=\"26.00\" y=\"41.58\" width=\"235.98\" height=\"34.58\" fill=\"#eb4a21\" fill-opacity=\"0.3\"/><rect x=\"26.00\" y=\"7.00\" width=\"235.98\" height=\"34.58\" fill=\"#8c2b29\" fill-opacity=\"0.12\"/><line x1=\"26.00\" y1=\"107.27\" x2=\"261.98\" y2=\"107.27\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"103.81\" x2=\"261.98\" y2=\"103.81\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"100.36\" x2=\"261.98\" y2=\"100.36\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"96.90\" x2=\"261.98\" y2=\"96.90\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"93.44\" x2=\"261.98\" y2=\"93.44\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"26.00\" y1=\"89.98\" x2=\"261.98\" y2=\"89.98\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"86.53\" x2=\"261.98\" y2=\"86.53\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"83.07\" x2=\"261.98\" y2=\"83.07\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"79.61\" x2=\"261.98\" y2=\"79.61\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"76.15\" x2=\"261.98\" y2=\"76.15\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"26.00\" y1=\"72.70\" x2=\"261.98\" y2=\"72.70\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"69.24\" x2=\"261.98\" y2=\"69.24\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"65.78\" x2=\"261.98\" y2=\"65.78\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"62.32\" x2=\"261.98\" y2=\"62.32\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"58.86\" x2=\"261.98\" y2=\"58.86\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"26.00\" y1=\"55.41\" x2=\"261.98\" y2=\"55.41\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"51.95\" x2=\"261.98\" y2=\"51.95\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"48.49\" x2=\"261.98\" y2=\"48.49\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"45.03\" x2=\"261.98\" y2=\"45.03\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"41.58\" x2=\"261.98\" y2=\"41.58\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"26.00\" y1=\"38.12\" x2=\"261.98\" y2=\"38.12\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"34.66\" x2=\"261.98\" y2=\"34.66\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"31.20\" x2=\"261.98\" y2=\"31.20\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"27.75\" x2=\"261.98\" y2=\"27.75\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"24.29\" x2=\"261.98\" y2=\"24.29\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"26.00\" y1=\"20.83\" x2=\"261.98\" y2=\"20.83\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"17.37\" x2=\"261.98\" y2=\"17.37\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"13.92\" x2=\"261.98\" y2=\"13.92\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"26.00\" y1=\"10.46\" x2=\"261.98\" y2=\"10.46\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"35.83\" y1=\"7.00\" x2=\"35.83\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"45.66\" y1=\"7.00\" x2=\"45.66\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"55.50\" y1=\"7.00\" x2=\"55.50\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"65.33\" y1=\"7.00\" x2=\"65.33\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"75.16\" y1=\"7.00\" x2=\"75.16\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"85.00\" y1=\"7.00\" x2=\"85.00\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"94.83\" y1=\"7.00\" x2=\"94.83\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"104.66\" y1=\"7.00\" x2=\"104.66\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"114.49\" y1=\"7.00\" x2=\"114.49\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"124.33\" y1=\"7.00\" x2=\"124.33\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"134.16\" y1=\"7.00\" x2=\"134.16\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"143.99\" y1=\"7.00\" x2=\"143.99\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"153.82\" y1=\"7.00\" x2=\"153.82\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"163.66\" y1=\"7.00\" x2=\"163.66\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"173.49\" y1=\"7.00\" x2=\"173.49\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"183.32\" y1=\"7.00\" x2=\"183.32\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"193.15\" y1=\"7.00\" x2=\"193.15\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"202.99\" y1=\"7.00\" x2=\"202.99\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"212.82\" y1=\"7.00\" x2=\"212.82\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"222.65\" y1=\"7.00\" x2=\"222.65\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"232.48\" y1=\"7.00\" x2=\"232.48\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><line x1=\"242.31\" y1=\"7.00\" x2=\"242.31\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.42\" stroke-width=\"0.6\"/><line x1=\"252.15\" y1=\"7.00\" x2=\"252.15\" y2=\"110.73\" stroke=\"#57668a\" stroke-opacity=\"0.14\" stroke-width=\"0.4\"/><path d=\"M26.00 7.00 V110.73 H261.98\" fill=\"none\" stroke=\"#57668a\" stroke-opacity=\".6\" stroke-width=\".7\"/><g font-family=\"'New York', ui-serif, Georgia, serif\" font-weight=\"500\" font-size=\"9.5\" fill=\"#1a1a1c\"><text x=\"22.00\" y=\"93.44\" text-anchor=\"end\" dominant-baseline=\"central\">50</text><text x=\"22.00\" y=\"76.15\" text-anchor=\"end\" dominant-baseline=\"central\">100</text><text x=\"22.00\" y=\"58.86\" text-anchor=\"end\" dominant-baseline=\"central\">150</text><text x=\"22.00\" y=\"41.58\" text-anchor=\"end\" dominant-baseline=\"central\">200</text><text x=\"22.00\" y=\"24.29\" text-anchor=\"end\" dominant-baseline=\"central\">250</text><text x=\"35.83\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">21</text><text x=\"65.33\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">00</text><text x=\"94.83\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">03</text><text x=\"124.33\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">06</text><text x=\"153.82\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">09</text><text x=\"183.32\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">12</text><text x=\"212.82\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">15</text><text x=\"242.31\" y=\"119.73\" text-anchor=\"middle\" dominant-baseline=\"central\">18</text></g><path d=\"M35.83 59.56 L37.24 59.30 L38.64 59.46 L40.05 59.48 L41.45 59.52 L42.86 59.30 L44.26 59.48 L45.66 59.56 L47.07 59.37 L48.47 59.32 L49.88 59.75 L51.28 59.41 L52.69 59.47 L54.09 59.50 L55.50 59.56 L56.90 59.35 L58.31 59.38 L59.71 59.66 L61.12 59.62 L62.52 59.81 L63.93 59.32 L65.33 59.56 L66.73 59.43 L68.14 59.69 L69.54 59.70 L70.95 59.53 L72.35 59.78 L73.76 59.60 L75.16 59.56 L76.57 59.31 L77.97 59.61 L79.38 59.84 L80.78 59.36 L82.19 59.47 L83.59 59.36 L85.00 59.56 L86.40 59.65 L87.80 59.77 L89.21 59.57 L90.61 59.33 L92.02 59.38 L93.42 59.50 L94.83 59.56 L96.23 59.46 L97.64 59.41 L99.04 59.31 L100.45 59.44 L101.85 59.49 L103.26 59.28 L104.66 59.56 L106.06 59.40 L107.47 59.36 L108.87 59.45 L110.28 59.32 L111.68 59.28 L113.09 59.81 L114.49 59.56 L115.90 59.36 L117.30 59.47 L118.71 59.37 L120.11 59.54 L121.52 59.44 L122.92 59.69 L124.33 59.56 L125.73 59.63 L127.13 59.21 L128.54 59.39 L129.95 59.59 L131.36 59.55 L132.75 59.28 L134.16 59.21 L135.54 58.84 L136.98 59.05 L138.37 58.73 L139.75 58.41 L141.21 58.72 L142.59 58.36 L143.99 58.17 L145.41 57.99 L146.80 57.66 L148.22 57.53 L149.56 56.91 L150.99 56.79 L152.39 56.52 L153.82 56.44 L155.23 56.18 L156.68 56.09 L157.99 55.34 L159.47 55.39 L160.84 54.93 L162.23 54.57 L163.66 54.37 L165.07 54.16 L166.43 53.70 L167.87 53.64 L169.26 53.33 L170.63 52.86 L172.11 53.06 L173.49 52.64 L174.83 52.07 L176.34 52.24 L177.65 51.50 L179.11 51.48 L180.48 51.02 L181.96 51.08 L183.32 50.57 L184.70 50.20 L186.09 49.83 L187.50 49.62 L188.95 49.62 L190.30 49.11 L191.74 49.06 L193.15 48.84 L194.53 48.48 L195.97 48.65 L197.39 48.59 L198.77 48.21 L200.18 48.15 L201.60 48.15 L202.99 47.80 L204.40 47.98 L205.80 47.95 L207.20 47.78 L208.61 47.67 L210.01 47.53 L211.40 47.24 L212.82 47.45 L214.22 47.67 L215.63 47.53 L217.03 47.60 L218.44 47.72 L219.84 47.48 L221.25 47.68 L222.65 47.45 L224.05 47.29 L225.46 47.25 L226.86 47.41 L228.27 47.25 L229.67 47.26 L231.08 47.62 L232.48 47.45 L233.89 47.72 L235.29 47.57 L236.70 47.26 L238.10 47.25 L239.51 47.70 L240.91 47.46 L242.31 47.45 L243.72 47.21 L245.12 47.60 L246.53 47.46 L247.93 47.49 L249.34 47.38 L250.74 47.38 L252.15 47.45 L253.55 47.25 L254.96 47.73 L256.36 47.22 L257.77 47.20 L259.17 47.72 L260.58 47.32 L261.98 47.45\" fill=\"none\" stroke=\"#261a45\" stroke-opacity=\".28\" stroke-width=\"2.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" filter=\"url(#ds-bleed)\"/><path d=\"M35.83 59.56 L37.24 59.30 L38.64 59.46 L40.05 59.48 L41.45 59.52 L42.86 59.30 L44.26 59.48 L45.66 59.56 L47.07 59.37 L48.47 59.32 L49.88 59.75 L51.28 59.41 L52.69 59.47 L54.09 59.50 L55.50 59.56 L56.90 59.35 L58.31 59.38 L59.71 59.66 L61.12 59.62 L62.52 59.81 L63.93 59.32 L65.33 59.56 L66.73 59.43 L68.14 59.69 L69.54 59.70 L70.95 59.53 L72.35 59.78 L73.76 59.60 L75.16 59.56 L76.57 59.31 L77.97 59.61 L79.38 59.84 L80.78 59.36 L82.19 59.47 L83.59 59.36 L85.00 59.56 L86.40 59.65 L87.80 59.77 L89.21 59.57 L90.61 59.33 L92.02 59.38 L93.42 59.50 L94.83 59.56 L96.23 59.46 L97.64 59.41 L99.04 59.31 L100.45 59.44 L101.85 59.49 L103.26 59.28 L104.66 59.56 L106.06 59.40 L107.47 59.36 L108.87 59.45 L110.28 59.32 L111.68 59.28 L113.09 59.81 L114.49 59.56 L115.90 59.36 L117.30 59.47 L118.71 59.37 L120.11 59.54 L121.52 59.44 L122.92 59.69 L124.33 59.56 L125.73 59.63 L127.13 59.21 L128.54 59.39 L129.95 59.59 L131.36 59.55 L132.75 59.28 L134.16 59.21 L135.54 58.84 L136.98 59.05 L138.37 58.73 L139.75 58.41 L141.21 58.72 L142.59 58.36 L143.99 58.17 L145.41 57.99 L146.80 57.66 L148.22 57.53 L149.56 56.91 L150.99 56.79 L152.39 56.52 L153.82 56.44 L155.23 56.18 L156.68 56.09 L157.99 55.34 L159.47 55.39 L160.84 54.93 L162.23 54.57 L163.66 54.37 L165.07 54.16 L166.43 53.70 L167.87 53.64 L169.26 53.33 L170.63 52.86 L172.11 53.06 L173.49 52.64 L174.83 52.07 L176.34 52.24 L177.65 51.50 L179.11 51.48 L180.48 51.02 L181.96 51.08 L183.32 50.57 L184.70 50.20 L186.09 49.83 L187.50 49.62 L188.95 49.62 L190.30 49.11 L191.74 49.06 L193.15 48.84 L194.53 48.48 L195.97 48.65 L197.39 48.59 L198.77 48.21 L200.18 48.15 L201.60 48.15 L202.99 47.80 L204.40 47.98 L205.80 47.95 L207.20 47.78 L208.61 47.67 L210.01 47.53 L211.40 47.24 L212.82 47.45 L214.22 47.67 L215.63 47.53 L217.03 47.60 L218.44 47.72 L219.84 47.48 L221.25 47.68 L222.65 47.45 L224.05 47.29 L225.46 47.25 L226.86 47.41 L228.27 47.25 L229.67 47.26 L231.08 47.62 L232.48 47.45 L233.89 47.72 L235.29 47.57 L236.70 47.26 L238.10 47.25 L239.51 47.70 L240.91 47.46 L242.31 47.45 L243.72 47.21 L245.12 47.60 L246.53 47.46 L247.93 47.49 L249.34 47.38 L250.74 47.38 L252.15 47.45 L253.55 47.25 L254.96 47.73 L256.36 47.22 L257.77 47.20 L259.17 47.72 L260.58 47.32 L261.98 47.45\" fill=\"none\" stroke=\"#261a45\" stroke-width=\"1.05\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect width=\"274.98\" height=\"129.73\" fill=\"url(#ds-shade-v)\" style=\"mix-blend-mode:multiply\"/><rect width=\"274.98\" height=\"129.73\" fill=\"url(#ds-shade-h)\" style=\"mix-blend-mode:multiply\"/><rect x=\"274.98\" width=\"22\" height=\"129.73\" fill=\"url(#ds-cap)\"/><g filter=\"url(#ds-pen)\"><polygon points=\"261.98,47.45 265.98,46.55 265.98,48.35\" fill=\"#9aa0a3\"/><rect x=\"265.98\" y=\"46.75\" width=\"20\" height=\"1.4\" rx=\".7\" fill=\"url(#ds-brass)\"/><rect x=\"284.98\" y=\"44.85\" width=\"7\" height=\"5.2\" rx=\"1\" fill=\"url(#ds-brass)\"/></g></svg>",
+      "css": ".ds-chart { display: block; width: 550px; height: auto; }"
+    },
+    {
+      "name": "Plate engraving, day and night",
+      "kind": "custom",
+      "refersTo": "plate-legend",
+      "description": "The barograph's foot cut into the gunmetal plate: Plate Cream with a shaded upper wall by day, lume with glow at night, and the stale mark in Light Ember or Stale Ember with no glow.",
+      "html": "<div class=\"ds-plate-pair\"><div class=\"ds-plate\"><span>N 126   S 159   E 173   W 197</span><span class=\"ds-plate-stale\">STALE 20:30</span></div><div class=\"ds-plate ds-plate-night\"><span>N 126   S 159   E 173   W 197</span><span class=\"ds-plate-stale\">STALE 20:30</span></div></div>",
+      "css": ".ds-plate-pair { display: inline-flex; flex-direction: column; gap: 6px; } .ds-plate { display: flex; justify-content: space-between; gap: 28px; width: 300px; padding: 10px 16px; background: linear-gradient(#3a3937, #2e2d2b); font: 600 11.5px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .5px; white-space: pre; color: #e8e0cc; text-shadow: -.4px -.6px 0 rgba(0,0,0,.6); } .ds-plate-stale { color: #ff9e7a; } .ds-plate-night { background: linear-gradient(#1d1d1c, #171716); color: #ccedc2; text-shadow: 0 0 1.6px rgba(204,237,194,.6); } .ds-plate-night .ds-plate-stale { color: #ff6b42; text-shadow: none; }"
     }
   ],
   "narrative": {
     "northStar": "The Brass Aneroid",
-    "overview": "psimeter is one instrument. On the Home Screen it is a 164 pt square on the reference iPhone 17 Pro. A gunmetal plate with four slotted screws holds a knurled brass bezel and a round dial. The dial carries a shallow five-band enamel arc with one needle, a wide three-wheel roller counter for the 24-hour PSI, a small counter for the WAQI AQI, and engraved legends. Every mark on the face is metal, enamel, glass, a tick or engraved text. There are no buttons, icons, chips or cards. On the Lock Screen, where the materials cannot survive vibrant rendering, the accessories drop to plain system type and make no attempt to imitate brass.\n\nThe world changes material with the appearance. It never inverts. Day is grained silver, black engraving and a blued-steel needle. Night is black lacquer with radium lume: legends, ticks and wheel figures glow, the needle turns gunmetal with a lume strip, and the bezel tile becomes a tone-mapped, darker copy of the day brass. A tinted or clear Home Screen gets a third finish, an open line drawing that keeps the engraved structure and puts the needle and figures in the accent group.\n\nThe reading is the product, so the figures carry it and the band supports it. Figures never take the band colour. The band shows only as the needle's position over the enamel, where the current band is the brightest segment. The face is dense, about a dozen engraved strings on 164 pt, and it holds together with two type voices, one light source and a 9 pt floor.",
+    "overview": "psimeter is one instrument world in two Home Screen sizes. The systemSmall widget is an aneroid, a 164 pt square on the reference iPhone 17 Pro. A gunmetal plate with four slotted screws holds a knurled brass bezel and a round dial. The dial carries a shallow five-band enamel arc with one needle, a wide three-wheel roller counter for the 24-hour PSI, a small counter for the WAQI AQI, and engraved legends. Every mark on the face is metal, enamel, glass, a tick or engraved text. There are no buttons, icons, chips or cards. On the Lock Screen, where the materials cannot survive vibrant rendering, the accessories drop to plain system type and make no attempt to imitate brass.\n\nThe systemLarge widget is a barograph, 350 × 364 pt on the same phone. The same gunmetal plate, its four brass screws now seated in counterbores, carries a brass drum housing across its upper half. Through the housing window a paper drum shows the last 24 hours of PSI as a pen trace over faint band zones, and a brass pen arm's nib marks the current reading at the right edge of the chart, which is now. Below the drum the plate holds the PSI and AQI roller counters in grained brass frames, and engraving for the legends, the four regional PSIs and the time. The barograph adds the trace and nothing else: the same materials, light and type voices as the aneroid.\n\nThe world changes material with the appearance. It never inverts. Day is grained silver, black engraving and a blued-steel needle; on the barograph it is warm chart paper and violet-black pen ink. Night is black lacquer with radium lume: legends, ticks, wheel figures and the barograph's trace glow, the needle turns gunmetal with a lume strip, the paper turns black under a lume grid, and the brass becomes a tone-mapped, darker copy of the day brass. A tinted or clear Home Screen gets a third finish, an open line drawing that keeps the engraved structure and puts the needle, the pen, the trace and the figures in the accent group.\n\nThe reading is the product, so the figures carry it and the band supports it. Figures never take the band colour. The band shows only as the needle's position over the enamel, or the pen's position over the chart zones, where the current band is the brightest. The aneroid face is dense, about a dozen engraved strings on 164 pt, and it holds together with two type voices, one light source and a 9 pt floor.",
     "keyCharacteristics": [
-      "One square instrument, drawn in code over three raster textures, scaled from a 170 pt authoring unit.",
-      "Exact figures on roller wheels; the band arc is supporting cast.",
-      "A material switch for night (lacquer, lume, dimmed brass), never an inverted palette.",
-      "Engraved serif for every legend and heavy tabular figures for the two readings. Nothing else is set on the face.",
-      "Light from the upper left everywhere: dial sheen, crystal glare, needle and hub shadows, counter frames.",
-      "Honest states drawn in the material: blank wheels for missing data, a rust or ember stale mark, a pegged needle."
+      "Two instruments in one world: the systemSmall aneroid, drawn in code over three raster textures on a 170 pt grid, and the systemLarge barograph, drawn in code over raster materials on a 350 × 364 pt canvas.",
+      "Exact figures on roller wheels; the band arc and the 24-hour trace are supporting cast.",
+      "A material switch for night (lacquer, black paper, lume, dimmed brass), never an inverted palette.",
+      "Engraved serif for every legend and Archivo Black figures for the two readings. Nothing else is set on either face.",
+      "Light from the upper left everywhere: dial sheen, crystal glare, plate bevel, screw bores, needle, hub, pen and counter shadows.",
+      "Honest states drawn in the material: blank wheels for missing data, a rust or ember stale mark, a pegged needle, an empty chart engraved `TREND · OFFLINE`."
     ],
     "rules": [
       {
         "name": "The One Lit Band Rule",
-        "body": "The segment holding the current PSI draws at full enamel under a 38% white glaze. The other four are muted (22% toward mid-grey by day, 15% toward black by night) under a 22% glaze. With no PSI reading, no segment is lit.",
+        "body": "The segment holding the current PSI draws at full enamel under a 38% white glaze. The other four are muted (22% toward mid-grey by day, 15% toward black by night) under a 22% glaze. With no PSI reading, no segment is lit. The barograph's chart zones obey the same rule: the zone holding the current PSI fills at 30% of its enamel and every other zone at 12% by day and 8.5% at night; the accented finish uses white at 14% and 3%. The zone is lit by the current reading, not by where the trace has been.",
         "section": "colors"
       },
       {
         "name": "The Figures Never Take the Band Rule",
-        "body": "Wheel figures stay Wheel White by day and Radium Lume by night at every value. The band shows only as the needle over the enamel.",
+        "body": "Wheel figures stay Wheel White by day and Radium Lume by night at every value. The band shows only as the needle over the enamel, or the pen over the chart zones.",
         "section": "colors"
       },
       {
         "name": "The Lume Is Night Rule",
-        "body": "Only the night finish glows. The day finish has no glow anywhere, and the stale mark never glows in any finish. Stale is painted, not luminous.",
+        "body": "Only the night finish glows. The day finish has no glow anywhere, and the stale mark never glows in any finish. Stale is painted, not luminous. The day trace's soft edge is ink bleed, darker than the paper, not a glow.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Follows the Ground Rule",
+        "body": "Day engraving takes its ink from the ground it is cut into, and night switches every ground to lume. Silver dial and chart paper take Engraver's Black. Brass (the aneroid bezel, the barograph housing bar) takes Bezel Umber over Relief Glint. The gunmetal plate takes Plate Cream, about 9.9 to 11.4:1. The stale mark follows the ground too: Stale Rust on silver, Light Ember on the day plate (7.5:1), Stale Ember on the night plate (6.5:1). Engraver's Black and Stale Rust never go on the plate.",
+        "section": "colors"
+      },
+      {
+        "name": "The Pen Ink Rule",
+        "body": "The day trace is ink from a pen, never a clean vector line. Each hourly segment is cut into steps of 1.3 pt or a little more, and every step except the segment's end is offset up to 0.28 pt along the normal, so the line still passes through every hourly reading. The offsets come from a generator seeded by the data, so the same 24 hours always draws the same line. The line is Violet Ink at 1.05 pt with round caps and joins, over a 2.3 pt bleed of the same ink at 28%, blurred 0.5 pt. At night the trace is a smooth 1.4 pt lume line with an 80% lume glow, radius 2 pt.",
         "section": "colors"
       },
       {
@@ -625,12 +800,17 @@
       },
       {
         "name": "The Two Voices Rule",
-        "body": "The face has two type voices. The engraved serif sets every legend, numeral, time and inscription; the wheel figures set the two readings. A third voice, or the serif on a wheel, breaks the instrument.",
+        "body": "Each face has two type voices. The engraved serif sets every legend, numeral, time and inscription; Archivo Black sets the two readings on the wheels. A third voice, or the serif on a wheel, breaks the instrument.",
         "section": "typography"
       },
       {
         "name": "The 170 Grid Rule",
-        "body": "Author every measure in u = side / 170 and let the view scale. Only type has a floor.",
+        "body": "Author every aneroid measure in u = side / 170 and let the view scale. Only type has a floor.",
+        "section": "layout"
+      },
+      {
+        "name": "The 350 Canvas Rule",
+        "body": "Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.",
         "section": "layout"
       },
       {
@@ -640,33 +820,42 @@
       },
       {
         "name": "The One Lamp Rule",
-        "body": "Light comes from the upper left. Highlights sit up and left (dial sheen, crystal glare and crescent, hub cap gradient); shadows fall down and right (needle, hub, counters). A new part lit from anywhere else is wrong.",
+        "body": "Light comes from the upper left. Highlights sit up and left (dial sheen, crystal glare and crescent, hub cap gradient, plate bevel); shadows fall down and right (needle, hub, counters, screw heads, pen arm). Recesses invert: a counterbore lights its lower-right wall and a letter cut into the plate shades its upper-left wall. A new part lit from anywhere else is wrong.",
         "section": "elevation"
       },
       {
         "name": "The Glass Over Everything Rule",
-        "body": "The crystal is the top layer, and the needle, hub and counters sit under its glare. The accented finish has no crystal.",
+        "body": "On the aneroid, the crystal is the top layer, and the needle, hub and counters sit under its glare. On the barograph the glass covers the drum only: paper, zones, grid and trace sit under it, and the housing, pen arm, engraving and counters sit above it. The accented finish has no glass on either size.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Raster Material, Code Data Rule",
+        "body": "A raster may carry a material and never a value. Brass, gunmetal, paper, glass, screws and the pen arm can be generated art; every zone, rule, label, trace point, figure and engraved string is drawn in code from the reading. A raster that moves with the data, like the pen arm, is placed by code and carries nothing that would need to change with it.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do measure everything in u = side / 170 and keep the dial at (0.498, 0.480) with radius 0.389 of the side.",
-      "Do keep the exact figures on the wheels and let the arc only place the band.",
-      "Do switch materials for night: lacquer face, lume ink with glow, `BezelTileNight`, a gunmetal needle with a lume strip, the counter frame dimmed 22%, the current enamel warmed 22% toward Lamp Warmth.",
-      "Do label each reading with its scale and source in the engraving (`PSI · 24H · CENTRAL`, `AQI · WAQI`).",
-      "Do show missing data as blank wheels and a named failure in the legend, with the needle parked at 0 when PSI is missing.",
+      "Do measure every aneroid part in u = side / 170 and keep the dial at (0.498, 0.480) with radius 0.389 of the side.",
+      "Do measure every barograph part in points on the 350 × 364 canvas and place the plot, pen and labels from the housing's window.",
+      "Do keep the exact figures on the wheels and let the arc and the chart zones only place the band.",
+      "Do switch materials for night: lacquer face, black paper, lume ink with glow, `BezelTileNight` and the night barograph rasters, a gunmetal needle with a lume strip, the counter frame dimmed, the current enamel warmed 22% toward Lamp Warmth.",
+      "Do label each reading with its scale and source in the engraving (`PSI · 24H · CENTRAL`, `PSI · NEA 24H`, `AQI · WAQI`).",
+      "Do pick engraving ink by its ground: Engraver's Black on silver and paper, Bezel Umber on brass, Plate Cream on gunmetal, with the stale mark in Light Ember on the plate.",
+      "Do show missing data as blank wheels and a named failure in the legend, with the needle or pen parked at 0 when PSI is missing, and an engraved `TREND · <FAILURE>` on an empty chart.",
       "Do peg the needle at 400 and let the counter show the true figure, up to 999.",
+      "Do build the hour axis from the data window, with the newest reading under the pen nib.",
       "Do light every new part from the upper left and cast its shadow down and right.",
-      "Do put the needle and the wheel figures in the accent group, and drop the raster plate and the crystal in the accented finish."
+      "Do put the needle, the pen, the trace and the wheel figures in the accent group, and drop the raster plate, screws, housing, paper, glass and crystal in the accented finish."
     ],
     "donts": [
-      "Don't colour the figures, the counters or the plate by band. The thesis refuses the band-coloured number tile; the band lives in the enamel arc only.",
-      "Don't draw AQI on the arc or give it a needle. The arc is NEA's PSI scale; AQI has its own counter.",
+      "Don't colour the figures, the counters or the plate by band. The thesis refuses the band-coloured number tile; the band lives in the enamel arc and the chart zones only.",
+      "Don't draw AQI on the arc or the chart, or give it a needle or a pen. The arc and the chart are NEA's PSI scale; AQI has its own counter.",
       "Don't shrink engraved text below 9 pt. Drop numerals or shorten the legend instead.",
       "Don't let anything glow by day, and don't let the stale mark glow at all.",
-      "Don't invent a figure to fill a wheel. A blank wheel is the honest state.",
-      "Don't treat the wheels' SF Pro Bold as the house display face. It is a stand-in the build carries.",
-      "Don't put icons, chips, cards or buttons on the face. Every mark is engraving, enamel, metal or glass."
+      "Don't invent a figure to fill a wheel, or a trace to fill a chart. A blank wheel and an empty chart are the honest states.",
+      "Don't draw the day trace as a clean vector line, or let its wobble change between reloads of the same data.",
+      "Don't bake a value into a raster. Materials can be generated art; readings, zones, rules and labels are code.",
+      "Don't put icons, chips, cards or buttons on the face. Every mark is engraving, enamel, metal, paper, ink or glass."
     ]
   }
 }
