@@ -72,7 +72,7 @@ typography:
     letterSpacing: "0.6pt"
   chart-label:
     fontFamily: "New York, ui-serif, serif"
-    fontSize: "9.5pt"
+    fontSize: "9.5pt" # on the 350 x 364pt canvas, set at max(9.5, 9 / scale) so it never renders under 9pt
     fontWeight: 500
   accessory-headline:
     fontFamily: "SF Pro" # system text style .headline, Dynamic Type
@@ -305,7 +305,7 @@ The AQI band table in `Shared/Instrument/Bands.swift` also defines an ochre (#d9
 - **Label, engraving** (500, 9 pt, 0.1u tracking, capitals): the aneroid's legends `PSI · 24H · CENTRAL` and `AQI · WAQI`, the scale numerals, the time and the stale mark. The size is max(9, 9u), so it grows only when the instrument is drawn larger than 170 pt, as in the app.
 - **Label strong, bezel inscription** (600, 9 pt, 0.1u tracking): `N 126`, `E 173`, `S 159`, `W 197`, with W and E turned to run along the ring.
 - **Barograph plate engraving** (600, 11.5 pt, 0.5 pt tracking): `PSI · NEA 24H`, `AQI · WAQI`, the regional foot `N 126   S 159   E 173   W 197` and the time or stale mark. The housing inscription `PSI · 24H · CENTRAL` uses the same size and weight at 0.6 pt tracking.
-- **Barograph chart labels** (500, 9.5 pt): the value scale and the hour labels. The trend failure note sets the same face at 11 pt.
+- **Barograph chart labels** (500, 9.5 pt on the canvas, never under 9 pt on screen): the value scale and the hour labels. The trend failure note sets the same face at 11 pt. See The Counter-Scaled Label Rule.
 - **Lock Screen** (`.headline` with tabular digits for `PSI 183 · AQI 168`, `.caption` at a 0.8 minimum scale for `Central · Unhealthy · 20:30`). Dynamic Type applies here and nowhere on either instrument face.
 
 Leading zeros on the wheels draw at 30% opacity, so 42 reads as a dim 0 followed by a full 4 and 2.
@@ -315,7 +315,7 @@ Leading zeros on the wheels draw at 30% opacity, so 42 reads as a dim 0 followed
 
 **The Two Voices Rule.** Each face has two type voices. The engraved serif sets every legend, numeral, time and inscription; Archivo Black sets the two readings on the wheels. A third voice, or the serif on a wheel, breaks the instrument.
 
-The barograph does not yet hold the floor on every phone. Its type scales with the whole face (see Layout), so the 9.5 pt chart labels still clear it at 9.2 pt on 390 pt-wide phones but fall to 8.9 pt on 375 pt-wide phones and 7.9 pt on the smallest. This is an open defect, not an exception to the rule.
+**The Counter-Scaled Label Rule.** The barograph face scales as one piece (see Layout), so text set at s pt on the canvas renders at s × scale. Each chart label is set at max(s, 9 / scale) on the canvas, so it renders at s × scale or at 9 pt, whichever is larger. The 9.5 pt labels render at 9.9 pt at 364 × 382, 9.5 pt at the 350 × 364 reference and 9.2 pt at 338 × 354, and hold at exactly 9 pt at 329 × 345 and 292 × 311. Only the size counter-scales. The labels stay anchored where the canvas puts them, so at 292 × 311 they stand 1.14 times their authored proportion. They still fit: the 3-hour labels clear one another and the 3-digit value labels clear the paper's edge, so nothing is dropped. The 11 pt trend note goes through the same floor but never needs it at a table size (9.2 pt at 292 × 311). The 11.5 pt plate and housing engraving have no floor in code; they render at 9.6 pt at 292 × 311.
 
 ## Layout
 
@@ -347,7 +347,7 @@ In the app and the gallery, the tile clips to a continuous corner of 0.13 of the
 
 ### Barograph (systemLarge)
 
-The barograph is laid out in points on a 350 × 364 pt canvas, the systemLarge size on the 402 pt-wide reference phone. The whole face scales uniformly by the smaller of width / 350 and height / 364 and sits centred in the widget, so type scales with it. The plate behind it fills the widget on its own. All positions are in points from the canvas's top left.
+The barograph is laid out in points on a 350 × 364 pt canvas, the systemLarge size on the 402 pt-wide reference phone. The whole face scales uniformly by the smaller of width / 350 and height / 364 and sits centred in the widget, so type scales with it, except that the chart labels never drop below 9 pt (see The Counter-Scaled Label Rule). The plate behind it fills the widget on its own. All positions are in points from the canvas's top left.
 
 | Element | Position | Size |
 | --- | --- | --- |
@@ -356,8 +356,8 @@ The barograph is laid out in points on a 350 × 364 pt canvas, the systemLarge s
 | Housing inscription | centre (175, 46) | 11.5 pt |
 | Chart window | origin (37.6, 59.6), set by the housing art at 9.11% to 90.95% across and 14.06% to 85.34% down | 275.0 × 129.7 |
 | Plot | the window inset 26 left, 7 top, 13 right, 26 bottom: origin (63.6, 66.6) | 236.0 × 103.7 |
-| Value labels | trailing edge at x 59.6, on their rules | 9.5 pt |
-| Hour labels | centred at y 179.3, on their rules | 9.5 pt |
+| Value labels | trailing edge at x 59.6, on their rules | 9.5 pt, never under 9 pt on screen |
+| Hour labels | centred at y 179.3, on their rules | 9.5 pt, never under 9 pt on screen |
 | Pen arm | nib at (299.6, the current PSI's height), arm running right over the end cap | 31 × 7.5, nib at 49.2% of its height |
 | PSI legend | centre (121, 233) | 11.5 pt |
 | PSI counter | centre (121, 285.5) | 84 tall, about 195 wide |
@@ -370,12 +370,12 @@ The chart's value scale fits the data. Its top is the first of 300, 400, 500, 60
 
 The hour axis is built from the live data window, not from the clock. The window is the 24 hours ending at the newest hourly reading, which sits on the right edge of the plot under the pen nib. Each reading sits at its own hour. Hourly rules step across the window from its start, which is the value axis itself; rules on Singapore hours divisible by 3 are major and carry a two-digit label (`21`, `00`, `03`). The labels therefore move with the data: a window ending at 10:00 reads `12` to `09`, one ending at 20:00 reads `21` to `18`. With no trend, the same 24 divisions are spaced evenly and carry no labels.
 
-The size table in the gallery (Apple's figures) gives 364 × 382 at 430 pt and wider, 360 × 379 at 414, 350 × 364 at 402, 338 × 354 at 390, 329 × 345 at 375 and 292 × 311 below that. Only 350 × 364 has been captured. In the gallery the tile clips to a continuous corner of 0.064 of its width; on the Home Screen the system shape clips it.
+The size table in the gallery (Apple's figures) gives 364 × 382 at 430 pt and wider, 360 × 379 at 414, 350 × 364 at 402, 338 × 354 at 390, 329 × 345 at 375 and 292 × 311 below that. 350 × 364 has been measured on a real iPhone 17 Pro Home Screen. Real Home Screens don't all match the table: the 17e, 390 pt wide, measures about 342 × 357, and the 17 Pro Max, 440 pt wide, about 377 × 393, against the table's 338 × 354 and 364 × 382. The chart labels render at 9.3 and 10.2 pt there. The table's sizes have been captured as gallery tiles: 364 × 382 on the 17 Pro Max, 338 × 354 on the 17e, 329 × 345 on the 13 mini and the SE (3rd generation), and 292 × 311 with `scripts/capture-large.sh <udid> <tag> 320`, because no iOS 27 simulator is narrower than 375 pt. The label floor is computed from the widget's actual size, so it also holds at sizes the table doesn't list. In the gallery the tile clips to a continuous corner of 0.064 of its width; on the Home Screen the system shape clips it.
 
 ### Named Rules
 **The 170 Grid Rule.** Author every aneroid measure in u = side / 170 and let the view scale. Only type has a floor.
 
-**The 350 Canvas Rule.** Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.
+**The 350 Canvas Rule.** Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The one exception is the chart labels' type size, which counter-scales under The Counter-Scaled Label Rule; their positions still scale with the face. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.
 
 **The Raster Opening Rule.** The dial is a circle of radius 0.389 of the side at (0.498, 0.480). That matches the black opening in the `BezelTile` artwork, so the code dial covers it exactly. Move the dial and the plate's black shows.
 

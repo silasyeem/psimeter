@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-15T02:29:44Z",
+  "generatedAt": "2026-10-15T03:18:34Z",
   "title": "Design System: psimeter",
   "extensions": {
     "colorMeta": {
@@ -513,7 +513,7 @@
       },
       "chart-label": {
         "displayName": "Chart labels",
-        "purpose": "Value scale and hour labels on the barograph chart; Engraver's Black by day, lume with glow at night."
+        "purpose": "Value scale and hour labels on the barograph chart; Engraver's Black by day, lume with glow at night. Set at max(9.5, 9 / scale) on the canvas, so never under 9pt on screen."
       }
     },
     "shadows": [
@@ -642,7 +642,7 @@
       },
       {
         "name": "widget-large-364",
-        "value": "430pt screen width and up: 364 x 382pt"
+        "value": "430pt screen width and up: 364 x 382pt (a real 440pt-wide iPhone 17 Pro Max Home Screen measures about 377 x 393pt)"
       },
       {
         "name": "widget-large-360",
@@ -654,15 +654,15 @@
       },
       {
         "name": "widget-large-338",
-        "value": "390pt: 338 x 354pt"
+        "value": "390pt: 338 x 354pt (a real iPhone 17e Home Screen measures about 342 x 357pt)"
       },
       {
         "name": "widget-large-329",
-        "value": "375pt: 329 x 345pt (chart labels fall to 8.9pt)"
+        "value": "375pt: 329 x 345pt (chart labels hold at 9pt)"
       },
       {
         "name": "widget-large-292",
-        "value": "below 375pt: 292 x 311pt (chart labels fall to 7.9pt)"
+        "value": "below 375pt: 292 x 311pt (chart labels hold at 9pt)"
       }
     ]
   },
@@ -804,13 +804,18 @@
         "section": "typography"
       },
       {
+        "name": "The Counter-Scaled Label Rule",
+        "body": "The barograph face scales as one piece (see Layout), so text set at s pt on the canvas renders at s × scale. Each chart label is set at max(s, 9 / scale) on the canvas, so it renders at s × scale or at 9 pt, whichever is larger. The 9.5 pt labels render at 9.9 pt at 364 × 382, 9.5 pt at the 350 × 364 reference and 9.2 pt at 338 × 354, and hold at exactly 9 pt at 329 × 345 and 292 × 311. Only the size counter-scales. The labels stay anchored where the canvas puts them, so at 292 × 311 they stand 1.14 times their authored proportion. They still fit: the 3-hour labels clear one another and the 3-digit value labels clear the paper's edge, so nothing is dropped. The 11 pt trend note goes through the same floor but never needs it at a table size (9.2 pt at 292 × 311). The 11.5 pt plate and housing engraving have no floor in code; they render at 9.6 pt at 292 × 311.",
+        "section": "typography"
+      },
+      {
         "name": "The 170 Grid Rule",
         "body": "Author every aneroid measure in u = side / 170 and let the view scale. Only type has a floor.",
         "section": "layout"
       },
       {
         "name": "The 350 Canvas Rule",
-        "body": "Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.",
+        "body": "Author every barograph measure in points on the 350 × 364 canvas and scale the finished face as one piece, never element by element. The one exception is the chart labels' type size, which counter-scales under The Counter-Scaled Label Rule; their positions still scale with the face. The chart window is measured off the housing art, and the plot, pen and chart labels are measured off the window, so the chart always sits inside the drum it is drawn on.",
         "section": "layout"
       },
       {

@@ -11,7 +11,7 @@ struct BarographView: View {
     var body: some View {
         GeometryReader { proxy in
             let scale = min(proxy.size.width / Self.design.width, proxy.size.height / Self.design.height)
-            face
+            face(scale: scale)
                 .frame(width: Self.design.width, height: Self.design.height)
                 .scaleEffect(scale)
                 .frame(width: proxy.size.width, height: proxy.size.height)
@@ -20,7 +20,7 @@ struct BarographView: View {
         .accessibilityLabel(spoken)
     }
 
-    private var face: some View {
+    private func face(scale: CGFloat) -> some View {
         let palette = Palette.of(finish)
         let chart = Chart(reading: reading, trend: trend)
         let grain: Image? = switch palette.face {
@@ -32,7 +32,7 @@ struct BarographView: View {
             if palette.face != .open {
                 Screws(night: palette.face == .lacquer)
             }
-            ChartPaper(chart: chart, palette: palette)
+            ChartPaper(chart: chart, palette: palette, scale: scale)
             TraceInk(chart: chart, palette: palette)
             if palette.face == .silver {
                 DrumShade()
@@ -228,6 +228,7 @@ private struct Chart {
 private struct ChartPaper: View {
     let chart: Chart
     let palette: Palette
+    let scale: CGFloat
 
     var body: some View {
         Canvas { ctx, _ in
@@ -304,7 +305,7 @@ private struct ChartPaper: View {
 
     private func legend(_ s: String, size: CGFloat = 9.5) -> Text {
         Text(s)
-            .font(.system(size: size, weight: .medium, design: .serif))
+            .font(.system(size: max(size, 9 / scale), weight: .medium, design: .serif))
             .foregroundStyle(palette.ink)
     }
 }

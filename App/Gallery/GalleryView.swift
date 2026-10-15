@@ -86,7 +86,8 @@ struct LargeTile: View {
 
     var body: some View {
         GeometryReader { proxy in
-            let size = WidgetMetrics.largeSize(screenWidth: proxy.size.width)
+            let forcedWidth = UserDefaults.standard.double(forKey: "gallery-screen-width")
+            let size = WidgetMetrics.largeSize(screenWidth: forcedWidth > 0 ? forcedWidth : proxy.size.width)
             let finish: Finish = demo.accented ? .accented : (colorScheme == .dark ? .night : .day)
             VStack(alignment: .leading, spacing: 3) {
                 Text("DEMO · Large \(demo.id)")
