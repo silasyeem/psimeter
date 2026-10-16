@@ -18,7 +18,7 @@ xcrun simctl install "$udid" "$root/build/dd/Build/Products/Debug-iphonesimulato
 
 for appearance in light dark; do
   xcrun simctl ui "$udid" appearance "$appearance"
-  for state in live stale trend accented; do
+  for state in live stale trend accented aged aged-stale; do
     xcrun simctl terminate "$udid" com.silasyeem.psimeter 2>/dev/null || true
     xcrun simctl launch "$udid" com.silasyeem.psimeter -gallery-large "$state" $width >/dev/null
     sleep 2

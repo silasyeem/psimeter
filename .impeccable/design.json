@@ -711,7 +711,7 @@
       "name": "Stale time mark",
       "kind": "custom",
       "refersTo": "time-stale",
-      "description": "The observation time once the reading is older than 2 hours or held from cache. Rust by day, ember by night, never glowing. On the instrument it follows the lower arc of the dial.",
+      "description": "The observation time once the reading is older than 2 hours; a reading held from cache keeps its plain time until then. Rust by day, ember by night, never glowing. On the instrument it follows the lower arc of the dial.",
       "html": "<div class=\"ds-stale-pair\"><span class=\"ds-stale\">STALE 20:30</span><span class=\"ds-stale-night\">STALE 20:30</span></div>",
       "css": ".ds-stale-pair { display: inline-flex; } .ds-stale, .ds-stale-night { padding: 8px 12px; font: 500 9px/1 'New York', ui-serif, Georgia, serif; letter-spacing: .1px; } .ds-stale { background: radial-gradient(circle at 35% 30%, #e4e5e3, #b4b6b5); color: #70180a; } .ds-stale-night { background: radial-gradient(circle at 40% 30%, #1c1c1c, #0d0d0d 55%, #040404); color: #ff6b42; }"
     },

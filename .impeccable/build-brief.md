@@ -57,7 +57,7 @@ enum Scale { case psi, aqi }   // psi dial 0...400; aqi has its own table
 - PSI: `GET https://api-open.data.gov.sg/v2/real-time/api/psi`. No key. `data.items[0].readings.psi_twenty_four_hourly.{north,south,east,west,central}`, `data.items[0].updatedTimestamp` (ISO 8601, +08:00).
 - AQI: `GET https://api.waqi.info/feed/geo:{lat};{lng}/?token={WAQI_TOKEN}` using the selected region's coords. `status == "ok"`, `data.aqi` (Int, but can be the string "-": treat as unreadable), `data.city.name`, `data.time.iso`.
 - Token: `.env` holds `WAQI_TOKEN=...` (may be absent today). A script syncs it into a gitignored `Config/Secrets.xcconfig`, surfaced through Info.plist as `WAQIToken`. Absent token means `.unavailable(.missingToken)`, never a crash and never a fake value.
-- Fetch both concurrently. Cache the last good Snapshot in the extension's own UserDefaults (no App Group needed) and fall back to it, marked stale, when a fetch fails.
+- Fetch both concurrently. Cache the last good Snapshot in the extension's own UserDefaults (no App Group needed) and fall back to it when a fetch fails; it reads stale only once it is older than 2 h.
 
 ## States the instrument must render
 
@@ -75,7 +75,7 @@ enum Scale { case psi, aqi }   // psi dial 0...400; aqi has its own table
 - accessoryRectangular: `PSI 183 · AQI 168` with `Central · Unhealthy · 20:30` beneath.
 - accessoryInline: `PSI 183 · AQI 168`.
 - Widget configuration: an AppIntent with a Region parameter (default Central). The counter shows the chosen region; the bezel shows N/E/S/W.
-- Timeline: one entry now, reload after 15 minutes.
+- Timeline: one entry now plus one at the stale mark. Reload after 15 minutes, or one minute past the stale mark if sooner; retry every 5 minutes after any failed fetch or while stale.
 - Containing app: the same instrument at large size, attribution (NEA data under the Singapore Open Data Licence; WAQI / aqicn.org attribution), token status. Plus a gallery screen (launch argument `-gallery`) that renders every state above at true systemSmall size in day and night from fixtures, each labelled DEMO. The gallery is the screenshot harness.
 
 ## Assets

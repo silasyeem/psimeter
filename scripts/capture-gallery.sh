@@ -18,6 +18,13 @@ for appearance in light dark; do
   xcrun simctl launch "$udid" com.silasyeem.psimeter -gallery >/dev/null
   sleep 3
   xcrun simctl io "$udid" screenshot "$out/gallery-$appearance.png" >/dev/null 2>&1
+  for state in Aged "Aged stale"; do
+    name=$(echo "$state" | tr 'A-Z ' 'a-z-')
+    xcrun simctl terminate "$udid" com.silasyeem.psimeter 2>/dev/null || true
+    xcrun simctl launch "$udid" com.silasyeem.psimeter -gallery-small "$state" >/dev/null
+    sleep 3
+    xcrun simctl io "$udid" screenshot "$out/gallery-$name-$appearance.png" >/dev/null 2>&1
+  done
 done
 xcrun simctl ui "$udid" appearance light
 

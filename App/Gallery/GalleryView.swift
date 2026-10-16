@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct GalleryView: View {
+    var cases = Demo.cases.filter { $0.wear == .polished }
+    var largeCases = Demo.largeCases.filter { $0.wear == .polished }
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
@@ -13,19 +15,19 @@ struct GalleryView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 LazyVGrid(columns: [GridItem(.fixed(side), spacing: 16), GridItem(.fixed(side), spacing: 16)], spacing: 8) {
-                    ForEach(Demo.cases) { demo in
+                    ForEach(cases) { demo in
                         VStack(alignment: .leading, spacing: 3) {
                             Text("DEMO · \(demo.id)")
                                 .font(.caption2.weight(.semibold))
                                 .foregroundStyle(.secondary)
-                            InstrumentTile(reading: demo.reading, finish: demo.accented ? .accented : (colorScheme == .dark ? .night : .day))
+                            InstrumentTile(reading: demo.reading, finish: demo.accented ? .accented : (colorScheme == .dark ? .night : .day), wear: demo.wear)
                                 .frame(width: side, height: side)
                         }
                     }
                 }
                 .frame(maxWidth: .infinity)
 
-                ForEach(Demo.largeCases) { demo in
+                ForEach(largeCases) { demo in
                     LargeTile(demo: demo)
                         .frame(maxWidth: .infinity)
                 }
@@ -93,9 +95,9 @@ struct LargeTile: View {
                 Text("DEMO · Large \(demo.id)")
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
-                BarographView(reading: demo.reading, trend: demo.barogram.trend, finish: finish)
+                BarographView(reading: demo.reading, trend: demo.barogram.trend, finish: finish, wear: demo.wear)
                     .frame(width: size.width, height: size.height)
-                    .background { LargePlate(finish: finish) }
+                    .background { LargePlate(finish: finish, wear: demo.wear) }
                     .clipShape(RoundedRectangle(cornerRadius: size.width * 0.064, style: .continuous))
                     .containerShape(RoundedRectangle(cornerRadius: size.width * 0.064, style: .continuous))
             }

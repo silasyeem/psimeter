@@ -469,8 +469,8 @@ A brass-framed window of three black wheels, one figure per wheel. Both sizes sh
 ### Engraved legends and time
 - **Legends:** `PSI · 24H · <REGION>` above the PSI counter and `AQI · WAQI` above the AQI counter. On failure the legend names the cause: `UNAVAILABLE` (no WAQI token), `OFFLINE`, or `NO DATA` (an unreadable reply, or the region missing from the report).
 - **Time:** the SGT observation time as `HH:MM`, set glyph by glyph along the lower arc in the ink colour, glowing at night.
-- **Stale:** after 2 hours, or when the reading was held from cache after a failed fetch, the time reads `STALE HH:MM`, or `STALE 14 OCT` after 20 hours, in Stale Rust or Stale Ember with no glow. The timeline adds an entry one minute past the 2-hour mark, so the face goes stale without a fetch.
-- **Refresh:** every timeline, on both sizes, asks WidgetKit to reload 15 minutes after the fetch.
+- **Stale:** once the reading is more than 2 hours old, the time reads `STALE HH:MM`, or `STALE 14 OCT` after 20 hours, in Stale Rust or Stale Ember with no glow. Age alone decides. A reading held from cache after a failed fetch is the last good reading and keeps its plain time until it reaches 2 hours. The timeline adds an entry one minute past the 2-hour mark, so the face goes stale without a fetch.
+- **Refresh:** every family reads the same NEA day feed, and one refresh wave sends each source one request. Concurrent fetches in the extension share a single flight, and a body fetched in the last 4 minutes is reused from the extension's UserDefaults. After a clean fetch the timeline reloads in 15 minutes, or one minute past the 2-hour mark if that comes sooner. After any failed fetch (PSI held or missing, AQI offline or unreadable, no trend), or while the reading is already stale, it retries in 5 minutes. A missing WAQI token is not a failure.
 - With PSI unavailable, no time is engraved.
 
 ### Bezel inscriptions
@@ -502,10 +502,47 @@ The systemLarge instrument, in `Shared/Instrument/Barograph.swift`. It shares th
 | State | Chart | Pen | Plate engraving |
 | --- | --- | --- | --- |
 | Live | zones, labelled grid, trace | nib at the current PSI, meeting the trace | legends, foot, `HH:MM` |
-| Stale | unchanged | at the held PSI | `STALE HH:MM`, Light Ember by day, Stale Ember at night, no glow |
+| Stale | unchanged | at the last PSI | `STALE HH:MM`, Light Ember by day, Stale Ember at night, no glow |
 | Trend unavailable | zones, value labels and an unlabelled grid; `TREND · OFFLINE` or `TREND · NO DATA` engraved at the centre in 11 pt; no trace | at the current PSI | unchanged |
 | PSI unavailable | no zone lit; any cached trend still drawn | parked at 0 | `PSI · OFFLINE` and siblings, bare region letters, no time |
 | Accented | white zones (14% current, 3% others), white grid, accent trace, no paper or glass | accent rule | white 85%, stale in white |
+
+### Aged wear
+Edit Widget offers a second parameter, Wear, with Polished (the default) and Aged. It applies to systemSmall and systemLarge; the accessories ignore it. `Palette.of(finish, wear)` is a table keyed by finish and wear, and each entry names its raster materials, so no view branches on wear.
+
+What changes:
+- Every raster swaps for an aged twin with the same geometry and alpha, made by `scripts/aged-assets.sh` from the polished art: bezel tile and night tile, drum housing and night housing, pen arm, plate, screw, and the counters' brass grain (cut from the aged housing at the polished grain's crop). The day dial becomes a yellowed, foxed paper (`DialAged`); the night lacquer stays. The chart paper becomes `PaperDayAged` and `PaperNightAged`.
+- A smudge layer (fingerprints and dust, light on black) screens over the glass at 35% by day and 25% at night. On the aneroid it is an 8-bit grey raster at the dial's drawn size, clipped to the dial and kept out of the counter windows. On the barograph it is pre-composited with the drum glass (its lift, fade and opacity included) into one 8-bit grey raster per finish at the window's size (`DrumGlassAgedDay`, `DrumGlassAgedNight`), so Aged screens a single layer, as Polished does. The aged chart papers store only the band of rows the window shows.
+- Each wheel shows its neighbours: the previous digit above and the next below, (d + 9) % 10 and (d + 1) % 10, at 35% (10% on a dimmed leading zero), clipped by the drum and under its shading. Polished wheels do not.
+- Ink moves only where the aged ground needs it. At night the bezel lume brightens to #e6ffe0 over a black relief; the plate stale mark lightens to #ffa887 by day and #ff754d at night.
+
+What never changes: the wheel figures (clean, unchipped Archivo Black), the needle, the hub, the enamel, the trace, the type, every position, and the polished finish itself, which captures pixel-identical with and without this option.
+
+Memory: a widget extension runs under a hard memory limit on device, about 30 MB, and the limit applies to its peak while rendering. A render that exceeds it is killed and the widget stays on its redacted placeholder. Decoded rasters dominate that peak, so every added raster or screen-blended layer on the barograph is budgeted against it. `scripts/widget-footprint.sh` reads the extension's peak on the simulator; the simulator adds a fixed overhead and does not enforce the limit, so compare cases rather than reading the totals as device numbers. Measured after one render in a fresh extension: large Polished 36.6 MB by day and night, large Aged 34.0 MB by day and 33.7 MB at night, small Aged 29.4 MB.
+
+Contrast against the ground immediately around each glyph, from the gallery captures (`scripts/measure-contrast.py`):
+
+| Surface | Finish | Element | Polished | Aged |
+| --- | --- | --- | --- | --- |
+| Aneroid | day | dial legend | 11.1:1 | 12.0:1 |
+| Aneroid | day | AQI legend | 9.3:1 | 10.1:1 |
+| Aneroid | day | time | 6.8:1 | 6.8:1 |
+| Aneroid | day | region on the bezel | 2.1:1 | 2.5:1 |
+| Aneroid | day | stale stamp | 4.5:1 | 4.6:1 |
+| Aneroid | night | dial legend | 11.6:1 | 11.5:1 |
+| Aneroid | night | time | 14.7:1 | 14.7:1 |
+| Aneroid | night | region on the bezel | 4.0:1 | 4.1:1 |
+| Aneroid | night | stale stamp | 7.2:1 | 7.2:1 |
+| Barograph | day | housing inscription | 2.3:1 | 2.7:1 |
+| Barograph | day | value and hour labels | 10.2:1, 6.3:1 | 8.3:1, 5.3:1 |
+| Barograph | day | plate legend, foot, time | 10.0 to 11.3:1 | 10.3 to 11.2:1 |
+| Barograph | day | stale stamp | 7.3:1 | 7.8:1 |
+| Barograph | night | housing inscription | 5.1:1 | 5.8:1 |
+| Barograph | night | value and hour labels | 13.0:1, 13.3:1 | 8.7:1, 9.1:1 |
+| Barograph | night | plate legend, foot, time | 10.8 to 11.7:1 | 10.8 to 11.7:1 |
+| Barograph | night | stale stamp | 6.5:1 | 6.8:1 |
+
+Every aged element holds its polished value or the 4.5:1 floor, whichever is lower. Two day inscriptions on brass, the aneroid's regional bezel and the barograph's housing bar, sit below 4.5:1 in both wears; they are relief engravings in umber over a glint, the polished build already measures them at 2.1:1 and 2.3:1, and aged wear raises both slightly.
 
 ### Lock Screen accessories
 Plain system type. The brass does not survive vibrant rendering, so the accessories do not imitate it.

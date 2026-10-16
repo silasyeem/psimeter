@@ -21,6 +21,10 @@ struct PSIReport: Codable, Equatable, Sendable {
 
     let psi: [Region: Int]
     let observedAt: Date
+
+    func isStale(at now: Date) -> Bool {
+        now.timeIntervalSince(observedAt) > Self.staleAfter
+    }
 }
 
 struct AQIReport: Codable, Equatable, Sendable {

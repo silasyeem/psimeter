@@ -13,12 +13,13 @@ import WidgetKit
 struct InstrumentView: View {
     let reading: Reading
     let finish: Finish
+    var wear: Wear = .polished
 
     var body: some View {
         GeometryReader { proxy in
             let g = DialGeometry(side: min(proxy.size.width, proxy.size.height))
-            let palette = Palette.of(finish)
-            ZStack(alignment: .topLeading) {
+            let palette = Palette.of(finish, wear)
+            let instrument = ZStack(alignment: .topLeading) {
                 DialPrint(reading: reading, palette: palette, g: g)
                 RollerCounter(value: reading.psi, centre: g.psiCounter, height: g.psiCounterHeight, palette: palette, u: g.u)
                 RollerCounter(value: reading.aqi, centre: g.aqiCounter, height: g.aqiCounterHeight, palette: palette, u: g.u)
@@ -28,6 +29,11 @@ struct InstrumentView: View {
                 Crystal(face: palette.face, g: g)
             }
             .frame(width: g.side, height: g.side)
+            if let smudge = palette.materials?.smudge, smudge > 0 {
+                instrument.overlay(alignment: .topLeading) { Smudge(opacity: smudge, g: g) }
+            } else {
+                instrument
+            }
         }
         .aspectRatio(1, contentMode: .fit)
         .accessibilityElement(children: .ignore)
@@ -135,7 +141,9 @@ private struct DialPrint: View {
         case .silver:
             ctx.drawLayer { layer in
                 layer.clip(to: dial)
-                layer.draw(Image("DialSilver").resizable(), in: box)
+                if let dial = palette.materials?.dial {
+                    layer.draw(Image(dial).resizable(), in: box)
+                }
                 layer.fill(dial, with: .radialGradient(
                     Gradient(stops: [
                         .init(color: .white.opacity(0.16), location: 0),
@@ -432,5 +440,28 @@ private struct Crystal: View {
         }
         .frame(width: g.side, height: g.side)
         .allowsHitTesting(false)
+    }
+}
+
+private struct Smudge: View {
+    let opacity: Double
+    let g: DialGeometry
+
+    var body: some View {
+        let dial = g.circle(g.radius)
+        let box = dial.boundingRect
+        var glass = dial
+        for (centre, height) in [(g.psiCounter, g.psiCounterHeight), (g.aqiCounter, g.aqiCounterHeight)] {
+            let width = RollerCounter.width(height: height)
+            glass.addRect(CGRect(x: centre.x - width / 2, y: centre.y - height / 2, width: width, height: height))
+        }
+        return Image("Smudge").resizable()
+            .frame(width: box.width, height: box.height)
+            .offset(x: box.minX, y: box.minY)
+            .frame(width: g.side, height: g.side, alignment: .topLeading)
+            .clipShape(glass, style: FillStyle(eoFill: true))
+            .opacity(opacity)
+            .blendMode(.screen)
+            .allowsHitTesting(false)
     }
 }

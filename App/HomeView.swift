@@ -98,7 +98,10 @@ struct HomeView: View {
         if observation?.snapshot.region != region {
             observation = SnapshotStore.standard.load(region).map { Observation(snapshot: $0, freshness: .held) }
         }
-        observation = await AirFeed().observe(region)
-        WidgetCenter.shared.reloadAllTimelines()
+        let fetched = await AirFeed().barogram(region).observation
+        observation = fetched
+        if fetched.freshness == .fetched, fetched.snapshot.psi.report != nil {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
 }

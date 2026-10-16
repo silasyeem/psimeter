@@ -66,6 +66,7 @@ final class Stub: URLProtocol {
 
     static let route = Mutex<@Sendable (URL) -> Reply>({ _ in .fail(.notConnectedToInternet) })
     static let requests = Mutex<[URL]>([])
+    static let latency = Mutex<TimeInterval>(0)
 
     static var hosts: [String] {
         requests.withLock { $0.map { $0.host() ?? "?" } }
@@ -87,6 +88,17 @@ final class Stub: URLProtocol {
         return URLSession(configuration: configuration)
     }
 
+    static func takeAll() -> [String] {
+        requests.withLock { requests in
+            defer { requests = [] }
+            return requests.map { url in
+                url.host() == "api.waqi.info"
+                    ? "waqi \(url.path().split(separator: "/").last ?? "?")"
+                    : "nea \(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.first { $0.name == "date" }?.value ?? "<realtime>")"
+            }.sorted()
+        }
+    }
+
     static func takeDays() -> [String] {
         requests.withLock { requests in
             defer { requests = [] }
@@ -103,6 +115,8 @@ final class Stub: URLProtocol {
             return
         }
         Stub.requests.withLock { $0.append(url) }
+        let delay = Stub.latency.withLock { $0 }
+        if delay > 0 { Thread.sleep(forTimeInterval: delay) }
         switch Stub.route.withLock({ $0 })(url) {
         case .fail(let code):
             client?.urlProtocol(self, didFailWithError: URLError(code))
@@ -164,20 +178,27 @@ var livePSI: PSIReport?
 var liveNEA: Data?
 var realtimeHour: Date?
 await paceNEA()
-if let neaData = await get(NEA.endpoint, "NEA endpoint") {
+if let neaData = await get(NEA.endpoint, "NEA realtime endpoint") {
     liveNEA = neaData
     let rawItem = (try? JSONDecoder().decode(RawNEA.self, from: neaData))?.data.items.first
     realtimeHour = rawItem.flatMap { referenceDate($0.timestamp) }
     let raw = rawItem?.updatedTimestamp ?? "<missing>"
-    switch Result(catching: { try NEA.decode(neaData) }) {
-    case .success(let report):
-        livePSI = report
-        let values = Region.allCases.map { "\($0.name) \(report.psi[$0].map(String.init) ?? "-")" }.joined(separator: ", ")
-        let regionsComplete = Set(report.psi.keys) == Set(Region.allCases)
-        let offsetHonoured = raw.hasSuffix("+08:00") && referenceDate(raw) == report.observedAt
-        check(regionsComplete && offsetHonoured, "NEA live decode: \(values); updated \(report.observedAt.formatted(sgtFormat)) SGT (raw \(raw))")
+    let realtimeDay = realtimeHour.map(SGTDay.init(containing:)) ?? SGTDay(containing: .now)
+    let decodeRealtime = { (data: Data) throws(FeedFailure) -> PSIDay in try NEA.decodeDay(data, day: realtimeDay) }
+    switch Result(catching: { try decodeRealtime(neaData) }) {
+    case .success(let day):
+        if day.hours.count == 1, let hour = day.hours.last {
+            let report = PSIReport(psi: hour.psi, observedAt: hour.observedAt)
+            livePSI = report
+            let values = Region.allCases.map { "\($0.name) \(report.psi[$0].map(String.init) ?? "-")" }.joined(separator: ", ")
+            let regionsComplete = Set(report.psi.keys) == Set(Region.allCases)
+            let offsetHonoured = raw.hasSuffix("+08:00") && referenceDate(raw) == report.observedAt
+            check(regionsComplete && offsetHonoured, "NEA realtime payload decodes as one hour of its day: \(values); updated \(report.observedAt.formatted(sgtFormat)) SGT (raw \(raw))")
+        } else {
+            check(false, "NEA realtime payload decodes to \(day.hours.count) hours, expected 1")
+        }
     case .failure(let error):
-        check(false, "NEA live decode failed with \(error)")
+        check(false, "NEA realtime decode failed with \(error)")
     }
 
     let text = String(decoding: neaData, as: UTF8.self)
@@ -188,11 +209,10 @@ if let neaData = await get(NEA.endpoint, "NEA endpoint") {
         ("central region missing", Data(withoutCentral.utf8)),
         ("central region null", Data(nullCentral.utf8)),
         ("payload truncated", neaData.prefix(neaData.count / 2)),
-        ("no items", Data(#"{"code":0,"data":{"items":[]}}"#.utf8)),
         ("rate-limit reply", rateLimited),
     ]
     for (name, data) in broken {
-        check(failure(NEA.decode, data) == .unreadable, "NEA \(name) is .unreadable")
+        check(failure(decodeRealtime, data) == .unreadable, "NEA \(name) is .unreadable")
     }
 }
 
@@ -307,37 +327,35 @@ check(failure(WAQI.decode, dash) == .unreadable, #"WAQI "aqi":"-" is .unreadable
 let invalidKey = Data(#"{"status":"error","data":"Invalid key"}"#.utf8)
 check(failure(WAQI.decode, invalidKey) == .unreadable, "WAQI error status is .unreadable")
 
-await paceNEA()
-let fetched = await AirFeed(token: nil).fetch(.central)
-check(fetched.psi.report.map { Set($0.psi.keys) == Set(Region.allCases) } == true, "fetch(.central) without a token has live PSI (central \(fetched.psi.report?.psi[.central].map(String.init) ?? "-"))")
-check(fetched.aqi == .unavailable(.missingToken), "fetch(.central) without a token has AQI .unavailable(.missingToken)")
-
-let defaults = scratch()
-let store = SnapshotStore(defaults: defaults)
 let offline = Stub.session(.fail(.notConnectedToInternet))
-let cold = await AirFeed(session: offline, token: nil, store: store).observe(.central)
-check(cold.freshness == .fetched && cold.snapshot.psi == .unavailable(.offline), "offline observe with an empty cache is PSI .offline, .fetched")
-check(cold.snapshot.aqi == .unavailable(.missingToken), "offline observe without a token is AQI .missingToken")
-check(Stub.hosts == ["api-open.data.gov.sg"], "no WAQI request is made without a token (requests: \(Stub.hosts))")
-check(store.load(.central) == nil, "an observation without live PSI is not cached")
+let offlineSuite = scratch()
+let cold = await AirFeed(session: offline, token: nil, defaults: offlineSuite).barogram(.central).observation
+check(cold.freshness == .fetched && cold.snapshot.psi == .unavailable(.offline), "offline barogram with an empty cache is PSI .offline, .fetched")
+check(cold.snapshot.aqi == .unavailable(.missingToken), "offline barogram without a token is AQI .missingToken")
+check(Set(Stub.hosts) == ["api-open.data.gov.sg"], "no WAQI request is made without a token (hosts: \(Set(Stub.hosts).sorted()))")
+check(SnapshotStore(defaults: offlineSuite).load(.central) == nil, "an observation without live PSI is not cached")
 
-let tokenOffline = await AirFeed(session: offline, token: WAQIToken("feed-check-not-a-token"), store: store).observe(.central)
-check(tokenOffline.snapshot.aqi == .unavailable(.offline), "offline observe with a token is AQI .offline")
+let tokenOffline = await AirFeed(session: offline, token: WAQIToken("feed-check-not-a-token"), defaults: scratch()).barogram(.central).observation
+check(tokenOffline.snapshot.aqi == .unavailable(.offline), "offline barogram with a token is AQI .offline")
 
 if let liveNEA, let livePSI {
-    let refused = await AirFeed(session: Stub.session(.serve(status: 503, body: liveNEA)), token: nil, store: store).observe(.central)
-    check(refused.freshness == .fetched && refused.snapshot.psi == .unavailable(.unreadable) && store.load(.central) == nil, "HTTP 503 is PSI .unreadable even with a valid body, and is not cached")
-    let warm = await AirFeed(session: Stub.session(.serve(status: 200, body: liveNEA)), token: nil, store: store).observe(.central)
-    check(warm.freshness == .fetched && warm.snapshot.psi == .live(livePSI), "observe with live PSI is .fetched")
-    check(store.load(.central) == warm.snapshot, "observe with live PSI caches its snapshot")
+    let refusedSuite = scratch()
+    let refused = await AirFeed(session: Stub.session(.serve(status: 503, body: liveNEA)), token: nil, defaults: refusedSuite).barogram(.central, now: livePSI.observedAt).observation
+    check(refused.freshness == .fetched && refused.snapshot.psi == .unavailable(.unreadable) && SnapshotStore(defaults: refusedSuite).load(.central) == nil, "HTTP 503 is PSI .unreadable even with a valid body, and is not cached")
+    let warmSuite = scratch()
+    let warm = await AirFeed(session: Stub.session(.serve(status: 200, body: liveNEA)), token: nil, defaults: warmSuite).barogram(.central, now: livePSI.observedAt).observation
+    check(warm.freshness == .fetched && warm.snapshot.psi == .live(livePSI), "barogram with live PSI is .fetched")
+    check(SnapshotStore(defaults: warmSuite).load(.central) == warm.snapshot, "barogram with live PSI caches its snapshot")
 }
 
 if let livePSI, let liveAQI {
+    let heldSuite = scratch()
+    let store = SnapshotStore(defaults: heldSuite)
     let full = Snapshot(region: .central, psi: .live(livePSI), aqi: .live(liveAQI), fetchedAt: .now)
     store.save(full)
-    let held = await AirFeed(session: Stub.session(.fail(.timedOut)), token: nil, store: store).observe(.central)
-    check(held.freshness == .held && held.snapshot == full, "offline observe after a live snapshot returns it whole (AQI included), .held")
-    let otherRegion = await AirFeed(session: Stub.session(.fail(.timedOut)), token: nil, store: store).observe(.north)
+    let held = await AirFeed(session: Stub.session(.fail(.timedOut)), token: nil, defaults: heldSuite).barogram(.central).observation
+    check(held.freshness == .held && held.snapshot == full, "offline barogram after a live snapshot returns it whole (AQI included), .held")
+    let otherRegion = await AirFeed(session: Stub.session(.fail(.timedOut)), token: nil, defaults: heldSuite).barogram(.north).observation
     check(otherRegion.freshness == .fetched && otherRegion.snapshot.psi == .unavailable(.offline), "the cache is per region")
 
     let decoded = try? JSONDecoder().decode(Snapshot.self, from: JSONEncoder().encode(full))
@@ -364,7 +382,7 @@ dayStore.save(older, keeping: [stubToday, stubYesterday])
 check(dayStore.load(older.day) == nil, "DayStore does not keep a saved day outside recent")
 
 func stubFeed(_ suite: UserDefaults, _ replies: [SGTDay: Stub.Reply]) -> AirFeed {
-    AirFeed(session: Stub.session(days: replies), token: nil, store: SnapshotStore(defaults: suite), days: DayStore(defaults: suite))
+    AirFeed(session: Stub.session(days: replies), token: nil, defaults: suite)
 }
 
 func report(_ hour: PSIHour) -> PSIReport {
@@ -384,9 +402,9 @@ let first = await cachedFeed.barogram(.central, now: stubNow)
 let firstDays = Stub.takeDays()
 check(firstDays == [stubYesterday.iso, stubToday.iso] && first.observation.freshness == .fetched && first.observation.snapshot.psi == .live(report(morning.hours[9])) && first.trend == expectedTrend(morning, fullYesterday), "first barogram makes 2 NEA requests \(firstDays): PSI is today's 09:00, .fetched, trend .live with \(first.trend.report?.hours.count ?? 0) hours")
 check(SnapshotStore(defaults: cacheSuite).load(.central) == first.observation.snapshot, "barogram saves its live snapshot to the shared SnapshotStore")
-let second = await cachedFeed.barogram(.central, now: stubNow)
+let second = await cachedFeed.barogram(.central, now: stubNow.addingTimeInterval(5 * 60))
 let secondDays = Stub.takeDays()
-check(secondDays == [stubToday.iso] && second == first, "second barogram makes 1 NEA request \(secondDays) and returns the same barogram")
+check(secondDays == [stubToday.iso] && second.observation.snapshot.psi == first.observation.snapshot.psi && second.trend == first.trend, "a barogram after the reuse window makes 1 NEA request \(secondDays): yesterday stays cached")
 
 let partialSuite = scratch()
 DayStore(defaults: partialSuite).save(PSIDay(day: stubYesterday, hours: Array(fullYesterday.hours.prefix(23))), keeping: [stubToday, stubYesterday])
@@ -429,9 +447,100 @@ let dark = await stubFeed(darkSuite, [stubToday: emptyDay, stubYesterday: .fail(
 _ = Stub.takeDays()
 check(dark.observation.snapshot.psi == .unavailable(.offline) && dark.trend == .unavailable(.offline), "today live with 0 items and yesterday offline: PSI and trend .unavailable(.offline)")
 
+func waqiJSON(_ region: Region) -> Data {
+    Data(#"{"status":"ok","data":{"aqi":\#(100 + region.waqiStation % 10),"city":{"name":"\#(region.name), Singapore"},"time":{"iso":"2026-03-01T09:00:00+08:00"}}}"#.utf8)
+}
+
+@MainActor func crowdSession(_ days: [SGTDay: Stub.Reply], latency: TimeInterval) -> URLSession {
+    Stub.latency.withLock { $0 = latency }
+    let stations = Dictionary(uniqueKeysWithValues: Region.allCases.map { ("/feed/@\($0.waqiStation)/", waqiJSON($0)) })
+    return Stub.session { url in
+        if url.host() == "api.waqi.info" {
+            return stations[url.path()].map { .serve(status: 200, body: $0) } ?? .fail(.unsupportedURL)
+        }
+        return days.first { NEA.url(for: $0.key).absoluteString == url.absoluteString }?.value ?? .fail(.unsupportedURL)
+    }
+}
+
+let stationToken = WAQIToken("feed-check-not-a-token")
+let liveMorning = Feed<PSIReport>.live(report(morning.hours[9]))
+
+let crowdSuite = scratch()
+DayStore(defaults: crowdSuite).save(fullYesterday, keeping: [stubToday, stubYesterday])
+let crowdFeedSession = crowdSession([stubToday: serveMorning], latency: 0.4)
+let families: [(name: String, region: Region)] = [("small", .central), ("large", .central), ("circular", .central), ("rectangular", .north), ("inline", .north)]
+let crowdFeeds = families.map { _ in AirFeed(session: crowdFeedSession, token: stationToken, defaults: crowdSuite) }
+let crowdNow = stubNow
+let crowd = await withTaskGroup(of: Barogram.self) { group in
+    for (feed, family) in zip(crowdFeeds, families) {
+        let region = family.region
+        group.addTask { await feed.barogram(region, now: crowdNow) }
+    }
+    var results: [Barogram] = []
+    for await barogram in group { results.append(barogram) }
+    return results
+}
+Stub.latency.withLock { $0 = 0 }
+let crowdRequests = Stub.takeAll()
+let crowdLive = crowd.count == 5 && crowd.allSatisfy { $0.observation.freshness == .fetched && $0.observation.snapshot.psi == liveMorning && $0.observation.snapshot.aqi.report != nil && $0.trend.report != nil }
+check(crowdRequests == ["nea \(stubToday.iso)", "waqi @1662", "waqi @1666"] && crowdLive, "five concurrent barograms (\(families.map(\.name).joined(separator: ", ")); Central and North) send \(crowdRequests): 1 NEA request and 1 WAQI request per station, all five live")
+
+let reuseSuite = scratch()
+DayStore(defaults: reuseSuite).save(fullYesterday, keeping: [stubToday, stubYesterday])
+let reuseFeed = AirFeed(session: crowdSession([stubToday: serveMorning], latency: 0), token: stationToken, defaults: reuseSuite)
+_ = await reuseFeed.barogram(.central, now: stubNow)
+let openingRequests = Stub.takeAll()
+let reused = await reuseFeed.barogram(.central, now: stubNow.addingTimeInterval(3 * 60 + 59))
+let reusedRequests = Stub.takeAll()
+let expired = await reuseFeed.barogram(.central, now: stubNow.addingTimeInterval(4 * 60))
+let expiredRequests = Stub.takeAll()
+check(openingRequests == ["nea \(stubToday.iso)", "waqi @1666"], "the first barogram sends \(openingRequests)")
+check(reusedRequests.isEmpty && reused.observation.snapshot.psi == liveMorning && reused.observation.snapshot.aqi.report != nil, "3 min 59 s later a barogram reuses both bodies from the store: \(reusedRequests.count) requests, PSI and AQI live")
+check(expiredRequests == openingRequests && expired.observation.snapshot.psi == liveMorning, "at 4 min the reuse window has closed: the barogram sends \(expiredRequests) once each")
+
+let policyAQI = AQIReport(aqi: 120, station: "Central, Singapore", observedAt: stubNow)
+let policyTrend = expectedTrend(morning, fullYesterday)
+
+func policyCase(ago: TimeInterval, _ freshness: Freshness, aqi: Feed<AQIReport> = .live(policyAQI), psiMissing: Bool = false, trend: Feed<PSITrend> = policyTrend) -> Barogram {
+    let psi: Feed<PSIReport> = psiMissing ? .unavailable(.unreadable) : .live(PSIReport(psi: morning.hours[9].psi, observedAt: stubNow.addingTimeInterval(-ago)))
+    return Barogram(observation: Observation(snapshot: Snapshot(region: .central, psi: psi, aqi: aqi, fetchedAt: stubNow), freshness: freshness), trend: trend)
+}
+
+let policyRows: [(String, Barogram, TimeInterval)] = [
+    ("fresh: fetched, 10 min old", policyCase(ago: 10 * 60, .fetched), 15 * 60),
+    ("near-stale: fetched, 1 h 55 min old", policyCase(ago: 115 * 60, .fetched), 6 * 60),
+    ("held-fresh: held, 30 min old", policyCase(ago: 30 * 60, .held), 5 * 60),
+    ("held-old: held, 3 h old", policyCase(ago: 180 * 60, .held), 5 * 60),
+    ("stale: fetched, NEA silent for 2 h 10 min", policyCase(ago: 130 * 60, .fetched), 5 * 60),
+    ("AQI offline", policyCase(ago: 10 * 60, .fetched, aqi: .unavailable(.offline)), 5 * 60),
+    ("AQI unreadable", policyCase(ago: 10 * 60, .fetched, aqi: .unavailable(.unreadable)), 5 * 60),
+    ("missing token: AQI unavailable, PSI fresh", policyCase(ago: 10 * 60, .fetched, aqi: .unavailable(.missingToken)), 15 * 60),
+    ("PSI unavailable, nothing held", policyCase(ago: 0, .fetched, psiMissing: true), 5 * 60),
+    ("trend unavailable", policyCase(ago: 10 * 60, .fetched, trend: .unavailable(.offline)), 5 * 60),
+]
+for (name, barogram, expected) in policyRows {
+    let wait = Refresh.nextReload(for: barogram, now: stubNow).timeIntervalSince(stubNow)
+    check(wait == expected, "policy \(name): reload in \(Int(wait) / 60) min \(Int(wait) % 60) s")
+}
+
+func timeMark(ago: TimeInterval, _ freshness: Freshness) -> Reading.TimeMark {
+    let psi = PSIReport(psi: morning.hours[9].psi, observedAt: stubNow.addingTimeInterval(-ago))
+    let snapshot = Snapshot(region: .central, psi: .live(psi), aqi: .unavailable(.missingToken), fetchedAt: stubNow)
+    return Reading(Observation(snapshot: snapshot, freshness: freshness), now: stubNow).time
+}
+
+func clock(ago: TimeInterval) -> String { SGT.clock(stubNow.addingTimeInterval(-ago)) }
+
+check(timeMark(ago: 30 * 60, .held) == .fresh(clock(ago: 30 * 60)), "a held reading 30 min old renders \(timeMark(ago: 30 * 60, .held)), not STALE")
+check(timeMark(ago: 119 * 60, .held) == .fresh(clock(ago: 119 * 60)), "a held reading 1 h 59 min old renders \(timeMark(ago: 119 * 60, .held)), not STALE")
+check(timeMark(ago: 121 * 60, .held) == .stale("STALE " + clock(ago: 121 * 60)), "a held reading 2 h 1 min old renders \(timeMark(ago: 121 * 60, .held))")
+check(timeMark(ago: 121 * 60, .fetched) == .stale("STALE " + clock(ago: 121 * 60)), "a fetched reading 2 h 1 min old renders \(timeMark(ago: 121 * 60, .fetched))")
+check(timeMark(ago: 21 * 3600, .fetched) == .stale("STALE " + SGT.day(stubNow.addingTimeInterval(-21 * 3600))), "a reading 21 h old renders \(timeMark(ago: 21 * 3600, .fetched))")
+
 await paceNEA()
 let liveSuite = scratch()
-let liveBarogram = await AirFeed(token: nil, store: SnapshotStore(defaults: liveSuite), days: DayStore(defaults: liveSuite)).barogram(.central)
+let liveBarogram = await AirFeed(token: nil, defaults: liveSuite).barogram(.central)
+check(liveBarogram.observation.snapshot.aqi == .unavailable(.missingToken), "live barogram without a token has AQI .unavailable(.missingToken)")
 if let newest = dayFeedNewest {
     let observation = liveBarogram.observation
     check(observation.freshness == .fetched && observation.snapshot.psi == .live(report(newest)), "live barogram(.central) PSI is live and equals the day feed's newest hour: central \(observation.snapshot.psi.report?.psi[.central].map(String.init) ?? "-") at \(newest.hour.formatted(sgtFormat))")
@@ -445,7 +554,7 @@ let liveDays = DayStore(defaults: liveSuite)
 check(liveDays.load(yesterday)?.isComplete == true && liveDays.load(today) != nil, "live barogram cached today and a complete yesterday")
 
 UserDefaults(suiteName: suite)?.removePersistentDomain(forName: suite)
-check(UserDefaults(suiteName: suite)?.dictionaryRepresentation().keys.contains { $0.hasPrefix("snapshot.") || $0.hasPrefix("psi.") } == false, "scratch defaults suite emptied")
+check(UserDefaults(suiteName: suite)?.dictionaryRepresentation().keys.contains { $0.hasPrefix("snapshot.") || $0.hasPrefix("psi.") || $0.hasPrefix("recent.") } == false, "scratch defaults suite emptied")
 
 print(failures == 0 ? "All feed checks passed." : "\(failures) feed check(s) failed.")
 exit(failures == 0 ? 0 : 1)

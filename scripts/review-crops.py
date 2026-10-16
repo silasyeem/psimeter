@@ -33,3 +33,8 @@ for appearance, name, comp in [("light", "widget-day", "comp-c-day"), ("dark", "
     pair.paste(tile, (tile.width + 20, 0))
     pair.save(review / f"compare-{name.split('-')[1]}.png")
     print(f"{name}.png {tile.width}x{tile.height} from {box}")
+
+for state in ["aged", "aged-stale"]:
+    for appearance, finish in [("light", "day"), ("dark", "night")]:
+        Image.open(review / f"gallery-{state}-{appearance}.png").convert("RGB").crop(box).save(review / f"widget-{state}-{finish}.png")
+        print(f"widget-{state}-{finish}.png from {box}")

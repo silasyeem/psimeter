@@ -17,7 +17,12 @@ struct RollerCounter: View {
     private var divider: CGFloat { max(0.8, height * 0.045) }
     private var drumHeight: CGFloat { height - 2 * (rim + inset) }
     private var drumWidth: CGFloat { drumHeight * 0.86 }
-    private var width: CGFloat { 3 * drumWidth + 4 * divider + 2 * (rim + inset) }
+    private var width: CGFloat { Self.width(height: height, rimScale: rimScale) }
+
+    static func width(height: CGFloat, rimScale: CGFloat = 1) -> CGFloat {
+        let edge = height * 0.065 * rimScale + height * 0.015
+        return 3 * ((height - 2 * edge) * 0.86) + 4 * max(0.8, height * 0.045) + 2 * edge
+    }
     private var corner: CGFloat { height * 0.15 }
     private var figureSize: CGFloat { max(9, drumHeight * 0.703 / 0.712) }
 
@@ -123,6 +128,11 @@ struct RollerCounter: View {
         Group {
             if palette.face == .open {
                 RoundedRectangle(cornerRadius: 1 * u).strokeBorder(Color.white.opacity(0.28), lineWidth: 0.5 * u)
+            } else if let figure, palette.materials?.neighbours == true {
+                Rectangle().fill(Self.cylinder).overlay {
+                    neighbour((figure + 9) % 10, dim: dim).offset(y: -drumHeight * 0.76)
+                    neighbour((figure + 1) % 10, dim: dim).offset(y: drumHeight * 0.76)
+                }
             } else {
                 Rectangle().fill(Self.cylinder)
             }
@@ -151,6 +161,14 @@ struct RollerCounter: View {
         .frame(width: drumWidth, height: drumHeight)
         .clipped()
         .animation(reduceMotion ? .easeInOut(duration: 0.3) : .smooth(duration: 0.9), value: figure)
+    }
+
+    private func neighbour(_ figure: Int, dim: Bool) -> some View {
+        Text(String(figure))
+            .font(.custom("ArchivoBlack-Regular", fixedSize: figureSize))
+            .fixedSize()
+            .contentTransition(reduceMotion ? .opacity : .numericText(value: Double(figure)))
+            .foregroundStyle(palette.figure.opacity(dim ? 0.1 : 0.35))
     }
 
     static let brass = LinearGradient(stops: [

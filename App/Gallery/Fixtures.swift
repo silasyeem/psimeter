@@ -6,6 +6,7 @@ enum Demo {
         let observation: Observation
         let now: Date
         var accented = false
+        var wear: Wear = .polished
 
         var reading: Reading { Reading(observation, now: now) }
     }
@@ -40,6 +41,8 @@ enum Demo {
             aqi: .live(AQIReport(aqi: 487, station: "DEMO", observedAt: observed))), freshness: .fetched), now: sgt(20, 45)),
         Case(id: "Accented", observation: live.observation, now: live.now, accented: true),
         Case(id: "Region West", observation: Observation(snapshot: snapshot(.west), freshness: .fetched), now: sgt(20, 45)),
+        Case(id: "Aged", observation: live.observation, now: live.now, wear: .aged),
+        Case(id: "Aged stale", observation: Observation(snapshot: snapshot(), freshness: .held), now: sgt(23, 10), wear: .aged),
     ]
 
     struct LargeCase: Identifiable {
@@ -47,6 +50,7 @@ enum Demo {
         let barogram: Barogram
         let now: Date
         var accented = false
+        var wear: Wear = .polished
 
         var reading: Reading { Reading(barogram.observation, now: now) }
     }
@@ -70,5 +74,7 @@ enum Demo {
         LargeCase(id: "stale", barogram: Barogram(observation: Observation(snapshot: snapshot(), freshness: .held), trend: trend), now: sgt(23, 10)),
         LargeCase(id: "trend", barogram: Barogram(observation: live.observation, trend: .unavailable(.offline)), now: sgt(20, 45)),
         LargeCase(id: "accented", barogram: liveBarogram, now: sgt(20, 45), accented: true),
+        LargeCase(id: "aged", barogram: liveBarogram, now: sgt(20, 45), wear: .aged),
+        LargeCase(id: "aged-stale", barogram: Barogram(observation: Observation(snapshot: snapshot(), freshness: .held), trend: trend), now: sgt(23, 10), wear: .aged),
     ]
 }
