@@ -20,3 +20,8 @@ Open:
 - On-device install needs a signing team in project.yml.
 - Stale stamp contrast margin is thin (about 4.7:1); don't darken the rim vignette.
 - DESIGN.md colour names were chosen by the documenter; confirm or rename.
+
+
+## 2026-10-16
+- PR #2 merged into main at 1e14a0e: one NEA request per refresh wave + 5-min retry + STALE only when data >2h old; Aged wear option; aged large fit under the widget memory limit (scripts/widget-footprint.sh). Installed on the user's iPhone and verified via iPhone Mirroring.
+- Open: Polished large peaks ~36.6 MB on the simulator (works on device, thin margin).
