@@ -21,17 +21,7 @@ struct BarographView: View {
         .accessibilityLabel(spoken)
     }
 
-    @ViewBuilder
     private func face(scale: CGFloat) -> some View {
-        let palette = Palette.of(finish, wear)
-        if let smudge = palette.materials?.smudge, smudge > 0 {
-            instrument(scale: scale).overlay(alignment: .topLeading) { DrumSmudge(opacity: smudge) }
-        } else {
-            instrument(scale: scale)
-        }
-    }
-
-    private func instrument(scale: CGFloat) -> some View {
         let palette = Palette.of(finish, wear)
         let chart = Chart(reading: reading, trend: trend)
         let grain = palette.materials.map { Image($0.grain) }
@@ -47,7 +37,9 @@ struct BarographView: View {
             if palette.face != .open {
                 Pen(nib: chart.nib, palette: palette)
                     .clipShape(Layout.windowPath)
-                DrumGlass(face: palette.face)
+                if let glass = palette.materials?.glass {
+                    DrumGlass(face: palette.face, glass: glass)
+                }
             }
             Housing(region: reading.region, palette: palette)
             Pen(nib: chart.nib, palette: palette)
@@ -253,8 +245,8 @@ private struct ChartPaper: View {
             let window = Path(Layout.window)
             let plot = Layout.plot
             ctx.clip(to: window)
-            if let paper = palette.materials?.paper {
-                self.paper(paper, in: &ctx)
+            if let materials = palette.materials {
+                paper(materials.paper, band: materials.paperBand, in: &ctx)
             }
 
             for zone in chart.zones {
@@ -306,9 +298,11 @@ private struct ChartPaper: View {
         .frame(width: BarographView.design.width, height: BarographView.design.height)
     }
 
-    private func paper(_ name: String, in ctx: inout GraphicsContext) {
+    private func paper(_ name: String, band: ClosedRange<Double>, in ctx: inout GraphicsContext) {
         let side = max(Layout.window.width, Layout.window.height)
-        ctx.draw(Image(name).resizable(), in: CGRect(x: Layout.window.minX, y: Layout.window.midY - side / 2, width: side, height: side))
+        ctx.draw(Image(name).resizable(), in: CGRect(
+            x: Layout.window.minX, y: Layout.window.midY - side / 2 + side * band.lowerBound,
+            width: side, height: side * (band.upperBound - band.lowerBound)))
     }
 
     private func zoneColor(_ zone: Chart.Zone) -> Color {
@@ -411,39 +405,34 @@ private struct DrumShade: View {
 
 private struct DrumGlass: View {
     let face: Palette.Face
+    let glass: Glass
 
     var body: some View {
-        Image("DrumGlass").resizable()
-            .frame(width: Layout.window.width, height: Layout.window.height)
-            .mask(LinearGradient(stops: [
-                .init(color: .white, location: 0),
-                .init(color: .white, location: 0.8),
-                .init(color: .clear, location: 0.86),
-            ], startPoint: .top, endPoint: .bottom))
-            .offset(y: -Layout.glassLift)
-            .frame(width: Layout.window.width, height: Layout.window.height, alignment: .top)
-            .clipped()
-            .offset(x: Layout.window.minX, y: Layout.window.minY)
-            .frame(width: BarographView.design.width, height: BarographView.design.height, alignment: .topLeading)
-            .opacity(face == .silver ? 0.6 : 0.45)
-            .blendMode(.screen)
-            .allowsHitTesting(false)
-    }
-}
-
-private struct DrumSmudge: View {
-    let opacity: Double
-
-    var body: some View {
-        let side = max(Layout.window.width, Layout.window.height)
-        return Image("Smudge").resizable()
-            .frame(width: side, height: side)
-            .offset(x: Layout.window.minX, y: Layout.window.midY - side / 2)
-            .frame(width: BarographView.design.width, height: BarographView.design.height, alignment: .topLeading)
-            .clipShape(Layout.windowPath)
-            .opacity(opacity)
-            .blendMode(.screen)
-            .allowsHitTesting(false)
+        switch glass {
+        case .reflections(let name):
+            Image(name).resizable()
+                .frame(width: Layout.window.width, height: Layout.window.height)
+                .mask(LinearGradient(stops: [
+                    .init(color: .white, location: 0),
+                    .init(color: .white, location: 0.8),
+                    .init(color: .clear, location: 0.86),
+                ], startPoint: .top, endPoint: .bottom))
+                .offset(y: -Layout.glassLift)
+                .frame(width: Layout.window.width, height: Layout.window.height, alignment: .top)
+                .clipped()
+                .offset(x: Layout.window.minX, y: Layout.window.minY)
+                .frame(width: BarographView.design.width, height: BarographView.design.height, alignment: .topLeading)
+                .opacity(face == .silver ? 0.6 : 0.45)
+                .blendMode(.screen)
+                .allowsHitTesting(false)
+        case .baked(let name):
+            Image(name).resizable()
+                .frame(width: Layout.window.width, height: Layout.window.height)
+                .offset(x: Layout.window.minX, y: Layout.window.minY)
+                .frame(width: BarographView.design.width, height: BarographView.design.height, alignment: .topLeading)
+                .blendMode(.screen)
+                .allowsHitTesting(false)
+        }
     }
 }
 

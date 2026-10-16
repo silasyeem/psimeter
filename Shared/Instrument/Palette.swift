@@ -111,26 +111,35 @@ struct Materials: Sendable {
     let dial: String?
     let plate: String
     let paper: String
+    var paperBand: ClosedRange<Double> = 0...1
     let housing: String
     let pen: String
     let screw: String
     let grain: String
+    let glass: Glass
     let smudge: Double
     let neighbours: Bool
 
     static let polishedDay = Materials(
         tile: "BezelTile", dial: "DialSilver", plate: "PlateDay", paper: "PaperDay", housing: "DrumHousing",
-        pen: "PenArm", screw: "Screw", grain: "BrassGrain", smudge: 0, neighbours: false)
+        pen: "PenArm", screw: "Screw", grain: "BrassGrain", glass: .reflections("DrumGlass"), smudge: 0, neighbours: false)
 
     static let polishedNight = Materials(
         tile: "BezelTileNight", dial: nil, plate: "PlateNight", paper: "PaperNight", housing: "DrumHousingNight",
-        pen: "PenArmNight", screw: "ScrewNight", grain: "BrassGrainNight", smudge: 0, neighbours: false)
+        pen: "PenArmNight", screw: "ScrewNight", grain: "BrassGrainNight", glass: .reflections("DrumGlass"), smudge: 0, neighbours: false)
 
     static let agedDay = Materials(
-        tile: "BezelTileAged", dial: "DialAged", plate: "PlateDayAged", paper: "PaperDayAged", housing: "DrumHousingAged",
-        pen: "PenArmAged", screw: "ScrewAged", grain: "BrassGrainAged", smudge: 0.35, neighbours: true)
+        tile: "BezelTileAged", dial: "DialAged", plate: "PlateDayAged", paper: "PaperDayAged", paperBand: (216.0 / 840)...(624.0 / 840), housing: "DrumHousingAged",
+        pen: "PenArmAged", screw: "ScrewAged", grain: "BrassGrainAged", glass: .baked("DrumGlassAgedDay"), smudge: 0.35, neighbours: true)
 
     static let agedNight = Materials(
-        tile: "BezelTileNightAged", dial: nil, plate: "PlateNightAged", paper: "PaperNightAged", housing: "DrumHousingNightAged",
-        pen: "PenArmNightAged", screw: "ScrewNightAged", grain: "BrassGrainNightAged", smudge: 0.25, neighbours: true)
+        tile: "BezelTileNightAged", dial: nil, plate: "PlateNightAged", paper: "PaperNightAged", paperBand: (216.0 / 840)...(624.0 / 840), housing: "DrumHousingNightAged",
+        pen: "PenArmNightAged", screw: "ScrewNightAged", grain: "BrassGrainNightAged", glass: .baked("DrumGlassAgedNight"), smudge: 0.25, neighbours: true)
+}
+
+/// `reflections` is lifted, faded and dimmed at render time; `baked` already carries all of that, plus the
+/// smudge, at the drum window's size, so the barograph screens one layer in either wear.
+enum Glass: Sendable {
+    case reflections(String)
+    case baked(String)
 }

@@ -512,11 +512,13 @@ Edit Widget offers a second parameter, Wear, with Polished (the default) and Age
 
 What changes:
 - Every raster swaps for an aged twin with the same geometry and alpha, made by `scripts/aged-assets.sh` from the polished art: bezel tile and night tile, drum housing and night housing, pen arm, plate, screw, and the counters' brass grain (cut from the aged housing at the polished grain's crop). The day dial becomes a yellowed, foxed paper (`DialAged`); the night lacquer stays. The chart paper becomes `PaperDayAged` and `PaperNightAged`.
-- A smudge layer (fingerprints and dust, light on black) screens over the glass at 35% by day and 25% at night. It is clipped to the dial or the drum window and kept out of the counter windows.
+- A smudge layer (fingerprints and dust, light on black) screens over the glass at 35% by day and 25% at night. On the aneroid it is an 8-bit grey raster at the dial's drawn size, clipped to the dial and kept out of the counter windows. On the barograph it is pre-composited with the drum glass (its lift, fade and opacity included) into one 8-bit grey raster per finish at the window's size (`DrumGlassAgedDay`, `DrumGlassAgedNight`), so Aged screens a single layer, as Polished does. The aged chart papers store only the band of rows the window shows.
 - Each wheel shows its neighbours: the previous digit above and the next below, (d + 9) % 10 and (d + 1) % 10, at 35% (10% on a dimmed leading zero), clipped by the drum and under its shading. Polished wheels do not.
 - Ink moves only where the aged ground needs it. At night the bezel lume brightens to #e6ffe0 over a black relief; the plate stale mark lightens to #ffa887 by day and #ff754d at night.
 
 What never changes: the wheel figures (clean, unchipped Archivo Black), the needle, the hub, the enamel, the trace, the type, every position, and the polished finish itself, which captures pixel-identical with and without this option.
+
+Memory: a widget extension runs under a hard memory limit on device, about 30 MB, and the limit applies to its peak while rendering. A render that exceeds it is killed and the widget stays on its redacted placeholder. Decoded rasters dominate that peak, so every added raster or screen-blended layer on the barograph is budgeted against it. `scripts/widget-footprint.sh` reads the extension's peak on the simulator; the simulator adds a fixed overhead and does not enforce the limit, so compare cases rather than reading the totals as device numbers. Measured after one render in a fresh extension: large Polished 36.6 MB by day and night, large Aged 34.0 MB by day and 33.7 MB at night, small Aged 29.4 MB.
 
 Contrast against the ground immediately around each glyph, from the gallery captures (`scripts/measure-contrast.py`):
 
