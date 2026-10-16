@@ -5,6 +5,7 @@ struct BarographView: View {
     let reading: Reading
     let trend: Feed<PSITrend>
     let finish: Finish
+    var wear: Wear = .polished
 
     static let design = CGSize(width: 350, height: 364)
 
@@ -20,17 +21,23 @@ struct BarographView: View {
         .accessibilityLabel(spoken)
     }
 
+    @ViewBuilder
     private func face(scale: CGFloat) -> some View {
-        let palette = Palette.of(finish)
-        let chart = Chart(reading: reading, trend: trend)
-        let grain: Image? = switch palette.face {
-        case .silver: Image("BrassGrain")
-        case .lacquer: Image("BrassGrainNight")
-        case .open: nil
+        let palette = Palette.of(finish, wear)
+        if let smudge = palette.materials?.smudge, smudge > 0 {
+            instrument(scale: scale).overlay(alignment: .topLeading) { DrumSmudge(opacity: smudge) }
+        } else {
+            instrument(scale: scale)
         }
+    }
+
+    private func instrument(scale: CGFloat) -> some View {
+        let palette = Palette.of(finish, wear)
+        let chart = Chart(reading: reading, trend: trend)
+        let grain = palette.materials.map { Image($0.grain) }
         return ZStack(alignment: .topLeading) {
-            if palette.face != .open {
-                Screws(night: palette.face == .lacquer)
+            if let materials = palette.materials {
+                Screws(screw: materials.screw, night: palette.face == .lacquer)
             }
             ChartPaper(chart: chart, palette: palette, scale: scale)
             TraceInk(chart: chart, palette: palette)
@@ -66,12 +73,13 @@ struct BarographView: View {
 
 struct LargePlate: View {
     let finish: Finish
+    var wear: Wear = .polished
 
     var body: some View {
-        switch finish {
-        case .day: plate("PlateDay")
-        case .night: plate("PlateNight")
-        case .accented: Color(red: 0.15, green: 0.16, blue: 0.19)
+        if let materials = Palette.of(finish, wear).materials {
+            plate(materials.plate)
+        } else {
+            Color(red: 0.15, green: 0.16, blue: 0.19)
         }
     }
 
@@ -245,10 +253,8 @@ private struct ChartPaper: View {
             let window = Path(Layout.window)
             let plot = Layout.plot
             ctx.clip(to: window)
-            switch palette.face {
-            case .silver: paper("PaperDay", in: &ctx)
-            case .lacquer: paper("PaperNight", in: &ctx)
-            case .open: break
+            if let paper = palette.materials?.paper {
+                self.paper(paper, in: &ctx)
             }
 
             for zone in chart.zones {
@@ -425,7 +431,24 @@ private struct DrumGlass: View {
     }
 }
 
+private struct DrumSmudge: View {
+    let opacity: Double
+
+    var body: some View {
+        let side = max(Layout.window.width, Layout.window.height)
+        return Image("Smudge").resizable()
+            .frame(width: side, height: side)
+            .offset(x: Layout.window.minX, y: Layout.window.midY - side / 2)
+            .frame(width: BarographView.design.width, height: BarographView.design.height, alignment: .topLeading)
+            .clipShape(Layout.windowPath)
+            .opacity(opacity)
+            .blendMode(.screen)
+            .allowsHitTesting(false)
+    }
+}
+
 private struct SeatedScrew: View {
+    let screw: String
     let night: Bool
 
     var body: some View {
@@ -441,7 +464,7 @@ private struct SeatedScrew: View {
                 .trim(from: 0.0, to: 0.27)
                 .stroke(Color.white.opacity(night ? 0.14 : 0.26), lineWidth: 0.6)
                 .padding(0.3)
-            Image(night ? "ScrewNight" : "Screw").resizable()
+            Image(screw).resizable()
                 .frame(width: Layout.screwDiameter, height: Layout.screwDiameter)
                 .shadow(color: .black.opacity(0.6), radius: 0.7, x: 0.8, y: 0.8)
         }
@@ -450,13 +473,14 @@ private struct SeatedScrew: View {
 }
 
 private struct Screws: View {
+    let screw: String
     let night: Bool
 
     var body: some View {
         ZStack(alignment: .topLeading) {
             ForEach(Layout.screws.indices, id: \.self) { index in
                 let centre = Layout.screws[index]
-                SeatedScrew(night: night)
+                SeatedScrew(screw: screw, night: night)
                     .offset(x: centre.x - Layout.screwBore / 2, y: centre.y - Layout.screwBore / 2)
             }
         }
@@ -470,16 +494,11 @@ private struct Housing: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            switch palette.face {
-            case .silver:
-                Image("DrumHousing").resizable()
+            if let materials = palette.materials {
+                Image(materials.housing).resizable()
                     .frame(width: Layout.housing.width, height: Layout.housing.height)
                     .offset(x: Layout.housing.minX, y: Layout.housing.minY)
-            case .lacquer:
-                Image("DrumHousingNight").resizable()
-                    .frame(width: Layout.housing.width, height: Layout.housing.height)
-                    .offset(x: Layout.housing.minX, y: Layout.housing.minY)
-            case .open:
+            } else {
                 outline
             }
             Canvas { ctx, _ in engrave(&ctx) }
@@ -527,14 +546,10 @@ private struct Pen: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            switch palette.face {
-            case .silver:
-                Image("PenArm").resizable().frame(width: Layout.penLength, height: height)
-                    .shadow(color: .black.opacity(0.4), radius: 0.6, x: 0.3, y: 0.8)
-            case .lacquer:
-                Image("PenArmNight").resizable().frame(width: Layout.penLength, height: height)
-                    .shadow(color: .black.opacity(0.6), radius: 0.6, x: 0.3, y: 0.8)
-            case .open:
+            if let materials = palette.materials {
+                Image(materials.pen).resizable().frame(width: Layout.penLength, height: height)
+                    .shadow(color: .black.opacity(palette.face == .lacquer ? 0.6 : 0.4), radius: 0.6, x: 0.3, y: 0.8)
+            } else {
                 Capsule().fill(palette.figure).frame(width: Layout.penLength, height: 1.2)
                     .offset(y: (height - 1.2) / 2)
             }
@@ -550,21 +565,6 @@ private struct BaseEngraving: View {
     let reading: Reading
     let palette: Palette
 
-    private var fill: Color {
-        switch palette.face {
-        case .silver: Color(red: 0.91, green: 0.88, blue: 0.80)
-        case .lacquer: Palette.lume
-        case .open: palette.ink
-        }
-    }
-
-    private var staleFill: Color {
-        switch palette.face {
-        case .silver: Color(red: 1.0, green: 0.62, blue: 0.48)
-        case .lacquer, .open: palette.stale
-        }
-    }
-
     var body: some View {
         Canvas { ctx, _ in
             let psiLegend = reading.psi == nil ? reading.psiLabel : "PSI · NEA 24H"
@@ -576,7 +576,7 @@ private struct BaseEngraving: View {
             switch reading.time {
             case .none: break
             case .fresh(let clock): cut(clock, at: CGPoint(x: Layout.footRight, y: Layout.footY), anchor: .trailing, in: &ctx)
-            case .stale(let mark): cut(mark, at: CGPoint(x: Layout.footRight, y: Layout.footY), anchor: .trailing, color: staleFill, glow: false, in: &ctx)
+            case .stale(let mark): cut(mark, at: CGPoint(x: Layout.footRight, y: Layout.footY), anchor: .trailing, color: palette.plateStale, glow: false, in: &ctx)
             }
         }
         .frame(width: BarographView.design.width, height: BarographView.design.height)
@@ -593,7 +593,7 @@ private struct BaseEngraving: View {
             if glow, let halo = palette.glow {
                 layer.addFilter(.shadow(color: halo, radius: 1.6))
             }
-            layer.draw(text(color ?? fill), at: p, anchor: anchor)
+            layer.draw(text(color ?? palette.plateInk), at: p, anchor: anchor)
         }
     }
 }

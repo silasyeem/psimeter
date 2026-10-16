@@ -27,7 +27,7 @@ def tile_box(shot):
 box = tile_box(Image.open(shots / "live-light.png").convert("RGB"))
 finish = {"light": "day", "dark": "night"}
 for path in sorted(shots.glob("*.png")):
-    state, appearance = path.stem.split("-")
+    state, appearance = path.stem.rsplit("-", 1)
     crop = Image.open(path).convert("RGB").crop(box)
     if tag:
         crop.save(review / f"large-{tag}-{state}-{finish[appearance]}.png")

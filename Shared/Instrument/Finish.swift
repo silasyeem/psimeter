@@ -1,6 +1,10 @@
 import SwiftUI
 import WidgetKit
 
+enum Wear: String, CaseIterable, Codable, Sendable {
+    case polished, aged
+}
+
 enum Finish: Sendable {
     case day, night, accented
 

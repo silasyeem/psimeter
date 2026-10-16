@@ -23,6 +23,7 @@ struct PsimeterWidget: Widget {
 struct Entry: TimelineEntry {
     let date: Date
     let barogram: Barogram
+    var wear: Wear = .polished
 }
 
 struct Provider: AppIntentTimelineProvider {
@@ -34,15 +35,15 @@ struct Provider: AppIntentTimelineProvider {
     }
 
     func snapshot(for configuration: RegionIntent, in context: Context) async -> Entry {
-        Entry(date: .now, barogram: await AirFeed().barogram(configuration.region))
+        Entry(date: .now, barogram: await AirFeed().barogram(configuration.region), wear: configuration.wear)
     }
 
     func timeline(for configuration: RegionIntent, in context: Context) async -> Timeline<Entry> {
         let now = Date.now
         let barogram = await AirFeed().barogram(configuration.region, now: now)
-        var entries = [Entry(date: now, barogram: barogram)]
+        var entries = [Entry(date: now, barogram: barogram, wear: configuration.wear)]
         if case .live(let report) = barogram.observation.snapshot.psi, Refresh.turnsStale(report) > now {
-            entries.append(Entry(date: Refresh.turnsStale(report), barogram: barogram))
+            entries.append(Entry(date: Refresh.turnsStale(report), barogram: barogram, wear: configuration.wear))
         }
         return Timeline(entries: entries, policy: .after(Refresh.nextReload(for: barogram, now: now)))
     }
@@ -69,11 +70,11 @@ struct EntryView: View {
             AccessoryInline(reading: reading)
                 .containerBackground(for: .widget) { Color.clear }
         case .systemLarge:
-            BarographView(reading: reading, trend: entry.barogram.trend, finish: finish)
-                .containerBackground(for: .widget) { LargePlate(finish: finish) }
+            BarographView(reading: reading, trend: entry.barogram.trend, finish: finish, wear: entry.wear)
+                .containerBackground(for: .widget) { LargePlate(finish: finish, wear: entry.wear) }
         default:
-            InstrumentView(reading: reading, finish: finish)
-                .containerBackground(for: .widget) { Plate(finish: finish) }
+            InstrumentView(reading: reading, finish: finish, wear: entry.wear)
+                .containerBackground(for: .widget) { Plate(finish: finish, wear: entry.wear) }
         }
     }
 }

@@ -507,6 +507,41 @@ The systemLarge instrument, in `Shared/Instrument/Barograph.swift`. It shares th
 | PSI unavailable | no zone lit; any cached trend still drawn | parked at 0 | `PSI · OFFLINE` and siblings, bare region letters, no time |
 | Accented | white zones (14% current, 3% others), white grid, accent trace, no paper or glass | accent rule | white 85%, stale in white |
 
+### Aged wear
+Edit Widget offers a second parameter, Wear, with Polished (the default) and Aged. It applies to systemSmall and systemLarge; the accessories ignore it. `Palette.of(finish, wear)` is a table keyed by finish and wear, and each entry names its raster materials, so no view branches on wear.
+
+What changes:
+- Every raster swaps for an aged twin with the same geometry and alpha, made by `scripts/aged-assets.sh` from the polished art: bezel tile and night tile, drum housing and night housing, pen arm, plate, screw, and the counters' brass grain (cut from the aged housing at the polished grain's crop). The day dial becomes a yellowed, foxed paper (`DialAged`); the night lacquer stays. The chart paper becomes `PaperDayAged` and `PaperNightAged`.
+- A smudge layer (fingerprints and dust, light on black) screens over the glass at 35% by day and 25% at night. It is clipped to the dial or the drum window and kept out of the counter windows.
+- Each wheel shows its neighbours: the previous digit above and the next below, (d + 9) % 10 and (d + 1) % 10, at 35% (10% on a dimmed leading zero), clipped by the drum and under its shading. Polished wheels do not.
+- Ink moves only where the aged ground needs it. At night the bezel lume brightens to #e6ffe0 over a black relief; the plate stale mark lightens to #ffa887 by day and #ff754d at night.
+
+What never changes: the wheel figures (clean, unchipped Archivo Black), the needle, the hub, the enamel, the trace, the type, every position, and the polished finish itself, which captures pixel-identical with and without this option.
+
+Contrast against the ground immediately around each glyph, from the gallery captures (`scripts/measure-contrast.py`):
+
+| Surface | Finish | Element | Polished | Aged |
+| --- | --- | --- | --- | --- |
+| Aneroid | day | dial legend | 11.1:1 | 12.0:1 |
+| Aneroid | day | AQI legend | 9.3:1 | 10.1:1 |
+| Aneroid | day | time | 6.8:1 | 6.8:1 |
+| Aneroid | day | region on the bezel | 2.1:1 | 2.5:1 |
+| Aneroid | day | stale stamp | 4.5:1 | 4.6:1 |
+| Aneroid | night | dial legend | 11.6:1 | 11.5:1 |
+| Aneroid | night | time | 14.7:1 | 14.7:1 |
+| Aneroid | night | region on the bezel | 4.0:1 | 4.1:1 |
+| Aneroid | night | stale stamp | 7.2:1 | 7.2:1 |
+| Barograph | day | housing inscription | 2.3:1 | 2.7:1 |
+| Barograph | day | value and hour labels | 10.2:1, 6.3:1 | 8.3:1, 5.3:1 |
+| Barograph | day | plate legend, foot, time | 10.0 to 11.3:1 | 10.3 to 11.2:1 |
+| Barograph | day | stale stamp | 7.3:1 | 7.8:1 |
+| Barograph | night | housing inscription | 5.1:1 | 5.8:1 |
+| Barograph | night | value and hour labels | 13.0:1, 13.3:1 | 8.7:1, 9.1:1 |
+| Barograph | night | plate legend, foot, time | 10.8 to 11.7:1 | 10.8 to 11.7:1 |
+| Barograph | night | stale stamp | 6.5:1 | 6.8:1 |
+
+Every aged element holds its polished value or the 4.5:1 floor, whichever is lower. Two day inscriptions on brass, the aneroid's regional bezel and the barograph's housing bar, sit below 4.5:1 in both wears; they are relief engravings in umber over a glint, the polished build already measures them at 2.1:1 and 2.3:1, and aged wear raises both slightly.
+
 ### Lock Screen accessories
 Plain system type. The brass does not survive vibrant rendering, so the accessories do not imitate it.
 - **accessoryCircular:** the system Gauge from 0 to 400, the PSI value (or `–`) as the current label, `PSI` as the label, in the accent group.
